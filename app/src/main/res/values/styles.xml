@@ -72,4 +72,17 @@
         <item name="android:textColorSecondary">@color/primary_blue_accent</item>
     </style>
 
+    <style name="CinemaxRoundIconButtonStyle" parent="Widget.Material3.Button.IconButton">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="iconGravity">textEnd</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconSize">@dimen/_24dp</item>
+        <item name="iconTint">@null</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded</item>
+    </style>
+
 </resources>
