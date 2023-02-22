@@ -2,4 +2,5 @@
 <resources>
     <dimen name="toolbar_height">32dp</dimen>
     <dimen name="bottom_bar_height">72dp</dimen>
+    <dimen name="text_input_layout_radius">24dp</dimen>
 </resources>

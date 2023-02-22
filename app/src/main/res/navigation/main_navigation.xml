@@ -3,11 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment2">
+    app:startDestination="@id/introFragment">
 
     <fragment
-        android:id="@+id/homeFragment2"
+        android:id="@+id/homeFragment"
         android:name="com.alibasoglu.cinemax.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.alibasoglu.cinemax.auth.ui.IntroFragment"
+        android:label="IntroFragment"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.alibasoglu.cinemax.auth.ui.SignupFragment"
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup" />
 </navigation>
