@@ -35,7 +35,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
     }
 
     private fun navToLoginFragment() {
-        //TODO nav to login page
+        nav(IntroFragmentDirections.actionIntroFragmentToLoginFragment())
     }
 
 }

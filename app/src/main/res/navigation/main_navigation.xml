@@ -14,14 +14,22 @@
         android:id="@+id/introFragment"
         android:name="com.alibasoglu.cinemax.auth.ui.IntroFragment"
         android:label="IntroFragment"
-        tools:layout="@layout/fragment_intro" >
+        tools:layout="@layout/fragment_intro">
         <action
             android:id="@+id/action_introFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_introFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.alibasoglu.cinemax.auth.ui.SignupFragment"
         android:label="SignupFragment"
         tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.alibasoglu.cinemax.auth.ui.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
 </navigation>
