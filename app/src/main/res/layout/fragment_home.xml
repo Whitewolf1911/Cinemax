@@ -87,8 +87,60 @@
             android:layout_marginTop="@dimen/_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/searchLayout"
+            tools:listitem="@layout/item_carousel_movie" />
 
+        <TextView
+            android:id="@+id/categoriesTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/categories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/carouselRecyclerView" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/categoriesTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40dp"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_16dp"
+            android:backgroundTint="@color/primary_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoriesTextView"
+            app:tabBackground="@drawable/tab_layout_selector"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/primary_blue_accent"
+            app:tabTextAppearance="@style/text_h6"
+            app:tabTextColor="@color/text_white_grey" />
+
+        <TextView
+            android:id="@+id/mostPopularTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/most_popular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categoriesTabLayout" />
+
+        <TextView
+            android:id="@+id/seeAllTextView"
+            style="@style/text_h5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:layout_marginEnd="@dimen/_24dp"
+            android:text="@string/see_all"
+            android:textColor="@color/primary_blue_accent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categoriesTabLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -52,6 +52,19 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 setAlpha(true)
             }
             carouselAdapter.submitList(dummyData)
+
+            seeAllTextView.setOnClickListener {
+                //TODO nav to most popular fragment
+            }
+
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("All"))
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Comedy"))
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Animation"))
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Document"))
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Action"))
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Tab 6"))
+            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Tab 7"))
+
         }
     }
 }
