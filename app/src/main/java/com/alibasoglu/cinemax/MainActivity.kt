@@ -2,8 +2,11 @@ package com.alibasoglu.cinemax
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.customviews.CustomToolbar
 import com.alibasoglu.cinemax.databinding.ActivityMainBinding
@@ -25,7 +28,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        //TODO setup navigation with bottom nav bar
+        navController =
+            (supportFragmentManager.findFragmentById(binding.navigationHostFragment.id) as NavHostFragment).navController
+        binding.bottomNavigationView.apply {
+            setupWithNavController(navController)
+            setOnItemReselectedListener {} // To prevent reselect item and resetting selected fragment
+        }
     }
 
     fun navBack() {
@@ -41,5 +49,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getToolbar(): CustomToolbar = binding.toolbar
+
+    fun hideBottomNavbar() {
+        binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    fun showBottomNavBar() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
+    }
 
 }

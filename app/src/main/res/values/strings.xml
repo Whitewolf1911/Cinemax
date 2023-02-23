@@ -4,4 +4,17 @@
     <string name="search">Search</string>
     <string name="download">Download</string>
     <string name="profile">Profile</string>
+    <string name="cinemax">CINEMAX</string>
+    <string name="enter_number_signup">Enter your registered\nPhone Number to Sign Up</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="i_have_account">I already have an account?</string>
+    <string name="login">Login</string>
+    <string name="or_sign_up_with">Or Sign up with</string>
+    <string name="lets_get_started">Let\'s get started</string>
+    <string name="latest_movies_here">The latest movies and series\nare here</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="agree_to_terms">I agree to the Terms and Services\nand Privacy Policy</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>

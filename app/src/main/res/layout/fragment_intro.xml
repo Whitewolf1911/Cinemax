@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="@dimen/_88dp"
+        android:layout_height="@dimen/_88dp"
+        android:layout_marginTop="@dimen/_160dp"
+        android:src="@drawable/ic_cinemax"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_24dp"
+        android:text="@string/cinemax"
+        android:textAppearance="@style/text_h1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView" />
+
+    <TextView
+        android:id="@+id/enterPhoneTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8dp"
+        android:text="@string/enter_number_signup"
+        android:textAlignment="center"
+        android:textAppearance="@style/text_h4"
+        android:textColor="@color/text_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signupButton"
+        style="@style/cinemax_button_extra_large"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_56dp"
+        android:layout_marginHorizontal="@dimen/_24dp"
+        android:layout_marginTop="@dimen/_64dp"
+        android:text="@string/sign_up"
+        app:layout_constraintTop_toBottomOf="@+id/enterPhoneTextView" />
+
+    <TextView
+        android:id="@+id/haveAccountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_32dp"
+        android:text="@string/i_have_account"
+        android:textAppearance="@style/text_h4"
+        android:textColor="@color/text_grey"
+        app:layout_constraintEnd_toEndOf="@+id/signupButton"
+        app:layout_constraintEnd_toStartOf="@+id/loginTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupButton" />
+
+    <TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_4dp"
+        android:text="@string/login"
+        android:textAppearance="@style/text_h4"
+        android:textColor="@color/primary_blue_accent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/haveAccountTextView"
+        app:layout_constraintTop_toTopOf="@+id/haveAccountTextView" />
+
+    <View
+        android:layout_width="@dimen/_64dp"
+        android:layout_height="@dimen/_1dp"
+        android:layout_marginEnd="@dimen/_8dp"
+        android:background="@color/primary_soft"
+        app:layout_constraintBottom_toBottomOf="@id/orSignUpTextView"
+        app:layout_constraintEnd_toStartOf="@id/orSignUpTextView"
+        app:layout_constraintTop_toTopOf="@id/orSignUpTextView" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="@dimen/_64dp"
+        android:layout_height="@dimen/_1dp"
+        android:layout_marginStart="@dimen/_8dp"
+        android:background="@color/primary_soft"
+        app:layout_constraintBottom_toBottomOf="@id/orSignUpTextView"
+        app:layout_constraintStart_toEndOf="@id/orSignUpTextView"
+        app:layout_constraintTop_toTopOf="@id/orSignUpTextView" />
+
+    <TextView
+        android:id="@+id/orSignUpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_48dp"
+        android:text="@string/or_sign_up_with"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/haveAccountTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/googleSignupButton"
+        style="@style/CinemaxRoundIconButtonStyle"
+        android:layout_width="@dimen/_68dp"
+        android:layout_height="@dimen/_68dp"
+        android:backgroundTint="@color/text_white"
+        app:icon="@drawable/ic_google"
+        app:layout_constraintEnd_toStartOf="@+id/appleSignupButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appleSignupButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/appleSignupButton"
+        style="@style/CinemaxRoundIconButtonStyle"
+        android:layout_width="@dimen/_68dp"
+        android:layout_height="@dimen/_68dp"
+        android:layout_marginTop="@dimen/_40dp"
+        android:backgroundTint="@color/primary_soft"
+        app:icon="@drawable/ic_apple"
+        app:layout_constraintEnd_toStartOf="@+id/facebookSignupButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/googleSignupButton"
+        app:layout_constraintTop_toBottomOf="@+id/orSignUpTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/facebookSignupButton"
+        style="@style/CinemaxRoundIconButtonStyle"
+        android:layout_width="@dimen/_68dp"
+        android:layout_height="@dimen/_68dp"
+        android:backgroundTint="@color/blue_facebook"
+        app:icon="@drawable/ic_facebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/appleSignupButton"
+        app:layout_constraintTop_toTopOf="@+id/appleSignupButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
