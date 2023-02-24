@@ -6,12 +6,14 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.NavigationUI
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.customviews.CustomToolbar
 import com.alibasoglu.cinemax.databinding.ActivityMainBinding
 import com.alibasoglu.cinemax.utils.navigateSafe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,10 +32,17 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigation() {
         navController =
             (supportFragmentManager.findFragmentById(binding.navigationHostFragment.id) as NavHostFragment).navController
-        binding.bottomNavigationView.apply {
-            setupWithNavController(navController)
-            setOnItemReselectedListener {} // To prevent reselect item and resetting selected fragment
+        val bottomNavigationView: BottomNavigationView = binding.bottomNav
+        val chipNavigationBar: ChipNavigationBar = binding.chipNav
+        chipNavigationBar.setOnItemSelectedListener { itemId ->
+            bottomNavigationView.selectedItemId = itemId
         }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            chipNavigationBar.setItemSelected(
+                destination.id
+            )
+        }
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
     fun navBack() {
@@ -51,11 +60,11 @@ class MainActivity : AppCompatActivity() {
     fun getToolbar(): CustomToolbar = binding.toolbar
 
     fun hideBottomNavbar() {
-        binding.bottomNavigationView.visibility = View.GONE
+        binding.chipNav.visibility = View.GONE
     }
 
     fun showBottomNavBar() {
-        binding.bottomNavigationView.visibility = View.VISIBLE
+        binding.chipNav.visibility = View.VISIBLE
     }
 
 }

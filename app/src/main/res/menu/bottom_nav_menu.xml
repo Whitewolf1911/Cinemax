@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home_24"
-        android:title="@string/home" />
+        android:title="@string/home"
+        app:cnb_iconColor="@color/primary_blue_accent" />
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/introFragment"
         android:icon="@drawable/ic_search_24"
-        android:title="@string/search" />
+        android:title="@string/search"
+        app:cnb_iconColor="@color/primary_blue_accent" />
     <item
         android:id="@+id/downloadFragment"
         android:icon="@drawable/ic_download_24"
-        android:title="@string/download" />
+        android:title="@string/download"
+        app:cnb_iconColor="@color/primary_blue_accent" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_24"
-        android:title="@string/profile" />
+        android:title="@string/profile"
+        app:cnb_iconColor="@color/primary_blue_accent" />
 </menu>
