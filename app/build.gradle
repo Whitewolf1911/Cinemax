@@ -25,6 +25,7 @@ android {
         
         // should correspond to key/value pairs inside the file
         buildConfigField("String", "MOVIES_HEADER_API_KEY", apikeyProperties['MOVIES_HEADER_API_KEY'])
+        buildConfigField("String", "BASE_URL", apikeyProperties['BASE_URL'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
