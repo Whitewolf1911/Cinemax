@@ -4,7 +4,6 @@ import com.alibasoglu.cinemax.BuildConfig
 import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.MoviesRepositoryImpl
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
-import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,12 +56,6 @@ object AppModule {
     @Singleton
     fun provideMoviesRepository(moviesApi: MoviesApi): MoviesRepository {
         return MoviesRepositoryImpl(moviesApi = moviesApi)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGetMoviesPagerUseCase(moviesRepository: MoviesRepository): GetMoviesPagerUseCase {
-        return GetMoviesPagerUseCase(moviesRepository)
     }
 
 }

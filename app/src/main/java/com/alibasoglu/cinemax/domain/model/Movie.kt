@@ -15,6 +15,7 @@ data class Movie(
     val vote_average: Double,
 )
 
+// TODO setting genre
 fun Movie.mapToMovieBasicCardItem(): MovieBasicCardItem {
     return MovieBasicCardItem(
         id = id,

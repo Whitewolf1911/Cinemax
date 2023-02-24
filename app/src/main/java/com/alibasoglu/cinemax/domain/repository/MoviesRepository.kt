@@ -7,4 +7,6 @@ import com.alibasoglu.cinemax.domain.model.Movie
 interface MoviesRepository {
 
     fun getMoviesPager(): Pager<Int, Movie>
+
+    suspend fun getSetConfigurationData()
 }
