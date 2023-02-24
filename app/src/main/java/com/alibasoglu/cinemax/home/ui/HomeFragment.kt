@@ -2,20 +2,26 @@ package com.alibasoglu.cinemax.home.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentHomeBinding
 import com.alibasoglu.cinemax.home.ui.model.CarouselMovieItem
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
-import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
+import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override val fragmentConfiguration = FragmentConfiguration()
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
+
+    private val viewModel by viewModels<HomeViewModel>()
 
     var dummyCarouselData = listOf(
         CarouselMovieItem(
@@ -38,48 +44,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         )
     )
 
-    var dummyPopularData = listOf(
-        MovieBasicCardItem(
-            id = "1",
-            title = "Life of Pi",
-            rating = "4.3",
-            imageUrl = "https://cdn.wannart.com/production/post/iki-dunya-arasinda-bir-animasyon-coraline-FxXng.jpg",
-            genre = "Cartoon"
-        ),
-        MovieBasicCardItem(
-            id = "2",
-            title = "Coraline",
-            rating = "4.3",
-            imageUrl = "https://m.media-amazon.com/images/I/91cV4E3r05L._AC_SX569_.jpg",
-            genre = "Cartoon"
-        ),
-        MovieBasicCardItem(
-            id = "3",
-            title = "X-Men Origins : Wolverine",
-            rating = "4.1",
-            imageUrl = "https://images.pling.com/img/00/00/61/26/90/1576052/35b4a108977b67bfdcc8ed854aa5261482712cd8822953bd42d51123e375f3c00513.jpg",
-            genre = "Cartoon"
-        ),MovieBasicCardItem(
-            id = "4",
-            title = "Coraline",
-            rating = "3.3",
-            imageUrl = "https://cdn.wannart.com/production/post/iki-dunya-arasinda-bir-animasyon-coraline-FxXng.jpg",
-            genre = "Cartoon"
-        ),MovieBasicCardItem(
-            id = "5",
-            title = "Spider Man",
-            rating = "2.3",
-            imageUrl = "https://m.media-amazon.com/images/I/91cV4E3r05L._AC_SX569_.jpg",
-            genre = "Cartoon"
-        ),MovieBasicCardItem(
-            id = "6",
-            title = "Coraline",
-            rating = "4.3",
-            imageUrl = "https://cdn.wannart.com/production/post/iki-dunya-arasinda-bir-animasyon-coraline-FxXng.jpg",
-            genre = "Cartoon"
-        ),
-    )
-
     private val carouselAdapter = MoviesCarouselAdapter()
 
     private val moviesBasicCardAdapter = MoviesBasicCardAdapter()
@@ -87,6 +51,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        initObservers()
     }
 
     private fun initUI() {
@@ -99,7 +64,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
             popularMoviesRecyclerView.adapter = moviesBasicCardAdapter
             carouselAdapter.submitList(dummyCarouselData)
-            moviesBasicCardAdapter.submitList(dummyPopularData)
 
             seeAllTextView.setOnClickListener {
                 //TODO nav to most popular fragment
@@ -113,6 +77,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Tab 6"))
             categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Tab 7"))
 
+        }
+    }
+
+    private fun initObservers() {
+        viewLifecycleOwner.observe {
+            viewModel.popularMoviesState.collectLatest {
+                moviesBasicCardAdapter.submitData(it)
+            }
         }
     }
 }

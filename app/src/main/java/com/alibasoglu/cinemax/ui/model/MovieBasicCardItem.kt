@@ -3,7 +3,7 @@ package com.alibasoglu.cinemax.ui.model
 import com.alibasoglu.cinemax.utils.list.RecyclerListItem
 
 data class MovieBasicCardItem(
-    val id: String,
+    val id: Int,
     val title: String,
     val rating: String,
     val genre: String,
