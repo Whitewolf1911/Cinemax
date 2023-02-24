@@ -16,7 +16,7 @@
             android:layout_height="@dimen/_40dp"
             android:layout_marginStart="@dimen/_24dp"
             android:layout_marginTop="@dimen/_8dp"
-            android:src="@drawable/ic_apple"
+            android:src="@drawable/ic_person_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded" />
@@ -141,6 +141,19 @@
             android:textColor="@color/primary_blue_accent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categoriesTabLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popularMoviesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mostPopularTextView"
+            tools:listitem="@layout/item_movie_basic_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
