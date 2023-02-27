@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.data.remote.model
+package com.alibasoglu.cinemax.model
 
 data class Genre(
     val id: Int,

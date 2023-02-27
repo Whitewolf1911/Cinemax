@@ -3,6 +3,7 @@ package com.alibasoglu.cinemax.home.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.alibasoglu.cinemax.GenresData
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
@@ -51,12 +52,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
 
             categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("All"))
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Comedy"))
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Animation"))
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Document"))
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Action"))
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Tab 6"))
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("Tab 7"))
+            GenresData.genres.forEach { genre ->
+                categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
+            }
 
         }
     }

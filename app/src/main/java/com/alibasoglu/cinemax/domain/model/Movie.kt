@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.domain.model
 
+import com.alibasoglu.cinemax.getGenreName
 import com.alibasoglu.cinemax.home.ui.model.CarouselMovieItem
 import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
 
@@ -16,13 +17,12 @@ data class Movie(
     val vote_average: Double,
 )
 
-// TODO setting genre
 fun Movie.mapToMovieBasicCardItem(): MovieBasicCardItem {
     return MovieBasicCardItem(
         id = id,
         title = title,
         rating = vote_average.toString(),
-        genre = "Action",
+        genre = getGenreName(genre_ids.first()),
         imageUrl = poster_path
     )
 }

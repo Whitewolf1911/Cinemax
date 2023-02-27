@@ -28,6 +28,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()
+
+        //Setting genre list from asset
+        getGenresList(this)?.let {
+            GenresData.genres = it
+        }
         setupNavigation()
     }
 
