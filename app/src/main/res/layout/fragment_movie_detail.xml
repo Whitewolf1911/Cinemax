@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/bottom_bar_height">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:alpha="0.1"
+            android:foreground="@drawable/bg_movie_poster_gradient"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/posterImageView"
+            android:layout_width="@dimen/_204dp"
+            android:layout_height="@dimen/_288dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/yearTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24dp"
+            android:drawablePadding="@dimen/_6dp"
+            android:textColor="@color/text_grey"
+            app:drawableStartCompat="@drawable/ic_calendar"
+            app:layout_constraintEnd_toStartOf="@+id/divider1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/backgroundImageView"
+            app:layout_constraintTop_toBottomOf="@+id/posterImageView"
+            tools:text="2022" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="@dimen/_1dp"
+            android:layout_height="@dimen/_16dp"
+            android:layout_marginHorizontal="@dimen/_12dp"
+            android:background="@color/text_grey"
+            app:layout_constraintEnd_toStartOf="@+id/runtimeTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/yearTextView"
+            app:layout_constraintTop_toTopOf="@id/yearTextView"
+            tools:layout_editor_absoluteY="352dp" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="@dimen/_1dp"
+            android:layout_height="@dimen/_16dp"
+            android:layout_marginHorizontal="@dimen/_12dp"
+            android:background="@color/text_grey"
+            app:layout_constraintEnd_toStartOf="@+id/genreTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/runtimeTextView"
+            app:layout_constraintTop_toTopOf="@id/yearTextView"
+            tools:layout_editor_absoluteY="352dp" />
+
+        <TextView
+            android:id="@+id/runtimeTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_6dp"
+            android:textColor="@color/text_grey"
+            app:drawableStartCompat="@drawable/ic_clock"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/divider1"
+            app:layout_constraintTop_toTopOf="@id/yearTextView"
+            tools:layout_editor_absoluteY="352dp"
+            tools:text="132 Minutes" />
+
+        <TextView
+            android:id="@+id/genreTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_6dp"
+            android:textColor="@color/text_grey"
+            app:drawableStartCompat="@drawable/ic_genre"
+            app:layout_constraintEnd_toStartOf="@+id/backgroundImageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toTopOf="@id/yearTextView"
+            tools:layout_editor_absoluteY="352dp"
+            tools:text="Action" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="@dimen/_56dp"
+            android:layout_height="@dimen/_24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="vertical"
+            app:cardBackgroundColor="@color/primary_soft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/runtimeTextView"
+            app:strokeColor="@color/primary_soft">
+
+            <TextView
+                android:id="@+id/ratingTextView"
+                style="@style/text_h6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_8dp"
+                android:drawablePadding="@dimen/_4dp"
+                android:textColor="@color/secondary_orange"
+                app:drawableStartCompat="@drawable/ic_star"
+                tools:text="4.5" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/playButton"
+            style="@style/cinemax_button_extra_large"
+            android:layout_width="@dimen/_116dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_28dp"
+            android:backgroundTint="@color/secondary_orange"
+            android:text="@string/play"
+            app:icon="@drawable/ic_play"
+            app:iconSize="@dimen/_24dp"
+            app:layout_constraintEnd_toStartOf="@+id/downloadButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/backgroundImageView"
+            app:layout_constraintTop_toBottomOf="@id/materialCardView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/downloadButton"
+            style="@style/CinemaxRoundIconButtonStyle"
+            android:layout_width="@dimen/_48dp"
+            android:layout_height="@dimen/_48dp"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:backgroundTint="@color/primary_soft"
+            app:icon="@drawable/ic_download_24"
+            app:iconTint="@color/secondary_orange"
+            app:layout_constraintEnd_toStartOf="@+id/shareButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/playButton"
+            app:layout_constraintTop_toTopOf="@id/playButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shareButton"
+            style="@style/CinemaxRoundIconButtonStyle"
+            android:layout_width="@dimen/_48dp"
+            android:layout_height="@dimen/_48dp"
+            android:backgroundTint="@color/primary_soft"
+            app:icon="@drawable/ic_share"
+            app:iconTint="@color/primary_blue_accent"
+            app:layout_constraintEnd_toStartOf="@+id/backgroundImageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/downloadButton"
+            app:layout_constraintTop_toTopOf="@id/playButton" />
+
+        <TextView
+            android:id="@+id/storyLineText"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/story_line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playButton" />
+
+        <TextView
+            android:id="@+id/storyLineTextView"
+            style="@style/text_h5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_8dp"
+            android:maxLength="150"
+            android:textColor="@color/text_white_grey"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/storyLineText"
+            app:layout_constraintTop_toBottomOf="@id/storyLineText"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/castCrewText"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/cast_and_crew"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storyLineTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/castCrewRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castCrewText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

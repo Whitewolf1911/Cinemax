@@ -23,9 +23,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
+    private val moviesBasicCardAdapterListener =
+        MoviesBasicCardAdapter.MoviesCardAdapterListener { movieBasicCardItem ->
+            navToMovieDetailFragment(movieBasicCardItem.id)
+        }
+
     private val carouselAdapter = MoviesCarouselAdapter()
 
-    private val moviesBasicCardAdapter = MoviesBasicCardAdapter()
+    private val moviesBasicCardAdapter = MoviesBasicCardAdapter(moviesBasicCardAdapterListener)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,5 +75,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 carouselAdapter.submitList(it)
             }
         }
+    }
+
+    private fun navToMovieDetailFragment(movieId: Int) {
+        nav(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId))
     }
 }

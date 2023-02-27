@@ -8,7 +8,10 @@ import com.alibasoglu.cinemax.databinding.ItemMovieBasicCardBinding
 import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
 import com.bumptech.glide.Glide
 
-class MovieBasicCardItemViewHolder(private val binding: ItemMovieBasicCardBinding) : ViewHolder(binding.root) {
+class MovieBasicCardItemViewHolder(
+    private val binding: ItemMovieBasicCardBinding,
+    private val listener: MovieCardItemClickListener
+) : ViewHolder(binding.root) {
 
     fun bind(movieBasicCardItem: MovieBasicCardItem) {
         with(binding) {
@@ -22,14 +25,22 @@ class MovieBasicCardItemViewHolder(private val binding: ItemMovieBasicCardBindin
                     .load(posterUrl)
                     .centerCrop()
                     .into(posterImageView)
+                root.setOnClickListener {
+                    listener.onClick(movieBasicCardItem)
+                }
             }
         }
     }
 
+    fun interface MovieCardItemClickListener {
+        fun onClick(movieBasicCardItem: MovieBasicCardItem)
+    }
+
     companion object {
-        fun create(parent: ViewGroup): MovieBasicCardItemViewHolder {
+        fun create(parent: ViewGroup, listener: MovieCardItemClickListener): MovieBasicCardItemViewHolder {
             return MovieBasicCardItemViewHolder(
-                ItemMovieBasicCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                ItemMovieBasicCardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                listener
             )
         }
     }

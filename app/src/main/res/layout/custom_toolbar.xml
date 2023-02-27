@@ -23,18 +23,29 @@
         android:id="@+id/toolbarTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/_8dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:maxWidth="@dimen/_200dp"
         android:textAppearance="@style/text_h4"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/endImageButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/startImageButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem[1]" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/endImageButton"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="@dimen/_32dp"
+        android:layout_height="@dimen/_32dp"
+        android:layout_marginEnd="@dimen/_24dp"
+        app:iconSize="@dimen/_32dp"
+        app:iconTint="@null"
+        tools:srcCompat="@drawable/ic_wishlist"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </merge>
