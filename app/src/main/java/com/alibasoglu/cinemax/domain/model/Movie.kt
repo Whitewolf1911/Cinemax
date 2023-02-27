@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.domain.model
 
+import com.alibasoglu.cinemax.home.ui.model.CarouselMovieItem
 import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
 
 data class Movie(
@@ -23,5 +24,14 @@ fun Movie.mapToMovieBasicCardItem(): MovieBasicCardItem {
         rating = vote_average.toString(),
         genre = "Action",
         imageUrl = poster_path
+    )
+}
+
+fun Movie.mapToCarouselMovieItem(): CarouselMovieItem {
+    return CarouselMovieItem(
+        id = id,
+        title = title,
+        upcomingDate = release_date,
+        imageUrl = backdrop_path
     )
 }

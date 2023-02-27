@@ -3,7 +3,7 @@ package com.alibasoglu.cinemax.home.ui.model
 import com.alibasoglu.cinemax.utils.list.RecyclerListItem
 
 data class CarouselMovieItem(
-    val id: String,
+    val id: Int,
     val title: String,
     val upcomingDate: String,
     val imageUrl: String
