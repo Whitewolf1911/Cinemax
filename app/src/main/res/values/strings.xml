@@ -17,4 +17,10 @@
     <string name="password">Password</string>
     <string name="agree_to_terms">I agree to the Terms and Services\nand Privacy Policy</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="hello_with_comma">Hello,</string>
+    <string name="lets_stream_favorite">Let\'s stream your favorite movie</string>
+    <string name="search_a_title">Search a title..</string>
+    <string name="categories">Categories</string>
+    <string name="most_popular">Most popular</string>
+    <string name="see_all">See All</string>
 </resources>
