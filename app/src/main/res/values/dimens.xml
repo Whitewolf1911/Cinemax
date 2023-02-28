@@ -27,4 +27,6 @@
     <dimen name="_116dp">116dp</dimen>
     <dimen name="_204dp">204dp</dimen>
     <dimen name="_288dp">288dp</dimen>
+    <dimen name="_92dp">92dp</dimen>
+    <dimen name="_140dp">140dp</dimen>
 </resources>

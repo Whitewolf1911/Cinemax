@@ -2,14 +2,18 @@ package com.alibasoglu.cinemax.moviedetail.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieDetailBinding
+import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
@@ -24,27 +28,34 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
 
     private val binding by viewBinding(FragmentMovieDetailBinding::bind)
 
+    private val viewModel by viewModels<MovieDetailViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
     }
 
     private fun initUI() {
-        getToolbar()?.setTitle("Spider-Man No Way Home bla bla lablasdasd")
-        with(binding) {
-            Glide.with(requireContext())
-                .load("https://cdn.shopify.com/s/files/1/0037/8008/3782/products/IMG_7259.jpg?v=1640349274")
-                .centerCrop().run {
-                    into(posterImageView)
-                    into(backgroundImageView)
-                }
+        viewLifecycleOwner.observe {
+            viewModel.movieDetailsState.collectLatest { movieDetail ->
+                getToolbar()?.setTitle(movieDetail.title)
+                with(binding) {
+                    val posterUrl =
+                        ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(3) + movieDetail.poster_path
+                    Glide.with(requireContext())
+                        .load(posterUrl)
+                        .centerCrop().run {
+                            into(posterImageView)
+                            into(backgroundImageView)
+                        }
+                    yearTextView.text = movieDetail.release_date
+                    ratingTextView.text = movieDetail.vote_average.toString()
+                    genreTextView.text = movieDetail.genre
+                    runtimeTextView.text = "${movieDetail.runtime} Minutes"
+                    storyLineTextView.text = movieDetail.overview
 
-            yearTextView.text = "2021"
-            ratingTextView.text = "4.5"
-            genreTextView.text = "Action"
-            runtimeTextView.text = "132 Minutes"
-            storyLineTextView.text =
-                "Lorem ipspsum dolor psider amet Lorem ipspsum dolor psider amet Lorem ipspsum dolor psider amet Lorem ipspsum dolor psider amet Lorem ipspsum dolor psider amet "
+                }
+            }
         }
     }
 
