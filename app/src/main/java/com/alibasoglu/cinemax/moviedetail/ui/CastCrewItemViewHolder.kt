@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibasoglu.cinemax.ImagesConfigData
+import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.databinding.ItemCastCrewBinding
 import com.alibasoglu.cinemax.moviedetail.ui.model.CastCrewItem
 import com.bumptech.glide.Glide
@@ -18,6 +19,7 @@ class CastCrewItemViewHolder(private val binding: ItemCastCrewBinding) : ViewHol
                 Glide.with(binding.root.context)
                     .load(imageUrl)
                     .centerCrop()
+                    .placeholder(R.drawable.ic_person_24)
                     .into(personImageView)
 
                 nameTextView.text = name

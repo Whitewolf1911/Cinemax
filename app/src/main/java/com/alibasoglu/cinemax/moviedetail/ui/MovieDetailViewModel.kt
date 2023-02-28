@@ -4,7 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.domain.model.mapToCastCrewItem
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
+import com.alibasoglu.cinemax.moviedetail.ui.model.CastCrewItem
 import com.alibasoglu.cinemax.utils.Resource
 import com.alibasoglu.cinemax.utils.getOrThrow
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +20,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
+    private val getMovieCastCrewListUseCase: GetMovieCastCrewListUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -40,9 +44,15 @@ class MovieDetailViewModel @Inject constructor(
     val movieDetailsState: StateFlow<MovieDetail>
         get() = _movieDetailsState
 
+    private var _movieCastCrewList = MutableStateFlow<List<CastCrewItem>>(listOf())
+    val movieCastCrewList: StateFlow<List<CastCrewItem>>
+        get() = _movieCastCrewList
+
     init {
         getMovieDetails()
+        getMovieCastCrewList()
     }
+
 
     private fun getMovieDetails() {
         viewModelScope.launch {
@@ -51,6 +61,28 @@ class MovieDetailViewModel @Inject constructor(
                     is Resource.Success -> {
                         result.data?.let {
                             _movieDetailsState.value = it
+                        }
+                    }
+                    is Resource.Error -> {
+                        //TODO error handle
+                    }
+                    is Resource.Loading -> {
+                        //TODO loading handle
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getMovieCastCrewList() {
+        viewModelScope.launch {
+            getMovieCastCrewListUseCase(movieId).collectLatest { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        result.data?.let {
+                            _movieCastCrewList.value = it.map {
+                                it.mapToCastCrewItem()
+                            }
                         }
                     }
                     is Resource.Error -> {

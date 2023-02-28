@@ -3,6 +3,7 @@ package com.alibasoglu.cinemax.moviedetail.di
 import com.alibasoglu.cinemax.moviedetail.data.MovieDetailRepositoryImpl
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
 import dagger.Module
 import dagger.Provides
@@ -32,4 +33,9 @@ object MovieDetailModule {
     @Singleton
     fun provideGetMovieDetailsUseCase(movieDetailsRepository: MovieDetailRepository) =
         GetMovieDetailsUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetMovieCastCrewListUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetMovieCastCrewListUseCase(movieDetailsRepository)
 }
