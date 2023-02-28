@@ -22,7 +22,7 @@ fun Movie.mapToMovieBasicCardItem(): MovieBasicCardItem {
         id = id,
         title = title,
         rating = vote_average.toString(),
-        genre = getGenreName(genre_ids.first()),
+        genre = getGenreName(genre_ids.firstOrNull() ?: 0), // Should refactor here (List is empty exception)
         imageUrl = poster_path
     )
 }

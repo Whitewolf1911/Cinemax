@@ -13,7 +13,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -42,14 +41,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMoviesApi(okHttpClient: OkHttpClient): MoviesApi {
+    fun provideMoviesApi(retrofit: Retrofit): MoviesApi {
+        return retrofit
+            .create(MoviesApi::class.java)
+    }
 
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()
-            .create()
     }
 
     @Provides

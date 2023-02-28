@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.customviews.CustomToolbar
 import com.alibasoglu.cinemax.databinding.ActivityMainBinding
+import com.alibasoglu.cinemax.utils.ProgressDialog
 import com.alibasoglu.cinemax.utils.navigateSafe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
     private val viewModel by viewModels<MainViewModel>()
+
+    private var progressDialog = ProgressDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +68,13 @@ class MainActivity : AppCompatActivity() {
 
     fun showBottomNavBar() {
         binding.bottomNavigationView.visibility = View.VISIBLE
+    }
+
+    fun showProgressDialog(){
+        progressDialog.startDialog()
+    }
+    fun hideProgressDialog(){
+        progressDialog.dismissDialog()
     }
 
 }

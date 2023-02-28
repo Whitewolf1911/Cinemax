@@ -5,12 +5,23 @@ import androidx.paging.PagingDataAdapter
 import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
 import com.alibasoglu.cinemax.utils.list.BaseDiffUtil
 
-class MoviesBasicCardAdapter : PagingDataAdapter<MovieBasicCardItem, MovieBasicCardItemViewHolder>(BaseDiffUtil()) {
+class MoviesBasicCardAdapter(
+    private val listener: MoviesCardAdapterListener
+) : PagingDataAdapter<MovieBasicCardItem, MovieBasicCardItemViewHolder>(BaseDiffUtil()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieBasicCardItemViewHolder {
-        return MovieBasicCardItemViewHolder.create(parent)
+        return MovieBasicCardItemViewHolder.create(parent, movieClickItem)
     }
 
     override fun onBindViewHolder(holder: MovieBasicCardItemViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
+    }
+
+    private val movieClickItem = MovieBasicCardItemViewHolder.MovieCardItemClickListener { movieBasicCardItem ->
+        listener.onMovieClick(movieBasicCardItem)
+    }
+
+    fun interface MoviesCardAdapterListener {
+        fun onMovieClick(movieBasicCardItem: MovieBasicCardItem)
     }
 }

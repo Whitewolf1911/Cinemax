@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_140dp"
+    android:layout_height="@dimen/_40dp"
+    android:layout_marginHorizontal="@dimen/_8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/personImageView"
+        android:layout_width="@dimen/_40dp"
+        android:layout_height="@dimen/_40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        style="@style/text_h5"
+        android:layout_width="@dimen/_92dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/personImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Matt Reeves" />
+
+    <TextView
+        android:id="@+id/jobTextView"
+        style="@style/text_h7"
+        android:layout_width="@dimen/_92dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/text_grey"
+        app:layout_constraintStart_toStartOf="@id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        tools:text="Director" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

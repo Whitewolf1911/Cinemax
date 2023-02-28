@@ -22,4 +22,12 @@
     <dimen name="_232dp">232dp</dimen>
     <dimen name="_176dp">176dp</dimen>
     <dimen name="_6dp">6dp</dimen>
+    <dimen name="_200dp">200dp</dimen>
+    <dimen name="_28dp">28dp</dimen>
+    <dimen name="_116dp">116dp</dimen>
+    <dimen name="_204dp">204dp</dimen>
+    <dimen name="_288dp">288dp</dimen>
+    <dimen name="_92dp">92dp</dimen>
+    <dimen name="_140dp">140dp</dimen>
+    <dimen name="_20dp">20dp</dimen>
 </resources>

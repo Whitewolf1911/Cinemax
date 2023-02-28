@@ -24,6 +24,7 @@ class CustomToolbar @JvmOverloads constructor(
         with(toolbarConfiguration) {
             initTitle(titleResId)
             configureStartButton(startIconResId, startIconClick)
+            configureEndButton(endIconResId, endIconClick)
         }
         initBackgroundColor(R.color.primary_dark)
         isVisible = true
@@ -54,6 +55,19 @@ class CustomToolbar @JvmOverloads constructor(
             isVisible = true
         }
     }
+
+    private fun configureEndButton(resId: Int?, clickAction: (() -> Unit)?) {
+        binding.endImageButton.apply {
+            if (resId == null) {
+                isVisible = false
+                return
+            }
+            setImageResource(resId)
+            setOnClickListener { clickAction?.invoke() }
+            isVisible = true
+        }
+    }
+
 
     private fun initBackgroundColor(resId: Int?) {
         resId?.let {

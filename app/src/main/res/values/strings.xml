@@ -23,4 +23,9 @@
     <string name="categories">Categories</string>
     <string name="most_popular">Most popular</string>
     <string name="see_all">See All</string>
+    <string name="play">Play</string>
+    <string name="story_line">Story Line</string>
+    <string name="cast_and_crew">Cast and Crew</string>
+    <string name="share_to">Share to</string>
+    <string name="minutes">%1$s Minutes</string>
 </resources>

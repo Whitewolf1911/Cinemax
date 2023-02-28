@@ -8,5 +8,8 @@ data class ToolbarConfiguration(
     val titleResId: Int? = null,
     @DrawableRes
     val startIconResId: Int? = null,
-    val startIconClick: (() -> Unit)? = null
+    val startIconClick: (() -> Unit)? = null,
+    @DrawableRes
+    val endIconResId: Int? = null,
+    val endIconClick: (() -> Unit)? = null
 )
