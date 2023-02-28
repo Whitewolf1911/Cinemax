@@ -22,7 +22,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        
+
         // should correspond to key/value pairs inside the file
         buildConfigField("String", "MOVIES_HEADER_API_KEY", apikeyProperties['MOVIES_HEADER_API_KEY'])
         buildConfigField("String", "BASE_URL", apikeyProperties['BASE_URL'])
@@ -102,9 +102,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
 
+    //Carousel RecyclerView
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
 
+    //Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:6.0.0"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

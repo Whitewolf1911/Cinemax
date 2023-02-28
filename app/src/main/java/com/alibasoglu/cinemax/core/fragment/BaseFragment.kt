@@ -44,4 +44,12 @@ abstract class BaseFragment(@LayoutRes layoutResId: Int) : Fragment(layoutResId)
         mainActivity?.showBottomNavBar()
     }
 
+    protected fun showProgressDialog() {
+        mainActivity?.showProgressDialog()
+    }
+
+    protected fun hideProgressDialog() {
+        mainActivity?.hideProgressDialog()
+    }
+
 }

@@ -3,11 +3,11 @@ package com.alibasoglu.cinemax.moviedetail.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
-import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToCastCrewItem
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
 import com.alibasoglu.cinemax.moviedetail.ui.model.CastCrewItem
+import com.alibasoglu.cinemax.moviedetail.ui.model.MovieDetailState
 import com.alibasoglu.cinemax.utils.Resource
 import com.alibasoglu.cinemax.utils.getOrThrow
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,22 +26,9 @@ class MovieDetailViewModel @Inject constructor(
 
     private val movieId = savedStateHandle.getOrThrow<Int>("movieId")
 
-    private var _movieDetailsState = MutableStateFlow(
-        MovieDetail(
-            backdrop_path = "",
-            genre = "",
-            id = 0,
-            original_title = "",
-            overview = null,
-            poster_path = null,
-            release_date = "",
-            runtime = 0,
-            title = "",
-            video = false,
-            vote_average = 0.0
-        )
-    )
-    val movieDetailsState: StateFlow<MovieDetail>
+    private var _movieDetailsState =
+        MutableStateFlow<MovieDetailState>(MovieDetailState(isLoading = true, movieDetail = null))
+    val movieDetailsState: StateFlow<MovieDetailState>
         get() = _movieDetailsState
 
     private var _movieCastCrewList = MutableStateFlow<List<CastCrewItem>>(listOf())
@@ -60,14 +47,14 @@ class MovieDetailViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         result.data?.let {
-                            _movieDetailsState.value = it
+                            _movieDetailsState.value = MovieDetailState(isLoading = false, movieDetail = it)
                         }
                     }
                     is Resource.Error -> {
                         //TODO error handle
                     }
                     is Resource.Loading -> {
-                        //TODO loading handle
+                        _movieDetailsState.value = MovieDetailState(isLoading = result.isLoading, movieDetail = null)
                     }
                 }
             }
