@@ -31,7 +31,7 @@ data class MovieDetailsResponse(
 fun MovieDetailsResponse.mapToMovieDetail(): MovieDetail {
     return MovieDetail(
         backdrop_path = backdrop_path,
-        genre = genres[0].name,
+        genre = genres.getOrNull(0)?.name ?: "",
         id = id,
         original_title = original_title,
         overview = overview,
