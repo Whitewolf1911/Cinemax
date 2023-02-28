@@ -11,6 +11,7 @@ import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieDetailBinding
 import com.alibasoglu.cinemax.utils.ShareDialog
 import com.alibasoglu.cinemax.utils.lifecycle.observe
+import com.alibasoglu.cinemax.utils.showTextToast
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -84,7 +85,8 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     }
 
     private fun addMovieToWishlist() {
-        //TODO add movie to wishlist
+        viewModel.insertMovieToDatabase()
+        context?.showTextToast("Movie added to wishlist!")
     }
 
     private fun showShareDialog() {

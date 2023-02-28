@@ -1,11 +1,14 @@
-package com.alibasoglu.cinemax.moviedetail.domain.model
+package com.alibasoglu.cinemax.data.local.model
 
-import com.alibasoglu.cinemax.data.local.model.MovieEntity
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 
-data class MovieDetail(
+@Entity(tableName = "movie_entities")
+data class MovieEntity(
+    @PrimaryKey val id: Int,
     val backdrop_path: String,
     val genre: String,
-    val id: Int,
     val original_title: String,
     val overview: String?,
     val poster_path: String?,
@@ -16,11 +19,11 @@ data class MovieDetail(
     val vote_average: Double,
 )
 
-fun MovieDetail.mapToMovieEntity(): MovieEntity {
-    return MovieEntity(
-        id = id,
+fun MovieEntity.mapToMovieDetail(): MovieDetail {
+    return MovieDetail(
         backdrop_path = backdrop_path,
         genre = genre,
+        id = id,
         original_title = original_title,
         overview = overview,
         poster_path = poster_path,
