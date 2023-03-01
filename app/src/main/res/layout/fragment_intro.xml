@@ -113,11 +113,10 @@
         style="@style/CinemaxRoundIconButtonStyle"
         android:layout_width="@dimen/_68dp"
         android:layout_height="@dimen/_68dp"
+        android:layout_marginEnd="@dimen/_24dp"
         android:backgroundTint="@color/text_white"
         app:icon="@drawable/ic_google"
         app:layout_constraintEnd_toStartOf="@+id/appleSignupButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/appleSignupButton" />
 
     <com.google.android.material.button.MaterialButton
@@ -128,9 +127,9 @@
         android:layout_marginTop="@dimen/_40dp"
         android:backgroundTint="@color/primary_soft"
         app:icon="@drawable/ic_apple"
-        app:layout_constraintEnd_toStartOf="@+id/facebookSignupButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/googleSignupButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orSignUpTextView" />
 
     <com.google.android.material.button.MaterialButton
@@ -138,10 +137,9 @@
         style="@style/CinemaxRoundIconButtonStyle"
         android:layout_width="@dimen/_68dp"
         android:layout_height="@dimen/_68dp"
+        android:layout_marginStart="@dimen/_24dp"
         android:backgroundTint="@color/blue_facebook"
         app:icon="@drawable/ic_facebook"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/appleSignupButton"
         app:layout_constraintTop_toTopOf="@+id/appleSignupButton" />
 
