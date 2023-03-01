@@ -3,6 +3,8 @@ package com.alibasoglu.cinemax.moviedetail.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.domain.usecase.InsertMovieToDatabaseUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToCastCrewItem
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
@@ -21,6 +23,7 @@ import kotlinx.coroutines.launch
 class MovieDetailViewModel @Inject constructor(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     private val getMovieCastCrewListUseCase: GetMovieCastCrewListUseCase,
+    private val insertMovieToDatabaseUseCase: InsertMovieToDatabaseUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -30,6 +33,8 @@ class MovieDetailViewModel @Inject constructor(
         MutableStateFlow<MovieDetailState>(MovieDetailState(isLoading = true, movieDetail = null))
     val movieDetailsState: StateFlow<MovieDetailState>
         get() = _movieDetailsState
+
+    private var movieData: MovieDetail? = null
 
     private var _movieCastCrewList = MutableStateFlow<List<CastCrewItem>>(listOf())
     val movieCastCrewList: StateFlow<List<CastCrewItem>>
@@ -48,6 +53,7 @@ class MovieDetailViewModel @Inject constructor(
                     is Resource.Success -> {
                         result.data?.let {
                             _movieDetailsState.value = MovieDetailState(isLoading = false, movieDetail = it)
+                            movieData = it
                         }
                     }
                     is Resource.Error -> {
@@ -66,8 +72,8 @@ class MovieDetailViewModel @Inject constructor(
             getMovieCastCrewListUseCase(movieId).collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
-                        result.data?.let {
-                            _movieCastCrewList.value = it.map {
+                        result.data?.let { list ->
+                            _movieCastCrewList.value = list.map {
                                 it.mapToCastCrewItem()
                             }
                         }
@@ -80,6 +86,12 @@ class MovieDetailViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun insertMovieToDatabase() {
+        viewModelScope.launch {
+            movieData?.let { insertMovieToDatabaseUseCase(it) }
         }
     }
 

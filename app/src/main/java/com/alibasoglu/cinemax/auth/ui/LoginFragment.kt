@@ -50,6 +50,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         if (email.isNotBlank() && password.isNotBlank()) {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
                 Toast.makeText(requireContext(), "Login success", Toast.LENGTH_SHORT).show()
+                setStartDestinationToHome()
                 navToHomeFragment()
             }.addOnFailureListener { exception ->
                 Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_SHORT).show()

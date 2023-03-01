@@ -28,4 +28,6 @@
     <string name="cast_and_crew">Cast and Crew</string>
     <string name="share_to">Share to</string>
     <string name="minutes">%1$s Minutes</string>
+    <string name="wishlist">Wishlist</string>
+
 </resources>

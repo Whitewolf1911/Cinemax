@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_108dp"
+    android:layout_marginHorizontal="@dimen/_24dp"
+    android:layout_marginVertical="@dimen/_8dp"
+    android:backgroundTint="@color/primary_soft"
+    app:cardCornerRadius="@dimen/_12dp"
+    app:strokeColor="@color/primary_soft">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/posterImageView"
+            android:layout_width="@dimen/_120dp"
+            android:layout_height="@dimen/_84dp"
+            android:layout_marginStart="@dimen/_12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:shapeAppearanceOverlay="@style/roundedImageView_8dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/genreTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16dp"
+            android:textColor="@color/text_white_grey"
+            app:layout_constraintStart_toEndOf="@id/posterImageView"
+            app:layout_constraintTop_toTopOf="@id/posterImageView"
+            tools:text="Action" />
+
+        <TextView
+            android:id="@+id/movieNameTextView"
+            style="@style/text_h5"
+            android:layout_width="@dimen/_160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6dp"
+            android:ellipsize="end"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/genreTextView"
+            app:layout_constraintTop_toBottomOf="@id/genreTextView"
+            tools:text="X-Men Origins : Wolverine Apocalypse" />
+
+        <TextView
+            android:id="@+id/typeTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6dp"
+            android:textColor="@color/text_grey"
+            app:layout_constraintStart_toStartOf="@id/movieNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/movieNameTextView"
+            tools:text="Movie" />
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8dp"
+            android:drawablePadding="@dimen/_4dp"
+            android:textColor="@color/secondary_orange"
+            app:drawableStartCompat="@drawable/ic_star"
+            app:layout_constraintStart_toEndOf="@id/typeTextView"
+            app:layout_constraintTop_toTopOf="@id/typeTextView"
+            tools:text="4.5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wishlistButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="@dimen/_32dp"
+            android:layout_height="@dimen/_32dp"
+            android:layout_marginEnd="@dimen/_12dp"
+            android:layout_marginBottom="@dimen/_12dp"
+            app:icon="@drawable/ic_wishlist"
+            app:iconGravity="textEnd"
+            app:iconSize="@dimen/_32dp"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -30,4 +30,7 @@
     <dimen name="_92dp">92dp</dimen>
     <dimen name="_140dp">140dp</dimen>
     <dimen name="_20dp">20dp</dimen>
+    <dimen name="_120dp">120dp</dimen>
+    <dimen name="_84dp">84dp</dimen>
+    <dimen name="_108dp">108dp</dimen>
 </resources>

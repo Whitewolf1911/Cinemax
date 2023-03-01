@@ -1,8 +1,11 @@
 package com.alibasoglu.cinemax.di
 
+import android.app.Application
+import androidx.room.Room
 import com.alibasoglu.cinemax.BuildConfig
+import com.alibasoglu.cinemax.data.local.MovieDatabase
 import com.alibasoglu.cinemax.data.remote.MoviesApi
-import com.alibasoglu.cinemax.data.remote.MoviesRepositoryImpl
+import com.alibasoglu.cinemax.data.MoviesRepositoryImpl
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import dagger.Module
 import dagger.Provides
@@ -58,8 +61,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMoviesRepository(moviesApi: MoviesApi): MoviesRepository {
-        return MoviesRepositoryImpl(moviesApi = moviesApi)
+    fun provideMoviesRepository(moviesApi: MoviesApi, movieDatabase: MovieDatabase): MoviesRepository {
+        return MoviesRepositoryImpl(moviesApi = moviesApi, movieDatabase = movieDatabase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDatabase(app: Application): MovieDatabase {
+        return Room.databaseBuilder(
+            app,
+            MovieDatabase::class.java,
+            "moviedb"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
 }

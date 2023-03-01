@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/bottom_bar_height">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,17 +30,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:shapeAppearanceOverlay="@style/roundedImageView_16dp"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/yearTextView"
             style="@style/text_h6"
-            android:maxLength="4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_24dp"
             android:drawablePadding="@dimen/_6dp"
+            android:maxLength="4"
             android:textColor="@color/text_grey"
             app:drawableStartCompat="@drawable/ic_calendar"
             app:layout_constraintEnd_toStartOf="@+id/divider1"
@@ -122,11 +121,11 @@
                 android:id="@+id/ratingTextView"
                 style="@style/text_h6"
                 android:layout_width="wrap_content"
-                android:maxLength="3"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_8dp"
                 android:drawablePadding="@dimen/_4dp"
+                android:maxLength="3"
                 android:textColor="@color/secondary_orange"
                 app:drawableStartCompat="@drawable/ic_star"
                 tools:text="4.5" />
@@ -217,8 +216,8 @@
             android:id="@+id/castCrewRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16dp"
             android:layout_marginStart="@dimen/_16dp"
+            android:layout_marginTop="@dimen/_16dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,13 +1,18 @@
-package com.alibasoglu.cinemax.data.remote
+package com.alibasoglu.cinemax.data
 
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.alibasoglu.cinemax.ImagesConfigData
+import com.alibasoglu.cinemax.data.local.MovieDatabase
+import com.alibasoglu.cinemax.data.local.model.mapToMovieDetail
+import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.domain.model.mapToMovieEntity
 import com.alibasoglu.cinemax.setConfigDataFromResponse
 import com.alibasoglu.cinemax.utils.Resource
 import java.io.IOException
@@ -16,8 +21,12 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
 class MoviesRepositoryImpl(
-    private val moviesApi: MoviesApi
+    private val moviesApi: MoviesApi,
+    private val movieDatabase: MovieDatabase
 ) : MoviesRepository {
+
+    private val movieDao = movieDatabase.dao
+
     override fun getMoviesPager(): Pager<Int, Movie> = Pager(
         config = PagingConfig(
             pageSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
@@ -61,6 +70,18 @@ class MoviesRepositoryImpl(
                 emit(Resource.Loading(isLoading = false))
             }
 
+        }
+    }
+
+    override suspend fun insertMovieToDatabase(movieDetail: MovieDetail) {
+        movieDao.insertMovie(movieDetail.mapToMovieEntity())
+    }
+
+    override suspend fun getWishListedMovies(): Flow<List<MovieDetail>> {
+        return flow {
+            emit(movieDao.getWishListedMovies().map {
+                it.mapToMovieDetail()
+            })
         }
     }
 }

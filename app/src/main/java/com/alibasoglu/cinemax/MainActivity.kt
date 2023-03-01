@@ -48,6 +48,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setStartDestinationToHome() {
+        val graph = navController.navInflater.inflate(R.navigation.main_navigation)
+        graph.setStartDestination(R.id.homeFragment)
+        navController.setGraph(graph, intent.extras)
+        binding.bottomNavigationView.apply {
+            setupWithNavController(navController)
+            setOnItemReselectedListener {} // To prevent reselect item and resetting selected fragment
+        }
+    }
+
     fun navBack() {
         navController.navigateUp()
     }
@@ -70,10 +80,11 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
 
-    fun showProgressDialog(){
+    fun showProgressDialog() {
         progressDialog.startDialog()
     }
-    fun hideProgressDialog(){
+
+    fun hideProgressDialog() {
         progressDialog.dismissDialog()
     }
 
