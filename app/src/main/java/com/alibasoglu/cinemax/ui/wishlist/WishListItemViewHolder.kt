@@ -8,26 +8,37 @@ import com.alibasoglu.cinemax.databinding.ItemWishlistBinding
 import com.alibasoglu.cinemax.ui.model.WishListCardItem
 import com.bumptech.glide.Glide
 
-class WishListItemViewHolder(private val binding: ItemWishlistBinding) : ViewHolder(binding.root) {
+class WishListItemViewHolder(
+    private val binding: ItemWishlistBinding,
+    private val listener: WishListItemClickListener
+) : ViewHolder(binding.root) {
 
     fun bind(wishListCardItem: WishListCardItem) {
         with(wishListCardItem) {
             val imageUrl = ImagesConfigData.secure_base_url + ImagesConfigData.backdrop_sizes?.get(1) + backdrop_path
 
             with(binding) {
+                root.setOnClickListener {
+                    listener.onClick(wishListCardItem)
+                }
                 genreTextView.text = genre
                 movieNameTextView.text = title
-                ratingTextView.text = vote_average.toString().substring(0,3)
+                ratingTextView.text = vote_average.toString().substring(0, 3)
                 typeTextView.text = "Movie"
                 Glide.with(root.context).load(imageUrl).centerCrop().into(posterImageView)
             }
         }
     }
 
+    fun interface WishListItemClickListener {
+        fun onClick(wishListCardItem: WishListCardItem)
+    }
+
     companion object {
-        fun create(parent: ViewGroup): WishListItemViewHolder {
+        fun create(parent: ViewGroup, listener: WishListItemClickListener): WishListItemViewHolder {
             return WishListItemViewHolder(
                 ItemWishlistBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                listener
             )
         }
     }

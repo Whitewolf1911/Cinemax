@@ -52,6 +52,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
         if (email.isNotBlank() && password.isNotBlank() && termsAccepted) {
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
                 Toast.makeText(requireContext(), "Account created", Toast.LENGTH_SHORT).show()
+                setStartDestinationToHome()
                 navToHomeFragment()
             }.addOnFailureListener { exception ->
                 Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_SHORT).show()

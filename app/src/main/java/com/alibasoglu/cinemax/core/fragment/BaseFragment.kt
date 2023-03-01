@@ -52,4 +52,7 @@ abstract class BaseFragment(@LayoutRes layoutResId: Int) : Fragment(layoutResId)
         mainActivity?.hideProgressDialog()
     }
 
+    protected fun setStartDestinationToHome() {
+        mainActivity?.setStartDestinationToHome()
+    }
 }

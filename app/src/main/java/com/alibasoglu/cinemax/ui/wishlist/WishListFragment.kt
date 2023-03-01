@@ -24,7 +24,11 @@ class WishListFragment : BaseFragment(R.layout.fragment_wishlist) {
 
     private val viewModel by viewModels<WishListViewModel>()
 
-    private val wishListAdapter = WishListCardAdapter()
+    private val wishListCardAdapterListener = WishListCardAdapter.WishListCardAdapterListener { wishListCardItem ->
+        nav(WishListFragmentDirections.actionWishListFragmentToMovieDetailFragment(wishListCardItem.id))
+    }
+
+    private val wishListAdapter = WishListCardAdapter(wishListCardAdapterListener)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,6 +41,7 @@ class WishListFragment : BaseFragment(R.layout.fragment_wishlist) {
     }
 
     private fun initUI() {
+        showBottomNavbar()
         binding.wishlistRecyclerView.adapter = wishListAdapter
         viewLifecycleOwner.observe {
             viewModel.wishListedMoviesState.collectLatest {

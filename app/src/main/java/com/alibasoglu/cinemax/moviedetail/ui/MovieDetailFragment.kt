@@ -43,6 +43,7 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     }
 
     private fun initUIWithObservers() {
+        hideBottomNavbar()
         viewLifecycleOwner.observe {
             viewModel.movieDetailsState.collectLatest { movieDetailState ->
                 movieDetailState.movieDetail?.let { movieDetail ->
