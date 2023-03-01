@@ -29,5 +29,7 @@
     <string name="share_to">Share to</string>
     <string name="minutes">%1$s Minutes</string>
     <string name="wishlist">Wishlist</string>
+    <string name="actors">Actors</string>
+    <string name="movie_related">Movie Related</string>
 
 </resources>

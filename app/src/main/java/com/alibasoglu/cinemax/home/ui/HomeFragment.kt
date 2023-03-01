@@ -2,7 +2,9 @@ package com.alibasoglu.cinemax.home.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.alibasoglu.cinemax.GenresData
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
@@ -12,7 +14,10 @@ import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
@@ -32,10 +37,17 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val moviesBasicCardAdapter = MoviesBasicCardAdapter(moviesBasicCardAdapterListener)
 
+    private var searchJob: Job? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
         initObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.searchEditText.text?.clear()
     }
 
     private fun initUI() {
@@ -56,11 +68,29 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 //TODO nav to wishlist fragment
             }
 
+            searchEditText.apply {
+                doAfterTextChanged { searchQuery ->
+                    searchQuery?.let {
+                        searchJob?.cancel()
+                        searchJob = lifecycleScope.launch {
+                            delay(QUERY_SEARCH_DELAY)
+                            if (searchQuery.trim().length > 1)
+                                navToSearchResultFragment(searchQuery.toString())
+                        }
+                    }
+                }
+                //For submit button
+                setOnEditorActionListener { textView, _, _ ->
+                    if (textView.text.trim().length > 1) {
+                        navToSearchResultFragment(textView.text.toString())
+                    }
+                    return@setOnEditorActionListener true
+                }
+            }
             categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("All"))
             GenresData.genres.forEach { genre ->
                 categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
             }
-
         }
     }
 
@@ -80,4 +110,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun navToMovieDetailFragment(movieId: Int) {
         nav(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId))
     }
+
+    private fun navToSearchResultFragment(searchQuery: String) {
+        nav(HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(searchQuery))
+    }
+
+    companion object {
+        const val QUERY_SEARCH_DELAY = 1800L
+    }
+
 }
