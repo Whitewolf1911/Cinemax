@@ -2,6 +2,7 @@ package com.alibasoglu.cinemax.domain.di
 
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
+import com.alibasoglu.cinemax.domain.usecase.GetWishListedMoviesUseCase
 import com.alibasoglu.cinemax.domain.usecase.InsertMovieToDatabaseUseCase
 import com.alibasoglu.cinemax.domain.usecase.SetImagesConfigDataUseCase
 import com.alibasoglu.cinemax.home.usecase.GetCarouselMoviesUseCase
@@ -34,5 +35,10 @@ object UseCaseModule {
     @Singleton
     fun provideInsertMovieToDatabaseUseCase(moviesRepository: MoviesRepository) =
         InsertMovieToDatabaseUseCase(moviesRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetWishListedMoviesUseCase(moviesRepository: MoviesRepository) =
+        GetWishListedMoviesUseCase(moviesRepository)
 
 }

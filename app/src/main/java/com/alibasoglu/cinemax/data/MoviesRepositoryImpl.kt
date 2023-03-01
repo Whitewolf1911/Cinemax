@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.data.remote
+package com.alibasoglu.cinemax.data
 
 import android.util.Log
 import androidx.paging.Pager
@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.data.local.MovieDatabase
 import com.alibasoglu.cinemax.data.local.model.mapToMovieDetail
+import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource
 import com.alibasoglu.cinemax.domain.model.Movie
@@ -78,9 +79,9 @@ class MoviesRepositoryImpl(
 
     override suspend fun getWishListedMovies(): Flow<List<MovieDetail>> {
         return flow {
-            movieDao.getWishListedMovies().map {
+            emit(movieDao.getWishListedMovies().map {
                 it.mapToMovieDetail()
-            }
+            })
         }
     }
 }

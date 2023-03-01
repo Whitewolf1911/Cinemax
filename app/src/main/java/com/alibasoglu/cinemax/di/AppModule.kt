@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.alibasoglu.cinemax.BuildConfig
 import com.alibasoglu.cinemax.data.local.MovieDatabase
 import com.alibasoglu.cinemax.data.remote.MoviesApi
-import com.alibasoglu.cinemax.data.remote.MoviesRepositoryImpl
+import com.alibasoglu.cinemax.data.MoviesRepositoryImpl
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import dagger.Module
 import dagger.Provides

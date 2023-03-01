@@ -54,4 +54,9 @@
             android:name="movieId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/wishListFragment"
+        android:name="com.alibasoglu.cinemax.ui.wishlist.WishListFragment"
+        tools:layout="@layout/fragment_wishlist"
+        android:label="WishListFragment" />
 </navigation>

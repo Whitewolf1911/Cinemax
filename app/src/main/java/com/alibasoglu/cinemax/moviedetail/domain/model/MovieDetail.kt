@@ -1,6 +1,7 @@
 package com.alibasoglu.cinemax.moviedetail.domain.model
 
 import com.alibasoglu.cinemax.data.local.model.MovieEntity
+import com.alibasoglu.cinemax.ui.model.WishListCardItem
 
 data class MovieDetail(
     val backdrop_path: String,
@@ -28,6 +29,16 @@ fun MovieDetail.mapToMovieEntity(): MovieEntity {
         runtime = runtime,
         title = title,
         video = video,
+        vote_average = vote_average
+    )
+}
+
+fun MovieDetail.mapToWishListCardItem(): WishListCardItem {
+    return WishListCardItem(
+        backdrop_path = backdrop_path,
+        genre = genre,
+        id = id,
+        title = title,
         vote_average = vote_average
     )
 }

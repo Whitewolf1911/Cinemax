@@ -82,12 +82,18 @@
         <item name="iconPadding">0dp</item>
         <item name="iconSize">@dimen/_24dp</item>
         <item name="iconTint">@null</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded
+        </item>
     </style>
 
-    <style name="roundedImageView" parent="">
+    <style name="roundedImageView_16dp" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">@dimen/_16dp</item>
+    </style>
+
+    <style name="roundedImageView_8dp" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_8dp</item>
     </style>
 
 </resources>
