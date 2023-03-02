@@ -2,9 +2,15 @@ package com.alibasoglu.cinemax.search.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.domain.model.mapToMovieBigCardItem
+import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
 import com.alibasoglu.cinemax.search.data.model.PersonListState
 import com.alibasoglu.cinemax.search.domain.usecase.SearchPersonUseCase
+import com.alibasoglu.cinemax.ui.model.MovieBigCardItem
 import com.alibasoglu.cinemax.utils.Resource
 import com.alibasoglu.cinemax.utils.getOrThrow
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +23,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class SearchResultViewModel @Inject constructor(
     private val searchPersonUseCase: SearchPersonUseCase,
+    private val getMoviesPagerUseCase: GetMoviesPagerUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -26,8 +33,15 @@ class SearchResultViewModel @Inject constructor(
     val personListState: StateFlow<PersonListState>
         get() = _personListState
 
+
+    private val _moviesSearchState = MutableStateFlow<PagingData<MovieBigCardItem>>(PagingData.empty())
+    val moviesSearchState: StateFlow<PagingData<MovieBigCardItem>>
+        get() = _moviesSearchState
+
+
     init {
         searchPerson(firstQuery)
+        searchMovie(firstQuery)
     }
 
     fun searchPerson(searchQuery: String) {
@@ -43,10 +57,23 @@ class SearchResultViewModel @Inject constructor(
                         //TODO error handling
                     }
                     is Resource.Loading -> {
-                        //TODO loading handling
+                        _personListState.value = _personListState.value.copy(isLoading = result.isLoading)
                     }
                 }
             }
+        }
+    }
+
+    fun searchMovie(searchQuery: String) {
+        viewModelScope.launch {
+            getMoviesPagerUseCase(searchQuery)
+                .flow
+                .cachedIn(viewModelScope)
+                .collectLatest { movieList ->
+                    _moviesSearchState.value = movieList.map {
+                        it.mapToMovieBigCardItem()
+                    }
+                }
         }
     }
 }

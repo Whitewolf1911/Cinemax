@@ -7,6 +7,7 @@ import com.alibasoglu.cinemax.data.local.MovieDatabase
 import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.MoviesRepositoryImpl
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
+import com.alibasoglu.cinemax.search.data.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,8 +62,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMoviesRepository(moviesApi: MoviesApi, movieDatabase: MovieDatabase): MoviesRepository {
-        return MoviesRepositoryImpl(moviesApi = moviesApi, movieDatabase = movieDatabase)
+    fun provideMoviesRepository(
+        moviesApi: MoviesApi,
+        movieDatabase: MovieDatabase,
+        searchApi: SearchApi
+    ): MoviesRepository {
+        return MoviesRepositoryImpl(
+            moviesApi = moviesApi,
+            movieDatabase = movieDatabase,
+            searchApi = searchApi
+        )
     }
 
     @Provides

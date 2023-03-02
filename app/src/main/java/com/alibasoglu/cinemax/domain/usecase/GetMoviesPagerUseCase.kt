@@ -5,5 +5,5 @@ import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 class GetMoviesPagerUseCase(
     private val moviesRepository: MoviesRepository
 ) {
-    operator fun invoke() = moviesRepository.getMoviesPager()
+    operator fun invoke(searchQuery: String?) = moviesRepository.getMoviesPager(searchQuery)
 }

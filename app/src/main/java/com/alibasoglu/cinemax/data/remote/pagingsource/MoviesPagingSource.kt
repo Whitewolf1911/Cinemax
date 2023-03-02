@@ -5,11 +5,14 @@ import androidx.paging.PagingState
 import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.domain.model.Movie
+import com.alibasoglu.cinemax.search.data.SearchApi
 import java.io.IOException
 import retrofit2.HttpException
 
 class MoviesPagingSource(
-    private val moviesApi: MoviesApi
+    private val moviesApi: MoviesApi,
+    private val searchApi: SearchApi,
+    private val searchQuery: String? = null
 ) : PagingSource<Int, Movie>() {
 
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
@@ -23,9 +26,16 @@ class MoviesPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val page = params.key ?: FIRST_PAGE_INDEX
         return try {
-            val moviesApiResponse = moviesApi.getPopularMovies(page = page).body()?.results?.map {
-                it.mapToMovie()
-            }
+            val moviesApiResponse =
+                if (searchQuery == null) {
+                    moviesApi.getPopularMovies(page = page).body()?.results?.map {
+                        it.mapToMovie()
+                    }
+                } else {
+                    searchApi.searchMovie(searchQuery = searchQuery, page = page).body()?.results?.map {
+                        it.mapToMovie()
+                    }
+                }
 
             val moviesList = moviesApiResponse.orEmpty()
             val nextKey = if (moviesList.isEmpty()) null else page.plus(1)

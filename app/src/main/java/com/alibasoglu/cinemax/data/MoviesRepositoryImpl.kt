@@ -13,6 +13,7 @@ import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToMovieEntity
+import com.alibasoglu.cinemax.search.data.SearchApi
 import com.alibasoglu.cinemax.setConfigDataFromResponse
 import com.alibasoglu.cinemax.utils.Resource
 import java.io.IOException
@@ -22,18 +23,19 @@ import retrofit2.HttpException
 
 class MoviesRepositoryImpl(
     private val moviesApi: MoviesApi,
+    private val searchApi: SearchApi,
     private val movieDatabase: MovieDatabase
 ) : MoviesRepository {
 
     private val movieDao = movieDatabase.dao
 
-    override fun getMoviesPager(): Pager<Int, Movie> = Pager(
+    override fun getMoviesPager(searchQuery: String?): Pager<Int, Movie> = Pager(
         config = PagingConfig(
             pageSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
             initialLoadSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
             enablePlaceholders = false
         ),
-        pagingSourceFactory = { MoviesPagingSource(moviesApi = moviesApi) }
+        pagingSourceFactory = { MoviesPagingSource(moviesApi = moviesApi, searchApi, searchQuery = searchQuery) }
     )
 
     override suspend fun getSetConfigurationData() {

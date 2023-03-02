@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
 
-    fun getMoviesPager(): Pager<Int, Movie>
+    fun getMoviesPager(searchQuery: String? = null): Pager<Int, Movie>
 
     suspend fun getSetConfigurationData()
 

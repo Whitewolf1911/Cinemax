@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_148dp"
+    android:layout_marginHorizontal="@dimen/_24dp"
+    android:layout_marginVertical="@dimen/_8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/posterImageView"
+        android:layout_width="@dimen/_112dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView_8dp"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        style="@style/text_h4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@+id/premiumCard"
+        app:layout_constraintTop_toBottomOf="@+id/premiumCard"
+        tools:text="Spider man No Way to home " />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/premiumCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16dp"
+        android:layout_marginTop="@dimen/_4dp"
+        android:backgroundTint="@color/secondary_orange"
+        app:layout_constraintStart_toEndOf="@id/posterImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/secondary_orange">
+
+        <TextView
+            style="@style/text_h7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_8dp"
+            android:paddingVertical="@dimen/_4dp"
+            android:text="@string/premium"
+            tools:layout_editor_absoluteX="129dp"
+            tools:layout_editor_absoluteY="7dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/yearTextView"
+        style="@style/text_h6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        android:drawablePadding="@dimen/_6dp"
+        android:maxLength="4"
+        android:textColor="@color/text_grey"
+        app:drawableStartCompat="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        tools:text="2022" />
+
+
+    <TextView
+        android:id="@+id/genreTextView"
+        style="@style/text_h6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12dp"
+        android:drawablePadding="@dimen/_6dp"
+        android:textColor="@color/text_grey"
+        app:drawableStartCompat="@drawable/ic_genre"
+        app:layout_constraintStart_toStartOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/yearTextView"
+        tools:text="Action" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/_1dp"
+        android:layout_height="@dimen/_16dp"
+        android:layout_marginHorizontal="@dimen/_12dp"
+        android:background="@color/text_grey"
+        app:layout_constraintStart_toEndOf="@id/genreTextView"
+        app:layout_constraintTop_toTopOf="@id/genreTextView" />
+
+    <TextView
+        android:id="@+id/movieText"
+        style="@style/text_h6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8dp"
+        android:layout_marginTop="@dimen/_12dp"
+        android:text="@string/movie"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/_56dp"
+        android:layout_height="@dimen/_24dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_8dp"
+        android:layout_marginTop="@dimen/_8dp"
+        android:alpha="0.8"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/primary_soft">
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8dp"
+            android:drawablePadding="@dimen/_4dp"
+            android:maxLength="3"
+            android:textColor="@color/secondary_orange"
+            app:drawableStartCompat="@drawable/ic_star"
+            tools:text="4.5" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/pg13Card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12dp"
+        app:cardCornerRadius="@dimen/_4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/yearTextView"
+        app:layout_constraintStart_toEndOf="@+id/yearTextView"
+        app:layout_constraintTop_toTopOf="@+id/yearTextView"
+        app:strokeColor="@color/primary_blue_accent">
+
+        <TextView
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_8dp"
+            android:paddingVertical="@dimen/_4dp"
+            android:text="PG-13"
+            android:textColor="@color/primary_blue_accent"
+            tools:layout_editor_absoluteX="129dp"
+            tools:layout_editor_absoluteY="7dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

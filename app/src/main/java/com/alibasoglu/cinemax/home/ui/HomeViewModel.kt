@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies() {
         viewModelScope.launch {
-            getMoviesPagerUseCase()
+            getMoviesPagerUseCase(searchQuery = null)
                 .flow
                 .cachedIn(viewModelScope)
                 .collectLatest { movieList ->

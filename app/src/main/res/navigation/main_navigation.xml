@@ -73,5 +73,8 @@
         <argument
             android:name="searchQuery"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>
