@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.moviedetail.ui
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.WindowCompat
@@ -43,6 +44,12 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
         hideBottomNavbar()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     private fun setupPlayer(trailerKey: String) {
