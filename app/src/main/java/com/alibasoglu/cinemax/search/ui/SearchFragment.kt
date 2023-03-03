@@ -17,6 +17,8 @@ import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -56,6 +58,20 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             GenresData.genres.forEach { genre ->
                 categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
             }
+
+            val onTabSelectedListener = object : OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val selectedTabGenreName = GenresData.genres.find {
+                        it.name == tab?.text
+                    }?.name
+                    viewModel.filterRecommendedMovies(selectedTabGenreName ?: "All")
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            }
+            categoriesTabLayout.addOnTabSelectedListener(onTabSelectedListener)
+
             recommendedMoviesRecyclerView.adapter = moviesBasicCardAdapter
 
             searchEditText.apply {

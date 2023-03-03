@@ -13,6 +13,7 @@ import com.alibasoglu.cinemax.databinding.FragmentHomeBinding
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
+import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -59,6 +60,19 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 setAlpha(true)
             }
             popularMoviesRecyclerView.adapter = moviesBasicCardAdapter
+
+            val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val selectedTabGenreName = GenresData.genres.find {
+                        it.name == tab?.text
+                    }?.name
+                    viewModel.filterPopularMovies(selectedTabGenreName ?: "All")
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            }
+            categoriesTabLayout.addOnTabSelectedListener(onTabSelectedListener)
 
             seeAllTextView.setOnClickListener {
                 //TODO nav to most popular fragment

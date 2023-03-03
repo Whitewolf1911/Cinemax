@@ -45,14 +45,22 @@ class SearchFragmentViewModel @Inject constructor(
         getRecommendedMovies()
     }
 
-    private fun getRecommendedMovies() {
+    private fun getRecommendedMovies(genreFilter: String? = null) {
         viewModelScope.launch {
             getRecommendedMoviesUseCase().collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
                         result.data?.let { movieList ->
-                            _recommendedMoviesState.value = movieList.map { movie ->
-                                movie.mapToMovieBasicCardItem()
+                            if (genreFilter == null) {
+                                _recommendedMoviesState.value = movieList.map { movie ->
+                                    movie.mapToMovieBasicCardItem()
+                                }
+                            } else {
+                                _recommendedMoviesState.value = movieList.map { movie ->
+                                    movie.mapToMovieBasicCardItem()
+                                }.filter {
+                                    it.genre == genreFilter
+                                }
                             }
                         }
                     }
@@ -84,6 +92,15 @@ class SearchFragmentViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    //TODO REFACTOR this is bad approach , should pass genreId instead. It will not work if language is changed.
+    fun filterRecommendedMovies(genre: String) {
+        if (genre == "All") {
+            getRecommendedMovies()
+        } else {
+            getRecommendedMovies(genreFilter = genre)
         }
     }
 

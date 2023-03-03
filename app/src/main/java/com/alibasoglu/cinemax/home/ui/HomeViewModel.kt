@@ -3,6 +3,7 @@ package com.alibasoglu.cinemax.home.ui
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.filter
 import androidx.paging.map
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.domain.model.mapToCarouselMovieItem
@@ -38,14 +39,22 @@ class HomeViewModel @Inject constructor(
         getUpcomingMovies()
     }
 
-    private fun getPopularMovies() {
+    private fun getPopularMovies(genreFilter: String? = null) {
         viewModelScope.launch {
             getMoviesPagerUseCase(searchQuery = null)
                 .flow
                 .cachedIn(viewModelScope)
                 .collectLatest { movieList ->
-                    _popularMoviesState.value = movieList.map { movie ->
-                        movie.mapToMovieBasicCardItem()
+                    if (genreFilter == null) {
+                        _popularMoviesState.value = movieList.map { movie ->
+                            movie.mapToMovieBasicCardItem()
+                        }
+                    } else {
+                        _popularMoviesState.value = movieList.map { movie ->
+                            movie.mapToMovieBasicCardItem()
+                        }.filter {
+                            it.genre == genreFilter
+                        }
                     }
                 }
         }
@@ -70,6 +79,15 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    //TODO REFACTOR this is bad approach , should pass genreId instead. It will not work if language is changed.
+    fun filterPopularMovies(genreName: String) {
+        if (genreName == "All") {
+            getPopularMovies()
+        } else {
+            getPopularMovies(genreFilter = genreName)
         }
     }
 
