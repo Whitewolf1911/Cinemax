@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        style="@style/CinemaxTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_24dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_search_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEditText"
+            style="@style/CinemaxTextInputEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/search_a_title"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="600dp">
+
+            <TextView
+                android:id="@+id/actorsTextView"
+                style="@style/text_h4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_24dp"
+                android:layout_marginTop="@dimen/_24dp"
+                android:text="@string/actors"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/actorsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_88dp"
+                android:layout_marginTop="@dimen/_16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/actorsTextView" />
+
+            <TextView
+                android:id="@+id/moviesTextView"
+                style="@style/text_h4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_24dp"
+                android:layout_marginTop="@dimen/_24dp"
+                android:text="@string/movie_related"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actorsRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/moviesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/moviesTextView" />
+
+            <ImageView
+                android:id="@+id/noResultImageView"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:src="@drawable/ic_no_search_results"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_48dp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/actorsRecyclerView"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/noResultBigTextView"
+                style="@style/text_h5"
+                android:layout_width="@dimen/_178dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16dp"
+                android:text="@string/cant_find_movie"
+                android:textAlignment="center"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/noResultImageView"
+                app:layout_constraintStart_toStartOf="@+id/noResultImageView"
+                app:layout_constraintTop_toBottomOf="@id/noResultImageView" />
+
+            <TextView
+                android:id="@+id/noResultSmallTextView"
+                style="@style/text_h6"
+                android:layout_width="@dimen/_178dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="@string/find_your_movie"
+                android:textAlignment="center"
+                android:textColor="@color/text_grey"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/noResultBigTextView"
+                app:layout_constraintStart_toStartOf="@+id/noResultBigTextView"
+                app:layout_constraintTop_toBottomOf="@+id/noResultBigTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

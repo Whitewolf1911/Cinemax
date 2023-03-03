@@ -59,7 +59,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/yearTextView"
             app:layout_constraintTop_toTopOf="@id/yearTextView"
-            tools:layout_editor_absoluteY="352dp" />
+            />
 
         <View
             android:id="@+id/divider2"
@@ -71,7 +71,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/runtimeTextView"
             app:layout_constraintTop_toTopOf="@id/yearTextView"
-            tools:layout_editor_absoluteY="352dp" />
+            />
 
         <TextView
             android:id="@+id/runtimeTextView"
@@ -85,7 +85,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/divider1"
             app:layout_constraintTop_toTopOf="@id/yearTextView"
-            tools:layout_editor_absoluteY="352dp"
             tools:text="132 Minutes" />
 
         <TextView
@@ -100,7 +99,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/divider2"
             app:layout_constraintTop_toTopOf="@id/yearTextView"
-            tools:layout_editor_absoluteY="352dp"
             tools:text="Action" />
 
         <com.google.android.material.card.MaterialCardView

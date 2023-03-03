@@ -3,6 +3,7 @@ package com.alibasoglu.cinemax.domain.model
 import com.alibasoglu.cinemax.getGenreName
 import com.alibasoglu.cinemax.home.ui.model.CarouselMovieItem
 import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
+import com.alibasoglu.cinemax.ui.model.MovieBigCardItem
 
 data class Movie(
     val id: Int,
@@ -33,5 +34,16 @@ fun Movie.mapToCarouselMovieItem(): CarouselMovieItem {
         title = title,
         upcomingDate = release_date,
         imageUrl = backdrop_path
+    )
+}
+
+fun Movie.mapToMovieBigCardItem(): MovieBigCardItem {
+    return MovieBigCardItem(
+        id = id,
+        genre = getGenreName(genre_ids.firstOrNull() ?: 0),
+        poster_path = poster_path,
+        release_date = release_date,
+        title = title,
+        vote_average = vote_average
     )
 }

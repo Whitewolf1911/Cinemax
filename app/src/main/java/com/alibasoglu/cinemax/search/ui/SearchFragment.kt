@@ -1,19 +1,24 @@
-package com.alibasoglu.cinemax.home.ui
+package com.alibasoglu.cinemax.search.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import com.alibasoglu.cinemax.GenresData
+import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
-import com.alibasoglu.cinemax.databinding.FragmentHomeBinding
+import com.alibasoglu.cinemax.databinding.FragmentSearchBinding
+import com.alibasoglu.cinemax.home.ui.HomeFragment
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -21,24 +26,20 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
-
+class SearchFragment : BaseFragment(R.layout.fragment_search) {
     override val fragmentConfiguration = FragmentConfiguration()
 
-    private val binding by viewBinding(FragmentHomeBinding::bind)
+    private val binding by viewBinding(FragmentSearchBinding::bind)
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by viewModels<SearchFragmentViewModel>()
+
+    private var searchJob: Job? = null
 
     private val moviesBasicCardAdapterListener =
         MoviesBasicCardAdapter.MoviesCardAdapterListener { movieBasicCardItem ->
             navToMovieDetailFragment(movieBasicCardItem.id)
         }
-
-    private val carouselAdapter = MoviesCarouselAdapter()
-
     private val moviesBasicCardAdapter = MoviesBasicCardAdapter(moviesBasicCardAdapterListener)
-
-    private var searchJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,19 +55,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun initUI() {
         showBottomNavbar()
         with(binding) {
-            carouselRecyclerView.apply {
-                this.adapter = carouselAdapter
-                set3DItem(true)
-                setAlpha(true)
+            GenresData.genres.forEach { genre ->
+                categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
             }
-            popularMoviesRecyclerView.adapter = moviesBasicCardAdapter
 
-            val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
+            val onTabSelectedListener = object : OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     val selectedTabGenreName = GenresData.genres.find {
                         it.name == tab?.text
                     }?.name
-                    viewModel.filterPopularMovies(selectedTabGenreName ?: "All")
+                    viewModel.filterRecommendedMovies(selectedTabGenreName ?: "All")
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -74,20 +72,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
             categoriesTabLayout.addOnTabSelectedListener(onTabSelectedListener)
 
-            seeAllTextView.setOnClickListener {
-                //TODO nav to most popular fragment
-            }
-
-            wishlistButton.setOnClickListener {
-                //TODO nav to wishlist fragment
-            }
+            recommendedMoviesRecyclerView.adapter = moviesBasicCardAdapter
 
             searchEditText.apply {
                 doAfterTextChanged { searchQuery ->
                     searchQuery?.let {
                         searchJob?.cancel()
                         searchJob = lifecycleScope.launch {
-                            delay(QUERY_SEARCH_DELAY)
+                            delay(HomeFragment.QUERY_SEARCH_DELAY)
                             if (searchQuery.trim().length > 1)
                                 navToSearchResultFragment(searchQuery.toString())
                         }
@@ -101,35 +93,43 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     return@setOnEditorActionListener true
                 }
             }
-            GenresData.genres.forEach { genre ->
-                categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
-            }
-        }
-    }
 
-    private fun initObservers() {
-        viewLifecycleOwner.observe {
-            viewModel.popularMoviesState.collectLatest {
-                moviesBasicCardAdapter.submitData(it)
-            }
-        }
-        viewLifecycleOwner.observe {
-            viewModel.upcomingMoviesState.collectLatest {
-                carouselAdapter.submitList(it)
-            }
         }
     }
 
     private fun navToMovieDetailFragment(movieId: Int) {
-        nav(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId))
+        nav(SearchFragmentDirections.actionSearchFragmentToMovieDetailFragment(movieId))
     }
 
     private fun navToSearchResultFragment(searchQuery: String) {
-        nav(HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(searchQuery))
+        nav(SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchQuery))
     }
 
-    companion object {
-        const val QUERY_SEARCH_DELAY = 1800L
+    private fun initObservers() {
+        viewLifecycleOwner.observe {
+            viewModel.recommendedMoviesState.collectLatest { list ->
+                moviesBasicCardAdapter.submitData(PagingData.from(list))
+            }
+        }
+        viewLifecycleOwner.observe {
+            viewModel.movieOfTheDayState.collectLatest { movieItem ->
+                val imageUrl =
+                    ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(1) + movieItem.poster_path
+                binding.todayMovieItem.apply {
+                    genreTextView.text = movieItem.genre
+                    nameTextView.text = movieItem.title
+                    yearTextView.text = movieItem.release_date
+                    ratingTextView.text = movieItem.vote_average.toString()
+                    Glide
+                        .with(requireContext())
+                        .load(imageUrl)
+                        .centerCrop()
+                        .into(posterImageView)
+                    root.setOnClickListener {
+                        navToMovieDetailFragment(movieItem.id)
+                    }
+                }
+            }
+        }
     }
-
 }

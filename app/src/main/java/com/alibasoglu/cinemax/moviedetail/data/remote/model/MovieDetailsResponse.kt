@@ -5,7 +5,7 @@ import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 
 data class MovieDetailsResponse(
     val adult: Boolean,
-    val backdrop_path: String,
+    val backdrop_path: String?,
     val belongs_to_collection: Any,
     val budget: Int,
     val genres: List<Genre>,

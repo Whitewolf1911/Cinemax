@@ -4,7 +4,7 @@ import com.alibasoglu.cinemax.data.local.model.MovieEntity
 import com.alibasoglu.cinemax.ui.model.WishListCardItem
 
 data class MovieDetail(
-    val backdrop_path: String,
+    val backdrop_path: String?,
     val genre: String,
     val id: Int,
     val original_title: String,
@@ -20,7 +20,7 @@ data class MovieDetail(
 fun MovieDetail.mapToMovieEntity(): MovieEntity {
     return MovieEntity(
         id = id,
-        backdrop_path = backdrop_path,
+        backdrop_path = backdrop_path ?: "",
         genre = genre,
         original_title = original_title,
         overview = overview,
@@ -35,7 +35,7 @@ fun MovieDetail.mapToMovieEntity(): MovieEntity {
 
 fun MovieDetail.mapToWishListCardItem(): WishListCardItem {
     return WishListCardItem(
-        backdrop_path = backdrop_path,
+        backdrop_path = backdrop_path ?: "",
         genre = genre,
         id = id,
         title = title,

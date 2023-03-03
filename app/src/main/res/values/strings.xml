@@ -29,5 +29,13 @@
     <string name="share_to">Share to</string>
     <string name="minutes">%1$s Minutes</string>
     <string name="wishlist">Wishlist</string>
+    <string name="actors">Actors</string>
+    <string name="movie_related">Movie Related</string>
+    <string name="premium">Premium</string>
+    <string name="movie">Movie</string>
+    <string name="cant_find_movie">We Are Sorry, We Can Not Find The Movie :(</string>
+    <string name="find_your_movie">Find your movie by Type title, categories,years,etc</string>
+    <string name="today">Today</string>
+    <string name="recommended_for_you">Recommended for you</string>
 
 </resources>
