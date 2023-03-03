@@ -87,7 +87,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     return@setOnEditorActionListener true
                 }
             }
-            categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText("All"))
             GenresData.genres.forEach { genre ->
                 categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
             }

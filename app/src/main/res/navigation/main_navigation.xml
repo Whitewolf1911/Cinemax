@@ -77,4 +77,13 @@
             android:id="@+id/action_searchResultFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.alibasoglu.cinemax.search.ui.SearchFragment"
+        tools:layout="@layout/fragment_search"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 </navigation>
