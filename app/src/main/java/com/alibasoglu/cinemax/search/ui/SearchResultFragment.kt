@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
@@ -43,6 +44,11 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
         initObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        searchJob?.cancel()
+    }
+
 
     private fun initUI() {
         hideBottomNavbar()
@@ -72,6 +78,15 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
                     return@setOnEditorActionListener true
                 }
             }
+
+            lifecycleScope.launch {
+                movieBigCardItemAdapter.loadStateFlow.collectLatest { loadState ->
+                    val isListEmpty =
+                        loadState.refresh is LoadState.NotLoading && movieBigCardItemAdapter.itemCount == 0
+
+                    checkEmptyMovieList(isListEmpty)
+                }
+            }
         }
     }
 
@@ -98,10 +113,9 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
         }
     }
 
-    //TODO handle here
-    private fun checkState() {
+    private fun checkEmptyMovieList(isListEmpty: Boolean) {
         with(binding) {
-            if (movieBigCardItemAdapter.itemCount < 1) {
+            if (isListEmpty) {
                 noResultBigTextView.visibility = View.VISIBLE
                 noResultSmallTextView.visibility = View.VISIBLE
                 noResultImageView.visibility = View.VISIBLE
