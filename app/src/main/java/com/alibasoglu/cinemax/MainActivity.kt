@@ -72,6 +72,14 @@ class MainActivity : AppCompatActivity() {
 
     fun getToolbar(): CustomToolbar = binding.toolbar
 
+    fun hideToolbar() {
+        binding.toolbar.visibility = View.GONE
+    }
+
+    fun showToolbar() {
+        binding.toolbar.visibility = View.VISIBLE
+    }
+
     fun hideBottomNavbar() {
         binding.bottomNavigationView.visibility = View.GONE
     }

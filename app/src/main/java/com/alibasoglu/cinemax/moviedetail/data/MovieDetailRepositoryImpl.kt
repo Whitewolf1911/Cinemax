@@ -3,9 +3,11 @@ package com.alibasoglu.cinemax.moviedetail.data
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToCastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToMovieDetail
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToTrailer
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.CastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.domain.model.Trailer
 import com.alibasoglu.cinemax.utils.Resource
 import java.io.IOException
 import kotlinx.coroutines.flow.Flow
@@ -58,6 +60,26 @@ class MovieDetailRepositoryImpl(
                 castCrewList.addAll(castList)
                 castCrewList.addAll(crewList)
                 emit(Resource.Success(data = castCrewList))
+                emit(Resource.Loading(isLoading = false))
+            }
+        }
+    }
+
+    override suspend fun getMovieTrailers(movieId: Int): Flow<Resource<List<Trailer>>> {
+        return flow {
+            emit(Resource.Loading(isLoading = true))
+            val response = try {
+                movieDetailApi.getMovieTrailers(movieId).body()
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            }
+            response?.results?.let { movieTrailersResults ->
+                val movieTrailers = movieTrailersResults.map { it.mapToTrailer() }
+                emit(Resource.Success(data = movieTrailers))
                 emit(Resource.Loading(isLoading = false))
             }
         }

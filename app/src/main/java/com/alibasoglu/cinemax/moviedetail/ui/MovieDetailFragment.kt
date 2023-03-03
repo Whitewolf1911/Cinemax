@@ -42,6 +42,11 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
         initUIWithObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMovieDetails()
+    }
+
     private fun initUIWithObservers() {
         hideBottomNavbar()
         viewLifecycleOwner.observe {
@@ -51,6 +56,9 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
                     with(binding) {
                         shareButton.setOnClickListener {
                             showShareDialog()
+                        }
+                        playButton.setOnClickListener {
+                            navToMovieTrailerFragment(movieId = movieDetail.id)
                         }
 
                         castCrewRecyclerView.adapter = castCrewAdapter
@@ -93,6 +101,10 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     private fun showShareDialog() {
         shareDialog = activity?.let { ShareDialog(it) }
         shareDialog?.startDialog()
+    }
+
+    private fun navToMovieTrailerFragment(movieId: Int) {
+        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieId))
     }
 
 }

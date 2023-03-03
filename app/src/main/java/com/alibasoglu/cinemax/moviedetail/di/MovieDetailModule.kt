@@ -5,6 +5,7 @@ import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieTrailerUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,4 +39,9 @@ object MovieDetailModule {
     @Singleton
     fun provideGetMovieCastCrewListUseCase(movieDetailsRepository: MovieDetailRepository) =
         GetMovieCastCrewListUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetMovieTrailerUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetMovieTrailerUseCase(movieDetailsRepository)
 }

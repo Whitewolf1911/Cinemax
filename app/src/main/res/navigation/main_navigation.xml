@@ -55,6 +55,9 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_movieTrailerFragment"
+            app:destination="@id/movieTrailerFragment" />
     </fragment>
     <fragment
         android:id="@+id/wishListFragment"
@@ -69,7 +72,7 @@
         android:id="@+id/searchResultFragment"
         android:name="com.alibasoglu.cinemax.search.ui.SearchResultFragment"
         android:label="SearchResultFragment"
-        tools:layout="@layout/fragment_search_result" >
+        tools:layout="@layout/fragment_search_result">
         <argument
             android:name="searchQuery"
             app:argType="string" />
@@ -80,13 +83,22 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.alibasoglu.cinemax.search.ui.SearchFragment"
-        tools:layout="@layout/fragment_search"
-        android:label="SearchFragment" >
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
         <action
             android:id="@+id/action_searchFragment_to_searchResultFragment"
             app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieTrailerFragment"
+        android:name="com.alibasoglu.cinemax.moviedetail.ui.MovieTrailerFragment"
+        android:label="MovieTrailerFragment"
+        tools:layout="@layout/fragment_movie_trailer">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
     </fragment>
 </navigation>
