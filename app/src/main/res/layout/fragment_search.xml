@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_24dp"
-        android:layout_marginTop="@dimen/_92dp"
+        android:layout_marginTop="@dimen/_68dp"
         android:text="@string/recommended_for_you"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/todayMovieItem" />

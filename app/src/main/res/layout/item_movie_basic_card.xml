@@ -68,6 +68,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8dp"
             android:drawablePadding="@dimen/_4dp"
+            android:maxLength="3"
             android:textColor="@color/secondary_orange"
             app:drawableStartCompat="@drawable/ic_star"
             tools:text="4.5" />

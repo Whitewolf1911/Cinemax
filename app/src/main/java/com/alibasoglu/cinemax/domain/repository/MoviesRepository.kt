@@ -19,4 +19,6 @@ interface MoviesRepository {
     suspend fun insertMovieToDatabase(movieDetail: MovieDetail)
 
     suspend fun getWishListedMovies(): Flow<List<MovieDetail>>
+
+    suspend fun getRandomWishListedMovieId(): Int
 }
