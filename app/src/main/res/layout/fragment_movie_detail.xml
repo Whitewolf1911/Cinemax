@@ -9,10 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.alibasoglu.cinemax.customviews.CustomToolbar
+            android:id="@+id/customToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/backgroundImageView"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="600dp"
             android:alpha="0.1"
             android:foreground="@drawable/bg_movie_poster_gradient"
             android:scaleType="fitXY"
@@ -29,7 +39,7 @@
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customToolbar"
             app:shapeAppearanceOverlay="@style/roundedImageView_16dp"
             tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -58,8 +68,7 @@
             app:layout_constraintEnd_toStartOf="@+id/runtimeTextView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/yearTextView"
-            app:layout_constraintTop_toTopOf="@id/yearTextView"
-            />
+            app:layout_constraintTop_toTopOf="@id/yearTextView" />
 
         <View
             android:id="@+id/divider2"
@@ -70,8 +79,7 @@
             app:layout_constraintEnd_toStartOf="@+id/genreTextView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/runtimeTextView"
-            app:layout_constraintTop_toTopOf="@id/yearTextView"
-            />
+            app:layout_constraintTop_toTopOf="@id/yearTextView" />
 
         <TextView
             android:id="@+id/runtimeTextView"
