@@ -9,11 +9,12 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/startImageButton"
-        style="?attr/toolbarNavigationButtonStyle"
-        android:layout_width="@dimen/_24dp"
-        android:layout_height="@dimen/_24dp"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="@dimen/_32dp"
+        android:layout_height="@dimen/_32dp"
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/_24dp"
+        app:iconTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,8 +27,8 @@
         android:layout_marginHorizontal="@dimen/_8dp"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="1"
         android:maxWidth="@dimen/_200dp"
+        android:maxLines="1"
         android:textAppearance="@style/text_h4"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +46,7 @@
         android:layout_marginEnd="@dimen/_24dp"
         app:iconSize="@dimen/_32dp"
         app:iconTint="@null"
-        tools:srcCompat="@drawable/ic_wishlist"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/ic_wishlist" />
 
 </merge>
