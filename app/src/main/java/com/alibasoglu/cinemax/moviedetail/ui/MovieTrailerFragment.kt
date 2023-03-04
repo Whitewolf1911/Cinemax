@@ -1,8 +1,10 @@
 package com.alibasoglu.cinemax.moviedetail.ui
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -47,6 +49,7 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onPause() {
         super.onPause()
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -70,11 +73,13 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
                         isFullscreen = false
                         showSystemUI()
                         showToolbar()
+                        setMargins(24, 28, 24, 0)
                     } else {
                         binding.youtubePlayer.enterFullScreen()
                         isFullscreen = true
                         hideSystemUI()
                         hideToolbar()
+                        setMargins(0, 0, 0, 0)
                     }
                 }
                 binding.youtubePlayer.setCustomPlayerUi(defaultPlayerUiController.rootView)
@@ -104,6 +109,13 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
             WindowInsetsControllerCompat(it, binding.mainContainer).show(WindowInsetsCompat.Type.systemBars())
         }
     }
+
+    private fun setMargins(left: Int, top: Int, right: Int, bottom: Int) {
+        val params = binding.youtubePlayer.layoutParams as ViewGroup.MarginLayoutParams
+        params.setMargins(left, top, right, bottom)
+        binding.youtubePlayer.layoutParams = params
+    }
+
 
     private fun initObserver() {
         viewLifecycleOwner.observe {
