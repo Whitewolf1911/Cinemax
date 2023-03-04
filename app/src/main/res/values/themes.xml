@@ -17,4 +17,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_splash_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.Cinemax</item>
+    </style>
 </resources>
