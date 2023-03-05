@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -14,6 +15,7 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieTrailerBinding
+import com.alibasoglu.cinemax.utils.dateFormatter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
@@ -24,7 +26,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiCo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-
+@SuppressLint("SourceLockedOrientationActivity")
 @AndroidEntryPoint
 class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
     private val toolbarConfiguration = ToolbarConfiguration(
@@ -46,13 +48,36 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
         hideBottomNavbar()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+        initUI()
+        handleBackButton()
     }
 
-    @SuppressLint("SourceLockedOrientationActivity")
     override fun onPause() {
         super.onPause()
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    private fun initUI() {
+        with(binding) {
+            with(viewModel.movieDetail) {
+                synopsisTextView.text = overview
+                movieNameTextView.text = title
+                releaseDateTextView.text = dateFormatter(release_date)
+                genreTextView.text = genre
+            }
+        }
+    }
+
+    private fun handleBackButton() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isFullscreen) {
+                    exitFullScreen()
+                } else {
+                    navBack()
+                }
+            }
+        })
     }
 
     private fun setupPlayer(trailerKey: String) {
@@ -67,19 +92,10 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val defaultPlayerUiController = DefaultPlayerUiController(binding.youtubePlayer, youTubePlayer)
                 defaultPlayerUiController.setFullScreenButtonClickListener {
-                    binding.youtubePlayer.toggleFullScreen()
                     if (isFullscreen) {
-                        binding.youtubePlayer.exitFullScreen()
-                        isFullscreen = false
-                        showSystemUI()
-                        showToolbar()
-                        setMargins(24, 28, 24, 0)
+                        exitFullScreen()
                     } else {
-                        binding.youtubePlayer.enterFullScreen()
-                        isFullscreen = true
-                        hideSystemUI()
-                        hideToolbar()
-                        setMargins(0, 0, 0, 0)
+                        enterFullScreen()
                     }
                 }
                 binding.youtubePlayer.setCustomPlayerUi(defaultPlayerUiController.rootView)
@@ -114,6 +130,24 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         val params = binding.youtubePlayer.layoutParams as ViewGroup.MarginLayoutParams
         params.setMargins(left, top, right, bottom)
         binding.youtubePlayer.layoutParams = params
+    }
+
+    private fun enterFullScreen() {
+        binding.youtubePlayer.enterFullScreen()
+        isFullscreen = true
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+        hideSystemUI()
+        hideToolbar()
+        setMargins(0, 0, 0, 0)
+    }
+
+    private fun exitFullScreen() {
+        binding.youtubePlayer.exitFullScreen()
+        isFullscreen = false
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        showSystemUI()
+        showToolbar()
+        setMargins(24, 28, 24, 0)
     }
 
 

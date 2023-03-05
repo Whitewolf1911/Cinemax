@@ -10,6 +10,7 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieDetailBinding
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.utils.ShareDialog
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.showTextToast
@@ -71,7 +72,7 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
                             showShareDialog()
                         }
                         playButton.setOnClickListener {
-                            navToMovieTrailerFragment(movieId = movieDetail.id)
+                            navToMovieTrailerFragment(movieDetail = movieDetail)
                         }
 
                         castCrewRecyclerView.adapter = castCrewAdapter
@@ -116,8 +117,8 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
         shareDialog?.startDialog()
     }
 
-    private fun navToMovieTrailerFragment(movieId: Int) {
-        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieId))
+    private fun navToMovieTrailerFragment(movieDetail: MovieDetail) {
+        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieDetail))
     }
 
 }

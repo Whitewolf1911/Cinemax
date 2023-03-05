@@ -98,7 +98,7 @@
         android:label="MovieTrailerFragment"
         tools:layout="@layout/fragment_movie_trailer">
         <argument
-            android:name="movieId"
-            app:argType="integer" />
+            android:name="movieDetail"
+            app:argType="com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail" />
     </fragment>
 </navigation>

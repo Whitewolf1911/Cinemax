@@ -1,8 +1,11 @@
 package com.alibasoglu.cinemax.moviedetail.domain.model
 
+import android.os.Parcelable
 import com.alibasoglu.cinemax.data.local.model.MovieEntity
 import com.alibasoglu.cinemax.ui.model.WishListCardItem
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class MovieDetail(
     val backdrop_path: String?,
     val genre: String,
@@ -15,7 +18,7 @@ data class MovieDetail(
     val title: String,
     val video: Boolean,
     val vote_average: Double,
-)
+) : Parcelable
 
 fun MovieDetail.mapToMovieEntity(): MovieEntity {
     return MovieEntity(

@@ -3,6 +3,7 @@ package com.alibasoglu.cinemax.moviedetail.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieTrailerUseCase
 import com.alibasoglu.cinemax.utils.getOrThrow
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,7 @@ class MovieTrailerViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val movieId = savedStateHandle.getOrThrow<Int>("movieId")
+    val movieDetail = savedStateHandle.getOrThrow<MovieDetail>("movieDetail")
 
     private var _trailerId = MutableStateFlow<String?>(null)
     val trailerId: StateFlow<String?>
@@ -29,7 +30,7 @@ class MovieTrailerViewModel @Inject constructor(
 
     private fun getMovieTrailer() {
         viewModelScope.launch {
-            _trailerId.value = getMovieTrailerUseCase(movieId).key
+            _trailerId.value = getMovieTrailerUseCase(movieDetail.id).key
         }
     }
 }
