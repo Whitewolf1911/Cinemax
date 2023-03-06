@@ -8,6 +8,7 @@
         <item name="android:textColorHint">@color/text_white</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="editTextColor">@color/text_grey</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -15,5 +16,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_splash_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.Cinemax</item>
     </style>
 </resources>

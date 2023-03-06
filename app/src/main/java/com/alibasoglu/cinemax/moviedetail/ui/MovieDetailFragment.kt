@@ -2,6 +2,7 @@ package com.alibasoglu.cinemax.moviedetail.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.viewModels
 import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.R
@@ -9,6 +10,7 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieDetailBinding
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.utils.ShareDialog
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.showTextToast
@@ -27,7 +29,7 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
         endIconResId = R.drawable.ic_wishlist,
         endIconClick = ::addMovieToWishlist
     )
-    override val fragmentConfiguration = FragmentConfiguration(toolbarConfiguration)
+    override val fragmentConfiguration = FragmentConfiguration()
 
     private val binding by viewBinding(FragmentMovieDetailBinding::bind)
 
@@ -42,15 +44,35 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
         initUIWithObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMovieDetails()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.window?.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        }
+    }
+
     private fun initUIWithObservers() {
+        activity?.window?.apply {
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        }
+        binding.customToolbar.configure(toolbarConfiguration)
         hideBottomNavbar()
         viewLifecycleOwner.observe {
             viewModel.movieDetailsState.collectLatest { movieDetailState ->
                 movieDetailState.movieDetail?.let { movieDetail ->
-                    getToolbar()?.setTitle(movieDetail.title)
                     with(binding) {
+                        customToolbar.setTitle(movieDetail.title)
                         shareButton.setOnClickListener {
                             showShareDialog()
+                        }
+                        playButton.setOnClickListener {
+                            navToMovieTrailerFragment(movieDetail = movieDetail)
                         }
 
                         castCrewRecyclerView.adapter = castCrewAdapter
@@ -93,6 +115,10 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     private fun showShareDialog() {
         shareDialog = activity?.let { ShareDialog(it) }
         shareDialog?.startDialog()
+    }
+
+    private fun navToMovieTrailerFragment(movieDetail: MovieDetail) {
+        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieDetail))
     }
 
 }

@@ -46,7 +46,7 @@ class MovieDetailViewModel @Inject constructor(
     }
 
 
-    private fun getMovieDetails() {
+    fun getMovieDetails() {
         viewModelScope.launch {
             getMovieDetailsUseCase(movieId).collectLatest { result ->
                 when (result) {

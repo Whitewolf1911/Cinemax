@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val splashScreen = installSplashScreen()
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()
 
@@ -71,6 +73,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getToolbar(): CustomToolbar = binding.toolbar
+
+    fun hideToolbar() {
+        binding.toolbar.visibility = View.GONE
+    }
+
+    fun showToolbar() {
+        binding.toolbar.visibility = View.VISIBLE
+    }
 
     fun hideBottomNavbar() {
         binding.bottomNavigationView.visibility = View.GONE

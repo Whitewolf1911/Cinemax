@@ -37,5 +37,9 @@
     <string name="find_your_movie">Find your movie by Type title, categories,years,etc</string>
     <string name="today">Today</string>
     <string name="recommended_for_you">Recommended for you</string>
+    <string name="trailer">Trailer</string>
+    <string name="release_date">Release Date:</string>
+    <string name="synopsis">Synopsis</string>
+
 
 </resources>
