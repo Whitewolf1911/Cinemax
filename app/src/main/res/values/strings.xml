@@ -40,6 +40,20 @@
     <string name="trailer">Trailer</string>
     <string name="release_date">Release Date:</string>
     <string name="synopsis">Synopsis</string>
+    <string name="premium_member">Premium Member</string>
+    <string name="new_movies_coming">New movies are coming for you, Download Now!</string>
+    <string name="account">Account</string>
+    <string name="member">Member</string>
+    <string name="change_password">Change Password</string>
+    <string name="general">General</string>
+    <string name="notification">Notification</string>
+    <string name="language">Language</string>
+    <string name="country">Country</string>
+    <string name="more">More</string>
+    <string name="legal_and_policies">Legal and Policies</string>
+    <string name="help_feedback"><![CDATA[Help & Feedback]]></string>
+    <string name="about_us">About Us</string>
+    <string name="log_out">Log Out</string>
 
 
 </resources>

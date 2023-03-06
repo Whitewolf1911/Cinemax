@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/bottom_bar_height"
+    tools:context=".profile.ui.ProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profileCardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_88dp"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:backgroundTint="@color/primary_dark"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/primary_soft">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/personImageView"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="@dimen/_16dp"
+                    android:layout_marginTop="@dimen/_16dp"
+                    android:src="@drawable/ic_person_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    style="@style/text_h4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16dp"
+                    app:layout_constraintStart_toEndOf="@+id/personImageView"
+                    app:layout_constraintTop_toTopOf="@+id/personImageView"
+                    tools:text="Tiffany" />
+
+                <TextView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8dp"
+                    app:layout_constraintStart_toStartOf="@id/nameTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+                    tools:text="test1234@gmail.com" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="@dimen/_24dp"
+                    android:layout_height="@dimen/_24dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    app:icon="@drawable/ic_edit"
+                    app:iconGravity="textEnd"
+                    app:iconSize="@dimen/_24dp"
+                    app:iconTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/premiumCardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_112dp"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileCardView"
+            app:strokeColor="@color/primary_soft">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_premium">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/premiumIcon"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="@dimen/_40dp"
+                    android:layout_height="@dimen/_40dp"
+                    android:layout_marginStart="@dimen/_24dp"
+                    android:layout_marginTop="@dimen/_24dp"
+                    app:icon="@drawable/ic_premium"
+                    app:iconGravity="textEnd"
+                    app:iconSize="@dimen/_40dp"
+                    app:iconTint="@null"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/premiumMemberText"
+                    style="@style/text_h5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8dp"
+                    android:text="@string/premium_member"
+                    app:layout_constraintStart_toEndOf="@+id/premiumIcon"
+                    app:layout_constraintTop_toTopOf="@+id/premiumIcon" />
+
+                <TextView
+                    android:id="@+id/newMoviesComing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8dp"
+                    android:layout_marginTop="@dimen/_8dp"
+                    android:maxWidth="@dimen/_232dp"
+                    android:text="@string/new_movies_coming"
+                    android:textColor="@color/text_white"
+                    app:layout_constraintStart_toEndOf="@+id/premiumIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/premiumMemberText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/accountCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:backgroundTint="@color/primary_dark"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/premiumCardView"
+            app:strokeColor="@color/primary_soft">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/accountText"
+                    style="@style/text_h3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16dp"
+                    android:layout_marginTop="@dimen/_24dp"
+                    android:text="@string/account"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/memberButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/accountText"
+                    app:startIconDrawable="@drawable/ic_profile_blue"
+                    app:text="@string/member" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginHorizontal="@dimen/_32dp"
+                    android:background="@color/primary_soft"
+                    app:layout_constraintTop_toBottomOf="@id/memberButton" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/changePasswordButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    app:startIconDrawable="@drawable/ic_padlock"
+                    app:text="@string/change_password" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/generalCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:backgroundTint="@color/primary_dark"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accountCardView"
+            app:strokeColor="@color/primary_soft">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/generalText"
+                    style="@style/text_h3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16dp"
+                    android:layout_marginTop="@dimen/_24dp"
+                    android:text="@string/general"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/notificationButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/generalText"
+                    app:startIconDrawable="@drawable/ic_notification"
+                    app:text="@string/notification" />
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginHorizontal="@dimen/_32dp"
+                    android:background="@color/primary_soft"
+                    app:layout_constraintTop_toBottomOf="@id/notificationButton" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/languageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider1"
+                    app:startIconDrawable="@drawable/ic_globe"
+                    app:text="@string/language" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginHorizontal="@dimen/_32dp"
+                    android:background="@color/primary_soft"
+                    app:layout_constraintTop_toBottomOf="@id/languageButton" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/countryButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2"
+                    app:startIconDrawable="@drawable/ic_flag"
+                    app:text="@string/country" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginHorizontal="@dimen/_32dp"
+                    android:background="@color/primary_soft"
+                    app:layout_constraintTop_toBottomOf="@id/countryButton" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/clearCacheButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider3"
+                    app:startIconDrawable="@drawable/ic_trashbin"
+                    app:text="Clear Cache" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/moreCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:backgroundTint="@color/primary_dark"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/generalCardView"
+            app:strokeColor="@color/primary_soft">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/moreText"
+                    style="@style/text_h3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16dp"
+                    android:layout_marginTop="@dimen/_24dp"
+                    android:text="@string/more"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/legalPoliciesButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/moreText"
+                    app:startIconDrawable="@drawable/ic_shield"
+                    app:text="@string/legal_and_policies" />
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginHorizontal="@dimen/_32dp"
+                    android:background="@color/primary_soft"
+                    app:layout_constraintTop_toBottomOf="@id/legalPoliciesButton" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/helpFeedbackButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider4"
+                    app:startIconDrawable="@drawable/ic_question"
+                    app:text="@string/help_feedback" />
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1dp"
+                    android:layout_marginHorizontal="@dimen/_32dp"
+                    android:background="@color/primary_soft"
+                    app:layout_constraintTop_toBottomOf="@id/helpFeedbackButton" />
+
+                <com.alibasoglu.cinemax.customviews.CustomProfileButton
+                    android:id="@+id/aboutUsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_72dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider5"
+                    app:startIconDrawable="@drawable/ic_info"
+                    app:text="@string/about_us" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/cinemax_button_extra_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_40dp"
+            android:backgroundTint="@color/primary_dark"
+            android:paddingVertical="@dimen/_16dp"
+            android:text="@string/log_out"
+            android:textColor="@color/primary_blue_accent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moreCardView"
+            app:strokeColor="@color/primary_blue_accent"
+            app:strokeWidth="@dimen/_1dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

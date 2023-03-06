@@ -101,4 +101,9 @@
             android:name="movieDetail"
             app:argType="com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.alibasoglu.cinemax.profile.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
