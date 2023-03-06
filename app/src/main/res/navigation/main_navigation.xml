@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/onboardingFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -105,7 +105,7 @@
         android:id="@+id/profileFragment"
         android:name="com.alibasoglu.cinemax.profile.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment" />
@@ -121,4 +121,9 @@
         android:id="@+id/editProfileFragment"
         android:name="com.alibasoglu.cinemax.profile.ui.EditProfileFragment"
         android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.alibasoglu.cinemax.ui.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment"
+        tools:layout="@layout/fragment_onboarding" />
 </navigation>
