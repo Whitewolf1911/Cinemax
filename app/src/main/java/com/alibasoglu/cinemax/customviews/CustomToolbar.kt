@@ -2,6 +2,7 @@ package com.alibasoglu.cinemax.customviews
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.alibasoglu.cinemax.R
@@ -59,7 +60,7 @@ class CustomToolbar @JvmOverloads constructor(
     private fun configureEndButton(resId: Int?, clickAction: (() -> Unit)?) {
         binding.endImageButton.apply {
             if (resId == null) {
-                isVisible = false
+                visibility = View.INVISIBLE
                 return
             }
             setImageResource(resId)
