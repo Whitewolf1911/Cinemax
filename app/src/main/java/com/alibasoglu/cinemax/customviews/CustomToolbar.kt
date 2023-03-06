@@ -48,7 +48,7 @@ class CustomToolbar @JvmOverloads constructor(
     private fun configureStartButton(resId: Int?, clickAction: (() -> Unit)?) {
         binding.startImageButton.apply {
             if (resId == null) {
-                isVisible = false
+                visibility = View.INVISIBLE
                 return
             }
             setImageResource(resId)

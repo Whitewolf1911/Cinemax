@@ -84,8 +84,8 @@
 
             <ImageView
                 android:id="@+id/noResultImageView"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
+                android:layout_width="@dimen/_76dp"
+                android:layout_height="@dimen/_76dp"
                 android:src="@drawable/ic_no_search_results"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

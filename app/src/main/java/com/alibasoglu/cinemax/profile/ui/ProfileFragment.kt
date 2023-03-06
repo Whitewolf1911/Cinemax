@@ -17,6 +17,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
+    private var logoutDialog: LogoutDialog? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
@@ -32,7 +34,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             editProfileButton.setOnClickListener {
                 nav(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
             }
+            logoutButton.setOnClickListener {
+                showLogoutDialog()
+            }
         }
     }
 
+    private fun showLogoutDialog() {
+        logoutDialog = activity?.let { LogoutDialog(it) }
+        logoutDialog?.startDialog()
+    }
 }

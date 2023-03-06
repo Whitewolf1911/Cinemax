@@ -62,5 +62,8 @@
     <string name="phone_number">Phone Number</string>
     <string name="save_changes">Save Changes</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="are_you_sure">Are you sure ?</string>
+    <string name="are_you_sure_subtext">Ullamcorper imperdiet urna id non sed est sem. Rhoncus amet, enim purus gravida donec aliquet.</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
