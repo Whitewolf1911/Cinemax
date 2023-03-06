@@ -17,6 +17,7 @@ import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieTrailerBinding
 import com.alibasoglu.cinemax.utils.dateFormatter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
+import com.alibasoglu.cinemax.utils.pxFromDp
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -126,9 +127,15 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         }
     }
 
-    private fun setMargins(left: Int, top: Int, right: Int, bottom: Int) {
+    private fun setMargins(left: Float, top: Float, right: Float) {
         val params = binding.youtubePlayer.layoutParams as ViewGroup.MarginLayoutParams
-        params.setMargins(left, top, right, bottom)
+        pxFromDp(requireContext(), left)
+        params.setMargins(
+            pxFromDp(requireContext(), left).toInt(),
+            pxFromDp(requireContext(), top).toInt(),
+            pxFromDp(requireContext(), right).toInt(),
+            0
+        )
         binding.youtubePlayer.layoutParams = params
     }
 
@@ -138,7 +145,7 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
         hideSystemUI()
         hideToolbar()
-        setMargins(0, 0, 0, 0)
+        setMargins(0f, 0f, 0f)
     }
 
     private fun exitFullScreen() {
@@ -147,7 +154,7 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         showSystemUI()
         showToolbar()
-        setMargins(24, 28, 24, 0)
+        setMargins(24f, 28f, 24f)
     }
 
 
