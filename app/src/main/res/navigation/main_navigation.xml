@@ -109,9 +109,16 @@
         <action
             android:id="@+id/action_profileFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
         android:name="com.alibasoglu.cinemax.ui.PrivacyPolicyFragment"
         android:label="PrivacyPolicyFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.alibasoglu.cinemax.profile.ui.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>

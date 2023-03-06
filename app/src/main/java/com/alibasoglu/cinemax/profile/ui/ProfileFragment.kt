@@ -29,6 +29,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             legalPoliciesButton.setOnClickListener {
                 nav(ProfileFragmentDirections.actionProfileFragmentToPrivacyPolicyFragment())
             }
+            editProfileButton.setOnClickListener {
+                nav(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
+            }
         }
     }
 

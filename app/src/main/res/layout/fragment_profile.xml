@@ -61,6 +61,7 @@
                     tools:text="test1234@gmail.com" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editProfileButton"
                     style="@style/Widget.Material3.Button.IconButton"
                     android:layout_width="@dimen/_24dp"
                     android:layout_height="@dimen/_24dp"
