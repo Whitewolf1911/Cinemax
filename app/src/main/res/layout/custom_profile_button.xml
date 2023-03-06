@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_72dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/startIconImageView"
+        android:layout_width="@dimen/_32dp"
+        android:layout_height="@dimen/_32dp"
+        android:layout_marginStart="@dimen/_16dp"
+        android:scaleType="centerInside"
+        android:background="@color/primary_soft"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Cinemax.Button.Rounded"
+        tools:src="@drawable/ic_person_24" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/text_h5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/startIconImageView"
+        app:layout_constraintStart_toEndOf="@+id/startIconImageView"
+        app:layout_constraintTop_toTopOf="@+id/startIconImageView"
+        tools:text="Change Password" />
+
+    <ImageView
+        android:id="@+id/arrowImage"
+        android:layout_width="@dimen/_24dp"
+        android:layout_height="@dimen/_24dp"
+        android:layout_marginEnd="@dimen/_24dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+</merge>

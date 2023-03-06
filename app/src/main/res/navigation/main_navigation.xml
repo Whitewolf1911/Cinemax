@@ -101,4 +101,24 @@
             android:name="movieDetail"
             app:argType="com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.alibasoglu.cinemax.profile.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.alibasoglu.cinemax.ui.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.alibasoglu.cinemax.profile.ui.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>
