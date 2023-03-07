@@ -46,6 +46,21 @@ class WishListFragment : BaseFragment(R.layout.fragment_wishlist) {
         viewLifecycleOwner.observe {
             viewModel.wishListedMoviesState.collectLatest {
                 wishListAdapter.submitList(it)
+                checkEmptyStatus(it.isEmpty())
+            }
+        }
+    }
+
+    private fun checkEmptyStatus(isEmpty: Boolean) {
+        with(binding) {
+            if (isEmpty) {
+                noMovieImageView.visibility = View.VISIBLE
+                subtitleTextView.visibility = View.VISIBLE
+                noMovieTitleTextView.visibility = View.VISIBLE
+            } else {
+                noMovieImageView.visibility = View.GONE
+                subtitleTextView.visibility = View.GONE
+                noMovieTitleTextView.visibility = View.GONE
             }
         }
     }

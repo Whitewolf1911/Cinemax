@@ -10,10 +10,48 @@
         android:id="@+id/wishlistRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_wishlist" />
+
+    <ImageView
+        android:id="@+id/noMovieImageView"
+        android:layout_width="@dimen/_76dp"
+        android:layout_height="@dimen/_76dp"
+        android:layout_marginTop="@dimen/_172dp"
+        android:src="@drawable/no_movie_image"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/noMovieTitleTextView"
+        style="@style/text_h4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:text="@string/there_is_no_movie"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/noMovieImageView"
+        app:layout_constraintStart_toStartOf="@+id/noMovieImageView"
+        app:layout_constraintTop_toBottomOf="@id/noMovieImageView" />
+
+    <TextView
+        android:id="@+id/subtitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:maxWidth="@dimen/_220dp"
+        android:text="@string/find_your_movie"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noMovieTitleTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
