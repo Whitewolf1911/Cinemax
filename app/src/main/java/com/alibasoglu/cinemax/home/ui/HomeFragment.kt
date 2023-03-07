@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             categoriesTabLayout.addOnTabSelectedListener(onTabSelectedListener)
 
             seeAllTextView.setOnClickListener {
-                //TODO nav to most popular fragment
+                navToPopularMoviesFragment()
             }
 
             Glide.with(requireContext())
@@ -145,8 +145,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         nav(HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(searchQuery))
     }
 
+    private fun navToPopularMoviesFragment() {
+        nav(HomeFragmentDirections.actionHomeFragmentToPopularMoviesFragment())
+    }
+
     companion object {
-        const val QUERY_SEARCH_DELAY = 1800L
+        const val QUERY_SEARCH_DELAY = 1000L
     }
 
 }
