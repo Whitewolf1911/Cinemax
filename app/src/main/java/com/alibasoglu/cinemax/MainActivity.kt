@@ -63,6 +63,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setStartDestinationToIntro() {
+        val graph = navController.navInflater.inflate(R.navigation.main_navigation)
+        graph.setStartDestination(R.id.introFragment)
+        navController.setGraph(graph, intent.extras)
+    }
+
     fun setStartDestinationToHome() {
         val graph = navController.navInflater.inflate(R.navigation.main_navigation)
         graph.setStartDestination(R.id.homeFragment)

@@ -27,10 +27,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private var currentUser: FirebaseUser? = null
 
-
     private val logOutRequestListener = LogoutDialog.LogOutRequestListener {
         auth.signOut()
-        context?.showTextToast("logged out")
+        context?.showTextToast("Logged out")
+        setStartDestinationToIntro()
+        nav(ProfileFragmentDirections.actionProfileFragmentToIntroFragment())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_introFragment"
+            app:destination="@id/introFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
@@ -123,7 +126,8 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.alibasoglu.cinemax.profile.ui.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"/>
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.alibasoglu.cinemax.ui.onboarding.OnboardingFragment"

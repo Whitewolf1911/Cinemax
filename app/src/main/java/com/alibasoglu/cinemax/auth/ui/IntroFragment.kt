@@ -48,7 +48,6 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
     }
 
     private fun handleFacebookLogin() {
-
         LoginManager.getInstance().registerCallback(callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult) {
@@ -84,7 +83,6 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
                 signInClient.signInIntent.also {
                     startActivityForResult(it, REQUEST_CODE_SIGN_IN)
                 }
-
             }
         }
     }

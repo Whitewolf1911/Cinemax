@@ -56,6 +56,10 @@ abstract class BaseFragment(@LayoutRes layoutResId: Int) : Fragment(layoutResId)
         mainActivity?.setStartDestinationToHome()
     }
 
+    protected fun setStartDestinationToIntro() {
+        mainActivity?.setStartDestinationToIntro()
+    }
+
     protected fun showToolbar() {
         mainActivity?.showToolbar()
     }
