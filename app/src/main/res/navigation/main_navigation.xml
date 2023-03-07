@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/introFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -125,5 +125,9 @@
         android:id="@+id/onboardingFragment"
         android:name="com.alibasoglu.cinemax.ui.onboarding.OnboardingFragment"
         android:label="OnboardingFragment"
-        tools:layout="@layout/fragment_onboarding" />
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_introFragment"
+            app:destination="@id/introFragment" />
+    </fragment>
 </navigation>
