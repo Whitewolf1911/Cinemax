@@ -15,6 +15,7 @@ import com.alibasoglu.cinemax.databinding.ActivityMainBinding
 import com.alibasoglu.cinemax.utils.ProgressDialog
 import com.alibasoglu.cinemax.utils.navigateSafe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,8 +29,11 @@ class MainActivity : AppCompatActivity() {
 
     private var progressDialog = ProgressDialog(this)
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
         val splashScreen = installSplashScreen()
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()

@@ -17,7 +17,7 @@
     <string name="password">Password</string>
     <string name="agree_to_terms">I agree to the Terms and Services\nand Privacy Policy</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="hello_with_comma">Hello,</string>
+    <string name="hello_with_comma">Hello, %1$s</string>
     <string name="lets_stream_favorite">Let\'s stream your favorite movie</string>
     <string name="search_a_title">Search a title..</string>
     <string name="categories">Categories</string>
@@ -70,5 +70,6 @@
     <string name="offers_ad_free">Offers ad-free viewing of \n high quality</string>
     <string name="brings_together">Our service brings together \nyour favorite series</string>
     <string name="there_is_no_movie">There is no movie yet!</string>
+    <string name="request_id_token">107261980976-llul2gt8ic0td5tdbm61bkj9i1jq9aei.apps.googleusercontent.com</string>
 
 </resources>

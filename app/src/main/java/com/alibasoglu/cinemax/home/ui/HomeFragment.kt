@@ -13,7 +13,10 @@ import com.alibasoglu.cinemax.databinding.FragmentHomeBinding
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -39,6 +42,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private val moviesBasicCardAdapter = MoviesBasicCardAdapter(moviesBasicCardAdapterListener)
 
     private var searchJob: Job? = null
+
+    private lateinit var auth: FirebaseAuth
+
+    private var currentUser: FirebaseUser? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+        currentUser = auth.currentUser
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,9 +91,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 //TODO nav to most popular fragment
             }
 
-            wishlistButton.setOnClickListener {
-                //TODO nav to wishlist fragment
-            }
+            Glide.with(requireContext())
+                .load(currentUser?.photoUrl)
+                .centerCrop()
+                .placeholder(R.drawable.ic_person_24)
+                .into(personImageView)
+
+            helloTextView.text = getString(R.string.hello_with_comma, currentUser?.displayName)
 
             searchEditText.apply {
                 doAfterTextChanged { searchQuery ->

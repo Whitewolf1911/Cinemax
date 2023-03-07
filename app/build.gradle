@@ -104,6 +104,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.2')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+
 
     //Carousel RecyclerView
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
@@ -122,6 +124,10 @@ dependencies {
 
     //DotsIndicator
     implementation 'com.tbuonomo:dotsindicator:4.3'
+
+    //Google Auth
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

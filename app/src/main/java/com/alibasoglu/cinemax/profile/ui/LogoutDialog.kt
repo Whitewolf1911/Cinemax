@@ -12,7 +12,8 @@ import com.alibasoglu.cinemax.utils.showBlurEffect
 
 @SuppressLint("NewApi")
 class LogoutDialog(
-    private val activity: Activity
+    private val activity: Activity,
+    private val listener: LogOutRequestListener
 ) {
     var dialog: AlertDialog? = null
 
@@ -35,7 +36,8 @@ class LogoutDialog(
             }
 
             logoutButton.setOnClickListener {
-                //TODO LOGOUT
+                listener.logOut()
+                dismissDialog()
             }
         }
     }
@@ -45,5 +47,9 @@ class LogoutDialog(
             dialog?.dismiss()
             clearBlurEffect(activity)
         }
+    }
+
+    fun interface LogOutRequestListener {
+        fun logOut()
     }
 }
