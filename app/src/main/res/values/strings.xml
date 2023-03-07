@@ -72,4 +72,8 @@
     <string name="there_is_no_movie">There is no movie yet!</string>
     <string name="request_id_token">107261980976-llul2gt8ic0td5tdbm61bkj9i1jq9aei.apps.googleusercontent.com</string>
 
+    <string name="facebook_app_id">1195947151126037</string>
+    <string name="fb_login_protocol_scheme">fb1195947151126037</string>
+    <string name="facebook_client_token">a19fc09beb470496cdd541d0bea667d3</string>
+
 </resources>

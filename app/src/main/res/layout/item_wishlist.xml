@@ -43,11 +43,12 @@
             android:layout_width="@dimen/_160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6dp"
+            android:maxLines="2"
             android:ellipsize="end"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/genreTextView"
             app:layout_constraintTop_toBottomOf="@id/genreTextView"
-            tools:text="X-Men Origins : Wolverine Apocalypse" />
+            tools:text="X-Men Origins:Wolverine Apocalypse" />
 
         <TextView
             android:id="@+id/typeTextView"

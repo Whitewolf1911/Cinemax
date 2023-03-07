@@ -57,7 +57,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             logoutButton.setOnClickListener {
                 showLogoutDialog()
             }
-            emailTextView.text = currentUser?.email
+            if (!currentUser?.email.isNullOrEmpty()) {
+                emailTextView.text = currentUser?.email
+            } else {
+                emailTextView.text = currentUser?.providerData?.get(1)?.email
+            }
             nameTextView.text = currentUser?.displayName
             Glide.with(requireContext())
                 .load(currentUser?.photoUrl)
