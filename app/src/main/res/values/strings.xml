@@ -65,5 +65,9 @@
     <string name="are_you_sure">Are you sure ?</string>
     <string name="are_you_sure_subtext">Ullamcorper imperdiet urna id non sed est sem. Rhoncus amet, enim purus gravida donec aliquet.</string>
     <string name="cancel">Cancel</string>
+    <string name="the_biggest_streaming">The biggest international \nand local film streaming</string>
+    <string name="onboarding_text">Semper in cursus magna et eu varius nunc adipiscing. Elementum justo, laoreet id sem semper parturient.</string>
+    <string name="offers_ad_free">Offers ad-free viewing of \n high quality</string>
+    <string name="brings_together">Our service brings together \nyour favorite series</string>
 
 </resources>

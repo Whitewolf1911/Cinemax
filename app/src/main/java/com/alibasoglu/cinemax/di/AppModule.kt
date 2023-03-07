@@ -1,6 +1,8 @@
 package com.alibasoglu.cinemax.di
 
 import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.alibasoglu.cinemax.BuildConfig
 import com.alibasoglu.cinemax.data.local.MovieDatabase
@@ -84,6 +86,12 @@ object AppModule {
         )
             .fallbackToDestructiveMigration()
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(app: Application): SharedPreferences {
+        return app.getSharedPreferences("prefs", MODE_PRIVATE)
     }
 
 }

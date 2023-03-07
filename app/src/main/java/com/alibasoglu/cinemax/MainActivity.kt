@@ -39,6 +39,15 @@ class MainActivity : AppCompatActivity() {
             GenresData.genres = it
         }
         setupNavigation()
+        handleOnBoarding()
+    }
+
+    private fun handleOnBoarding() {
+        if (viewModel.getShouldShowOnBoarding()) {
+            val graph = navController.navInflater.inflate(R.navigation.main_navigation)
+            graph.setStartDestination(R.id.onboardingFragment)
+            navController.setGraph(graph, intent.extras)
+        }
     }
 
     private fun setupNavigation() {

@@ -4,6 +4,8 @@
     <color name="primary_dark">#1F1D2B</color>
     <color name="primary_soft">#252836</color>
     <color name="primary_blue_accent">#12CDD9</color>
+    <color name="primary_blue_accent_40">#6612CDD9</color>
+
 
     <color name="secondary_green">#22B07D</color>
     <color name="secondary_orange">#FF8700</color>
