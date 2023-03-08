@@ -19,15 +19,20 @@ interface SearchApi {
     @GET("search/movie")
     suspend fun searchMovie(
         @Query("query") searchQuery: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Response<SearchMovieResponse>
 
     @GET("movie/{movie_id}/recommendations")
     suspend fun getRecommendedMovies(
-        @Path("movie_id") movieId: Int, @Query("page") page: Int
+        @Path("movie_id") movieId: Int,
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Response<RecommendedMoviesResponse>
 
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMovies(): Response<NowPlayingMoviesResponse>
+    suspend fun getNowPlayingMovies(
+        @Query("language") language: String
+    ): Response<NowPlayingMoviesResponse>
 
 }

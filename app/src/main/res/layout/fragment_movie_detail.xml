@@ -199,7 +199,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_24dp"
             android:layout_marginTop="@dimen/_8dp"
-            android:maxLength="150"
+            android:ellipsize="end"
+            android:maxLines="5"
             android:textColor="@color/text_white_grey"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -208,12 +209,23 @@
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
+            android:id="@+id/showMoreButton"
+            style="@style/text_h5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:text="@string/more"
+            android:textColor="@color/primary_blue_accent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storyLineTextView" />
+
+        <TextView
             android:id="@+id/castCrewText"
             style="@style/text_h4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_24dp"
-            android:layout_marginTop="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_28dp"
             android:text="@string/cast_and_crew"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/storyLineTextView" />

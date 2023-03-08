@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.data
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -16,6 +17,7 @@ import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToMovieEntity
 import com.alibasoglu.cinemax.search.data.SearchApi
 import com.alibasoglu.cinemax.setConfigDataFromResponse
+import com.alibasoglu.cinemax.utils.ENGLISH
 import com.alibasoglu.cinemax.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -25,10 +27,13 @@ import java.io.IOException
 class MoviesRepositoryImpl(
     private val moviesApi: MoviesApi,
     private val searchApi: SearchApi,
-    private val movieDatabase: MovieDatabase
+    private val movieDatabase: MovieDatabase,
+    private val sharedPreferences: SharedPreferences
 ) : MoviesRepository {
 
     private val movieDao = movieDatabase.dao
+
+    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
 
     override fun getMoviesPager(pagingDataType: PagingDataType<Any>): Pager<Int, Movie> = Pager(
         config = PagingConfig(
@@ -36,7 +41,14 @@ class MoviesRepositoryImpl(
             initialLoadSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
             enablePlaceholders = false
         ),
-        pagingSourceFactory = { MoviesPagingSource(moviesApi = moviesApi, searchApi, pagingDataType = pagingDataType) }
+        pagingSourceFactory = {
+            MoviesPagingSource(
+                moviesApi = moviesApi,
+                searchApi,
+                pagingDataType = pagingDataType,
+                sharedPreferences = sharedPreferences
+            )
+        }
     )
 
     override suspend fun getSetConfigurationData() {
@@ -57,7 +69,7 @@ class MoviesRepositoryImpl(
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
-                moviesApi.getUpcomingMovies(page = 1).body()
+                moviesApi.getUpcomingMovies(page = 1, language = currentLanguage).body()
             } catch (e: HttpException) {
                 emit(Resource.Error(message = e.toString()))
                 null

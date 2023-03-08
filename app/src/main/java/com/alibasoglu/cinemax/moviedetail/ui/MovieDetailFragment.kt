@@ -61,6 +61,10 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         }
+        binding.showMoreButton.setOnClickListener {
+            binding.storyLineTextView.maxLines = Int.MAX_VALUE
+            it.visibility = View.GONE
+        }
         binding.customToolbar.configure(toolbarConfiguration)
         hideBottomNavbar()
         viewLifecycleOwner.observe {

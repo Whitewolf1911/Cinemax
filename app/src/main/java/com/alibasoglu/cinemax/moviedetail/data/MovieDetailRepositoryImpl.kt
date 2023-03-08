@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.moviedetail.data
 
+import android.content.SharedPreferences
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToCastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToMovieDetail
@@ -8,20 +9,24 @@ import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.CastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.Trailer
+import com.alibasoglu.cinemax.utils.ENGLISH
 import com.alibasoglu.cinemax.utils.Resource
-import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.io.IOException
 
 class MovieDetailRepositoryImpl(
-    private val movieDetailApi: MovieDetailApi
+    private val movieDetailApi: MovieDetailApi,
+    private val sharedPreferences: SharedPreferences
 ) : MovieDetailRepository {
+
+    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
 
     override suspend fun getMovieDetails(movieId: Int): Flow<Resource<MovieDetail>> {
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
-                movieDetailApi.getMovieDetails(movieId).body()
+                movieDetailApi.getMovieDetails(movieId = movieId, language = currentLanguage).body()
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
@@ -41,7 +46,7 @@ class MovieDetailRepositoryImpl(
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
-                movieDetailApi.getMovieCredits(movieId).body()
+                movieDetailApi.getMovieCredits(movieId = movieId, language = currentLanguage).body()
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null

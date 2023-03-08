@@ -12,7 +12,8 @@ interface MoviesApi {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Response<PopularMoviesResponse>
 
     @GET("configuration")
@@ -20,11 +21,13 @@ interface MoviesApi {
 
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Response<UpcomingMoviesResponse>
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovies(
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Response<TopRatedMoviesResponse>
 }

@@ -8,6 +8,6 @@ fun Context.setAppLocale(language: String) {
     val locale = Locale(language)
     Locale.setDefault(locale)
     val config = Configuration()
-    config.locale = locale
+    config.setLocale(locale)
     resources.updateConfiguration(config, resources.displayMetrics)
 }

@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.moviedetail.di
 
+import android.content.SharedPreferences
 import com.alibasoglu.cinemax.moviedetail.data.MovieDetailRepositoryImpl
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
@@ -10,8 +11,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 
 @Module
@@ -26,8 +27,14 @@ object MovieDetailModule {
 
     @Provides
     @Singleton
-    fun provideMovieDetailRepository(movieDetailApi: MovieDetailApi): MovieDetailRepository {
-        return MovieDetailRepositoryImpl(movieDetailApi)
+    fun provideMovieDetailRepository(
+        movieDetailApi: MovieDetailApi,
+        sharedPreferences: SharedPreferences
+    ): MovieDetailRepository {
+        return MovieDetailRepositoryImpl(
+            movieDetailApi = movieDetailApi,
+            sharedPreferences = sharedPreferences
+        )
     }
 
     @Provides

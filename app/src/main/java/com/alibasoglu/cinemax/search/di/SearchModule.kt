@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.search.di
 
+import android.content.SharedPreferences
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.search.data.SearchApi
 import com.alibasoglu.cinemax.search.data.SearchRepositoryImpl
@@ -11,8 +12,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,8 +27,8 @@ object SearchModule {
 
     @Provides
     @Singleton
-    fun provideSearchRepository(searchApi: SearchApi): SearchRepository {
-        return SearchRepositoryImpl(searchApi)
+    fun provideSearchRepository(searchApi: SearchApi, sharedPreferences: SharedPreferences): SearchRepository {
+        return SearchRepositoryImpl(searchApi = searchApi, sharedPreferences = sharedPreferences)
     }
 
     @Provides

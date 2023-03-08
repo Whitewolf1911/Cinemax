@@ -1,10 +1,12 @@
 package com.alibasoglu.cinemax.search.data
 
+import android.content.SharedPreferences
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.search.data.model.mapToPersonItem
 import com.alibasoglu.cinemax.search.domain.SearchRepository
 import com.alibasoglu.cinemax.search.ui.model.PersonItem
+import com.alibasoglu.cinemax.utils.ENGLISH
 import com.alibasoglu.cinemax.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,8 +14,11 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class SearchRepositoryImpl(
-    private val searchApi: SearchApi
+    private val searchApi: SearchApi,
+    private val sharedPreferences: SharedPreferences
 ) : SearchRepository {
+
+    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
 
     override suspend fun searchPerson(searchQuery: String): Flow<Resource<List<PersonItem>>> {
         return flow {
@@ -41,7 +46,7 @@ class SearchRepositoryImpl(
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
-                searchApi.getRecommendedMovies(movieId = movieId, page = 1).body()
+                searchApi.getRecommendedMovies(movieId = movieId, page = 1, language = currentLanguage).body()
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
@@ -63,7 +68,7 @@ class SearchRepositoryImpl(
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
-                searchApi.getNowPlayingMovies().body()
+                searchApi.getNowPlayingMovies(language = currentLanguage).body()
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
