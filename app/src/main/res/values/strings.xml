@@ -81,5 +81,6 @@
     <string name="premium_member">Premium Member</string>
     <string name="clear_cache">Clear Cache</string>
     <string name="on_date">On %1$s</string>
+    <string name="top_rated">Top Rated</string>
 
 </resources>

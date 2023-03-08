@@ -35,9 +35,14 @@ class HomeViewModel @Inject constructor(
     val upcomingMoviesState: StateFlow<List<CarouselMovieItem>>
         get() = _upcomingMoviesState
 
+    private val _topRatedMoviesState = MutableStateFlow<PagingData<MovieBasicCardItem>>(PagingData.empty())
+    val topRatedMoviesState: StateFlow<PagingData<MovieBasicCardItem>>
+        get() = _topRatedMoviesState
+
     init {
         getPopularMovies()
         getUpcomingMovies()
+        getTopRatedMovies()
     }
 
     private fun getPopularMovies(genreFilter: String? = null) {
@@ -83,6 +88,27 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getTopRatedMovies(genreFilter: String? = null) {
+        viewModelScope.launch {
+            getMoviesPagerUseCase(pagingDataType = PagingDataType.TopRatedMovies())
+                .flow
+                .cachedIn(viewModelScope)
+                .collectLatest { movieList ->
+                    if (genreFilter == null) {
+                        _topRatedMoviesState.value = movieList.map { movie ->
+                            movie.mapToMovieBasicCardItem()
+                        }
+                    } else {
+                        _topRatedMoviesState.value = movieList.map { movie ->
+                            movie.mapToMovieBasicCardItem()
+                        }.filter {
+                            it.genre == genreFilter
+                        }
+                    }
+                }
+        }
+    }
+
     //TODO REFACTOR this is bad approach , should pass genreId instead. It will not work if language is changed.
     fun filterPopularMovies(genreName: String) {
         if (genreName == "All") {
@@ -91,5 +117,14 @@ class HomeViewModel @Inject constructor(
             getPopularMovies(genreFilter = genreName)
         }
     }
+
+    fun filterTopRatedMovies(genreName: String) {
+        if (genreName == "All") {
+            getTopRatedMovies()
+        } else {
+            getTopRatedMovies(genreFilter = genreName)
+        }
+    }
+
 
 }

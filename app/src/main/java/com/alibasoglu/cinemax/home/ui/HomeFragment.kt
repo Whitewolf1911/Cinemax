@@ -32,14 +32,21 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
-    private val moviesBasicCardAdapterListener =
+    private val popularMoviesAdapterListener =
         MoviesBasicCardAdapter.MoviesCardAdapterListener { movieBasicCardItem ->
             navToMovieDetailFragment(movieBasicCardItem.id)
         }
 
-    private val carouselAdapter = MoviesCarouselAdapter()
+    private val topRatedMoviesAdapterListener =
+        MoviesBasicCardAdapter.MoviesCardAdapterListener { movieBasicCardItem ->
+            navToMovieDetailFragment(movieBasicCardItem.id)
+        }
 
-    private val moviesBasicCardAdapter = MoviesBasicCardAdapter(moviesBasicCardAdapterListener)
+    private val topRatedMoviesAdapter = MoviesBasicCardAdapter(topRatedMoviesAdapterListener)
+
+    private val upcomingMoviesCarouselAdapter = MoviesCarouselAdapter()
+
+    private val popularMoviesAdapter = MoviesBasicCardAdapter(popularMoviesAdapterListener)
 
     private var searchJob: Job? = null
 
@@ -68,11 +75,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         showBottomNavbar()
         with(binding) {
             carouselRecyclerView.apply {
-                this.adapter = carouselAdapter
+                this.adapter = upcomingMoviesCarouselAdapter
                 set3DItem(true)
                 setAlpha(true)
             }
-            popularMoviesRecyclerView.adapter = moviesBasicCardAdapter
+            popularMoviesRecyclerView.adapter = popularMoviesAdapter
+            topRatedMoviesRecyclerView.adapter = topRatedMoviesAdapter
 
             val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -80,6 +88,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                         it.name == tab?.text
                     }?.name
                     viewModel.filterPopularMovies(selectedTabGenreName ?: "All")
+                    viewModel.filterTopRatedMovies(selectedTabGenreName ?: "All")
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -127,12 +136,17 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun initObservers() {
         viewLifecycleOwner.observe {
             viewModel.popularMoviesState.collectLatest {
-                moviesBasicCardAdapter.submitData(it)
+                popularMoviesAdapter.submitData(it)
             }
         }
         viewLifecycleOwner.observe {
             viewModel.upcomingMoviesState.collectLatest {
-                carouselAdapter.submitList(it)
+                upcomingMoviesCarouselAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.observe {
+            viewModel.topRatedMoviesState.collectLatest {
+                topRatedMoviesAdapter.submitData(it)
             }
         }
     }

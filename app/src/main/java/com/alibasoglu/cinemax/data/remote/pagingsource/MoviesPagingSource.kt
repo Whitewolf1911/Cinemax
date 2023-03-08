@@ -45,6 +45,11 @@ class MoviesPagingSource(
                                 it.mapToMovie()
                             }
                     }
+                    is PagingDataType.TopRatedMovies -> {
+                        moviesApi.getTopRatedMovies(page = page).body()?.results?.map {
+                            it.mapToMovie()
+                        }
+                    }
                 }
 
             val moviesList = moviesApiResponse.orEmpty()
@@ -74,4 +79,5 @@ sealed class PagingDataType<T>(val parameter: Any? = null) {
     class RecommendedMovies<Int>(movieId: Int) : PagingDataType<Int>(parameter = movieId)
     class SearchMovies<String>(searchQuery: String) : PagingDataType<String>(parameter = searchQuery)
     class PopularMovies() : PagingDataType<Any>(null)
+    class TopRatedMovies() : PagingDataType<Any>(null)
 }

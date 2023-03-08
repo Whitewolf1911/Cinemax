@@ -2,6 +2,7 @@ package com.alibasoglu.cinemax.data.remote
 
 import com.alibasoglu.cinemax.data.remote.model.ConfigurationResponse
 import com.alibasoglu.cinemax.data.remote.model.PopularMoviesResponse
+import com.alibasoglu.cinemax.data.remote.model.TopRatedMoviesResponse
 import com.alibasoglu.cinemax.data.remote.model.UpcomingMoviesResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -21,4 +22,9 @@ interface MoviesApi {
     suspend fun getUpcomingMovies(
         @Query("page") page: Int
     ): Response<UpcomingMoviesResponse>
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+        @Query("page") page: Int
+    ): Response<TopRatedMoviesResponse>
 }
