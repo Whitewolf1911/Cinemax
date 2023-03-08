@@ -105,11 +105,11 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
                 auth.signInWithCredential(credential)
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
-                            context?.showTextToast("Login Success")
+                            context?.showTextToast(getString(R.string.login_success))
                             setStartDestinationToHome()
                             nav(IntroFragmentDirections.actionIntroFragmentToHomeFragment())
                         } else {
-                            context?.showTextToast("Facebook login failed")
+                            context?.showTextToast(getString(R.string.facebook_login_failed))
                         }
                     }
             } catch (e: Exception) {
@@ -127,7 +127,7 @@ class IntroFragment : BaseFragment(R.layout.fragment_intro) {
             try {
                 auth.signInWithCredential(credentials).addOnSuccessListener {
                     hideProgressDialog()
-                    context?.showTextToast("Login success")
+                    context?.showTextToast(getString(R.string.login_success))
                     setStartDestinationToHome()
                     nav(IntroFragmentDirections.actionIntroFragmentToHomeFragment())
                 }

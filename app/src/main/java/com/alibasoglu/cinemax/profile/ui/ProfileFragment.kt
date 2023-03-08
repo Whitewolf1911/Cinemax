@@ -55,6 +55,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             editProfileButton.setOnClickListener {
                 nav(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
             }
+            languageButton.setOnClickListener {
+                nav(ProfileFragmentDirections.actionProfileFragmentToLanguageFragment())
+            }
             logoutButton.setOnClickListener {
                 showLogoutDialog()
             }

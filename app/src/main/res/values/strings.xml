@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cinemax</string>
+    <string name="app_name" translatable="false">Cinemax</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="download">Download</string>
@@ -40,7 +40,6 @@
     <string name="trailer">Trailer</string>
     <string name="release_date">Release Date:</string>
     <string name="synopsis">Synopsis</string>
-    <string name="premium_member">Premium Member</string>
     <string name="new_movies_coming">New movies are coming for you, Download Now!</string>
     <string name="account">Account</string>
     <string name="member">Member</string>
@@ -65,7 +64,7 @@
     <string name="are_you_sure">Are you sure ?</string>
     <string name="are_you_sure_subtext">Ullamcorper imperdiet urna id non sed est sem. Rhoncus amet, enim purus gravida donec aliquet.</string>
     <string name="cancel">Cancel</string>
-    <string name="the_biggest_streaming">The biggest international \nand local film streaming</string>
+    <string name="the_biggest_streaming">The biggest international  and local film streaming</string>
     <string name="onboarding_text">Semper in cursus magna et eu varius nunc adipiscing. Elementum justo, laoreet id sem semper parturient.</string>
     <string name="offers_ad_free">Offers ad-free viewing of \n high quality</string>
     <string name="brings_together">Our service brings together \nyour favorite series</string>
@@ -73,9 +72,14 @@
     <string name="most_popular_movie">Most Popular Movie</string>
     <string name="recommended">Recommended</string>
 
-    <string name="request_id_token">107261980976-llul2gt8ic0td5tdbm61bkj9i1jq9aei.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">1195947151126037</string>
-    <string name="fb_login_protocol_scheme">fb1195947151126037</string>
-    <string name="facebook_client_token">a19fc09beb470496cdd541d0bea667d3</string>
+    <string name="request_id_token" translatable="false">107261980976-llul2gt8ic0td5tdbm61bkj9i1jq9aei.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">1195947151126037</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1195947151126037</string>
+    <string name="facebook_client_token" translatable="false">a19fc09beb470496cdd541d0bea667d3</string>
+    <string name="login_success">Login success</string>
+    <string name="facebook_login_failed">Facebook login failed</string>
+    <string name="premium_member">Premium Member</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="on_date">On %1$s</string>
 
 </resources>

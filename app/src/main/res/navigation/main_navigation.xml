@@ -124,6 +124,9 @@
         <action
             android:id="@+id/action_profileFragment_to_introFragment"
             app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
@@ -156,9 +159,14 @@
         android:id="@+id/recommendedMoviesFragment"
         android:name="com.alibasoglu.cinemax.search.ui.RecommendedMoviesFragment"
         android:label="RecommendedMoviesFragment"
-        tools:layout="@layout/fragment_recommended_movies" >
+        tools:layout="@layout/fragment_recommended_movies">
         <action
             android:id="@+id/action_recommendedMoviesFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.alibasoglu.cinemax.profile.ui.LanguageFragment"
+        android:label="LanguageFragment"
+        tools:layout="@layout/fragment_language" />
 </navigation>
