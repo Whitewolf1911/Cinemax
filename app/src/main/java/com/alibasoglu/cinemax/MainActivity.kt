@@ -14,6 +14,7 @@ import com.alibasoglu.cinemax.customviews.CustomToolbar
 import com.alibasoglu.cinemax.databinding.ActivityMainBinding
 import com.alibasoglu.cinemax.utils.ProgressDialog
 import com.alibasoglu.cinemax.utils.navigateSafe
+import com.alibasoglu.cinemax.utils.setAppLocale
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         installSplashScreen()
+        setAppLocale(viewModel.getCurrentLocale())
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()
 

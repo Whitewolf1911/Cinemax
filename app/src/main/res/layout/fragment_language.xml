@@ -8,6 +8,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_12dp"
         android:layout_marginHorizontal="@dimen/_24dp"
         android:layout_marginTop="@dimen/_24dp"
         android:backgroundTint="@color/primary_dark"

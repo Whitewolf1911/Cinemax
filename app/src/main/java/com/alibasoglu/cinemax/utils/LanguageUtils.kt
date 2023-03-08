@@ -1,7 +1,7 @@
 package com.alibasoglu.cinemax.utils
 
-private const val ENGLISH = "en"
-private const val TURKISH = "tr"
+const val ENGLISH = "en"
+const val TURKISH = "tr"
 
 val supportedLanguages = listOf(
     ENGLISH,

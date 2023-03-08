@@ -5,9 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.domain.usecase.SetImagesConfigDataUseCase
 import com.alibasoglu.cinemax.ui.onboarding.OnboardingViewModel.Companion.ONBOARDING_KEY
+import com.alibasoglu.cinemax.utils.ENGLISH
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -23,6 +24,10 @@ class MainViewModel @Inject constructor(
 
     fun getShouldShowOnBoarding(): Boolean {
         return sharedPreferences.getBoolean(ONBOARDING_KEY, true)
+    }
+
+    fun getCurrentLocale(): String {
+        return sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
     }
 
 }
