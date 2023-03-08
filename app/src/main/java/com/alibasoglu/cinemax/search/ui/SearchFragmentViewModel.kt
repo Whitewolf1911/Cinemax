@@ -1,6 +1,7 @@
 package com.alibasoglu.cinemax.search.ui
 
 import androidx.lifecycle.viewModelScope
+import com.alibasoglu.cinemax.GenresData
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.domain.model.mapToMovieBasicCardItem
 import com.alibasoglu.cinemax.domain.model.mapToMovieBigCardItem
@@ -10,11 +11,11 @@ import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
 import com.alibasoglu.cinemax.ui.model.MovieBigCardItem
 import com.alibasoglu.cinemax.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class SearchFragmentViewModel @Inject constructor(
@@ -95,9 +96,10 @@ class SearchFragmentViewModel @Inject constructor(
         }
     }
 
-    //TODO REFACTOR this is bad approach , should pass genreId instead. It will not work if language is changed.
     fun filterRecommendedMovies(genre: String) {
-        if (genre == "All") {
+        if (genre == GenresData.genres.find {
+                it.id == 0
+            }?.name) {
             getRecommendedMovies()
         } else {
             getRecommendedMovies(genreFilter = genre)

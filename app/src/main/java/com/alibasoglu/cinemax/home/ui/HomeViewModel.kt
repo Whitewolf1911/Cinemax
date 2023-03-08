@@ -5,6 +5,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
+import com.alibasoglu.cinemax.GenresData
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.mapToCarouselMovieItem
@@ -109,9 +110,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    //TODO REFACTOR this is bad approach , should pass genreId instead. It will not work if language is changed.
     fun filterPopularMovies(genreName: String) {
-        if (genreName == "All") {
+        if (genreName == GenresData.genres.find {
+                it.id == 0
+            }?.name) {
             getPopularMovies()
         } else {
             getPopularMovies(genreFilter = genreName)
@@ -119,7 +121,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun filterTopRatedMovies(genreName: String) {
-        if (genreName == "All") {
+        if (genreName == GenresData.genres.find {
+                it.id == 0
+            }?.name) {
             getTopRatedMovies()
         } else {
             getTopRatedMovies(genreFilter = genreName)

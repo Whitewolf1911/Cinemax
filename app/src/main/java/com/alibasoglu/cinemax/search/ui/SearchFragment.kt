@@ -61,10 +61,13 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
             val onTabSelectedListener = object : OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val allGenres = GenresData.genres.find {
+                        it.id == 0
+                    }?.name.orEmpty()
                     val selectedTabGenreName = GenresData.genres.find {
                         it.name == tab?.text
                     }?.name
-                    viewModel.filterRecommendedMovies(selectedTabGenreName ?: "All")
+                    viewModel.filterRecommendedMovies(selectedTabGenreName ?: allGenres)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}

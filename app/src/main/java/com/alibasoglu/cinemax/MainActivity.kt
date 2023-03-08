@@ -40,12 +40,13 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         installSplashScreen()
         myIntent = intent
-        setAppLocale(viewModel.getCurrentLocale())
+        val currentLanguage = viewModel.getCurrentLocale()
+        setAppLocale(currentLanguage)
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()
 
         //Setting genre list from asset
-        getGenresList(this)?.let {
+        getGenresList(this, currentLanguage)?.let {
             GenresData.genres = it
         }
         setupNavigation()
