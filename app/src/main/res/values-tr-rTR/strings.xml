@@ -75,6 +75,7 @@
     <string name="recommended">Tavsiye Edilen</string>
     <string name="clear_cache">Önbelleği temizle</string>
     <string name="top_rated">En İyiler</string>
+    <string name="suggested_languages">Tavsiye Edilen Diller</string>
 
     <string name="login_success">Giriş Başarılı</string>
     <string name="facebook_login_failed">Facebook Girişi Başarısız</string>

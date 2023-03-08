@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/selectionItemView"
+    style="@style/text_h5"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_64dp"
+    android:layout_centerVertical="true"
+    android:background="@null"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="24dp"
+    android:drawableEnd="@drawable/selector_check"
+    tools:text="English" />
