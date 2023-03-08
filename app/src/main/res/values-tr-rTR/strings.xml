@@ -76,6 +76,7 @@
     <string name="clear_cache">Önbelleği temizle</string>
     <string name="top_rated">En İyiler</string>
     <string name="suggested_languages">Tavsiye Edilen Diller</string>
+    <string name="logged_out">Çıkış Yapıldı</string>
 
     <string name="login_success">Giriş Başarılı</string>
     <string name="facebook_login_failed">Facebook Girişi Başarısız</string>

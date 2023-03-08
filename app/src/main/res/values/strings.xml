@@ -83,5 +83,6 @@
     <string name="on_date">On %1$s</string>
     <string name="top_rated">Top Rated</string>
     <string name="suggested_languages">Suggested Languages</string>
+    <string name="logged_out">Logged out</string>
 
 </resources>

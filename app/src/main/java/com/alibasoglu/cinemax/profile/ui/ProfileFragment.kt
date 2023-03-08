@@ -29,7 +29,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val logOutRequestListener = LogoutDialog.LogOutRequestListener {
         auth.signOut()
-        context?.showTextToast("Logged out")
+        context?.showTextToast(getString(R.string.logged_out))
         setStartDestinationToIntro()
         nav(ProfileFragmentDirections.actionProfileFragmentToIntroFragment())
     }
