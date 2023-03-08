@@ -33,8 +33,6 @@ class MoviesRepositoryImpl(
 
     private val movieDao = movieDatabase.dao
 
-    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
-
     override fun getMoviesPager(pagingDataType: PagingDataType<Any>): Pager<Int, Movie> = Pager(
         config = PagingConfig(
             pageSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
@@ -66,6 +64,7 @@ class MoviesRepositoryImpl(
     }
 
     override suspend fun getUpcomingMovies(): Flow<Resource<List<Movie>>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {

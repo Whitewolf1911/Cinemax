@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -28,6 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
+    lateinit var myIntent: Intent
+
     private var progressDialog = ProgressDialog(this)
 
     private lateinit var auth: FirebaseAuth
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         installSplashScreen()
+        myIntent = intent
         setAppLocale(viewModel.getCurrentLocale())
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()
@@ -117,6 +121,11 @@ class MainActivity : AppCompatActivity() {
 
     fun hideProgressDialog() {
         progressDialog.dismissDialog()
+    }
+
+    fun restartActivity() {
+        finish()
+        startActivity(myIntent)
     }
 
 }

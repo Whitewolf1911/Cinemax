@@ -20,9 +20,8 @@ class MovieDetailRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ) : MovieDetailRepository {
 
-    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
-
     override suspend fun getMovieDetails(movieId: Int): Flow<Resource<MovieDetail>> {
+       val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
@@ -43,6 +42,7 @@ class MovieDetailRepositoryImpl(
     }
 
     override suspend fun getMovieCastCrew(movieId: Int): Flow<Resource<List<CastCrewPerson>>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {

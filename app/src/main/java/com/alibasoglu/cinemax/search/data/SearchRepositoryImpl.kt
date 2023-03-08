@@ -18,7 +18,6 @@ class SearchRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ) : SearchRepository {
 
-    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
 
     override suspend fun searchPerson(searchQuery: String): Flow<Resource<List<PersonItem>>> {
         return flow {
@@ -43,6 +42,7 @@ class SearchRepositoryImpl(
     }
 
     override suspend fun getRecommendedMovies(movieId: Int): Flow<Resource<List<Movie>>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
@@ -65,6 +65,7 @@ class SearchRepositoryImpl(
     }
 
     override suspend fun getMovieOfTheDay(): Flow<Resource<Movie>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {

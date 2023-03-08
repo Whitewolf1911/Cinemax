@@ -61,5 +61,6 @@ class LanguageFragment : BaseFragment(R.layout.fragment_language) {
         val langId = languageListItem.languageId
         context?.setAppLocale(langId)
         viewModel.setCurrentLocale(langId)
+        restartActivity()
     }
 }

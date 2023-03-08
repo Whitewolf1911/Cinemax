@@ -67,4 +67,8 @@ abstract class BaseFragment(@LayoutRes layoutResId: Int) : Fragment(layoutResId)
     protected fun hideToolbar() {
         mainActivity?.hideToolbar()
     }
+
+    protected fun restartActivity() {
+        mainActivity?.restartActivity()
+    }
 }
