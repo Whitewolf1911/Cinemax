@@ -25,7 +25,7 @@ class GetMovieTrailerUseCase(
                 is Resource.Error -> {}
             }
         }
-        return filtered?.first() ?: Trailer(
+        return filtered?.firstOrNull() ?: Trailer(
             id = "",
             key = "",
             name = "",

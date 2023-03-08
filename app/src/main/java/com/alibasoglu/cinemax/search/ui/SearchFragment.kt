@@ -94,6 +94,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                 }
             }
 
+            seeAllTextView.setOnClickListener {
+                navToRecommendedMoviesFragment()
+            }
+
         }
     }
 
@@ -103,6 +107,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
     private fun navToSearchResultFragment(searchQuery: String) {
         nav(SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(searchQuery))
+    }
+
+    private fun navToRecommendedMoviesFragment() {
+        nav(SearchFragmentDirections.actionSearchFragmentToRecommendedMoviesFragment())
     }
 
     private fun initObservers() {

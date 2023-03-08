@@ -6,13 +6,13 @@ import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.search.data.SearchApi
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class MoviesPagingSource(
     private val moviesApi: MoviesApi,
     private val searchApi: SearchApi,
-    private val searchQuery: String? = null
+    private val pagingDataType: PagingDataType<Any>,
 ) : PagingSource<Int, Movie>() {
 
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
@@ -26,14 +26,24 @@ class MoviesPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val page = params.key ?: FIRST_PAGE_INDEX
         return try {
-            val moviesApiResponse =
-                if (searchQuery == null) {
-                    moviesApi.getPopularMovies(page = page).body()?.results?.map {
-                        it.mapToMovie()
+            val moviesApiResponse: List<Movie>? =
+                when (pagingDataType) {
+                    is PagingDataType.SearchMovies -> {
+                        searchApi.searchMovie(searchQuery = pagingDataType.parameter as String, page = page)
+                            .body()?.results?.map {
+                                it.mapToMovie()
+                            }
                     }
-                } else {
-                    searchApi.searchMovie(searchQuery = searchQuery, page = page).body()?.results?.map {
-                        it.mapToMovie()
+                    is PagingDataType.PopularMovies -> {
+                        moviesApi.getPopularMovies(page = page).body()?.results?.map {
+                            it.mapToMovie()
+                        }
+                    }
+                    is PagingDataType.RecommendedMovies -> {
+                        searchApi.getRecommendedMovies(page = page, movieId = pagingDataType.parameter as Int)
+                            .body()?.results?.map {
+                                it.mapToMovie()
+                            }
                     }
                 }
 
@@ -58,4 +68,10 @@ class MoviesPagingSource(
         const val MOVIES_PAGE_SIZE = 10
         private const val FIRST_PAGE_INDEX = 1
     }
+}
+
+sealed class PagingDataType<T>(val parameter: Any? = null) {
+    class RecommendedMovies<Int>(movieId: Int) : PagingDataType<Int>(parameter = movieId)
+    class SearchMovies<String>(searchQuery: String) : PagingDataType<String>(parameter = searchQuery)
+    class PopularMovies() : PagingDataType<Any>(null)
 }

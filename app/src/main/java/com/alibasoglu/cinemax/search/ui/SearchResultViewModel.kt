@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.mapToMovieBigCardItem
 import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
 import com.alibasoglu.cinemax.search.data.model.PersonListState
@@ -14,11 +15,11 @@ import com.alibasoglu.cinemax.ui.model.MovieBigCardItem
 import com.alibasoglu.cinemax.utils.Resource
 import com.alibasoglu.cinemax.utils.getOrThrow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class SearchResultViewModel @Inject constructor(
@@ -66,7 +67,7 @@ class SearchResultViewModel @Inject constructor(
 
     fun searchMovie(searchQuery: String) {
         viewModelScope.launch {
-            getMoviesPagerUseCase(searchQuery)
+            getMoviesPagerUseCase(pagingDataType = PagingDataType.SearchMovies(searchQuery))
                 .flow
                 .cachedIn(viewModelScope)
                 .collectLatest { movieList ->

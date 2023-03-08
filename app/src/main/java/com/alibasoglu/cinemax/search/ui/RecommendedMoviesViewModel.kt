@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.home.ui
+package com.alibasoglu.cinemax.search.ui
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -7,6 +7,7 @@ import androidx.paging.map
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.mapToMovieBigCardItem
+import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
 import com.alibasoglu.cinemax.ui.model.MovieBigCardItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,29 +18,32 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PopularMoviesViewModel @Inject constructor(
-    private val getMoviesPagerUseCase: GetMoviesPagerUseCase
+class RecommendedMoviesViewModel @Inject constructor(
+    private val getMoviesPagerUseCase: GetMoviesPagerUseCase,
+    private val moviesRepository: MoviesRepository
 ) : BaseViewModel() {
 
-    private val _popularMoviesState = MutableStateFlow<PagingData<MovieBigCardItem>>(PagingData.empty())
-    val popularMoviesState: StateFlow<PagingData<MovieBigCardItem>>
-        get() = _popularMoviesState
+    private val _recommendedMoviesState = MutableStateFlow<PagingData<MovieBigCardItem>>(PagingData.empty())
+    val recommendedMoviesState: StateFlow<PagingData<MovieBigCardItem>>
+        get() = _recommendedMoviesState
 
 
     init {
-        getPopularMovies()
+        getRecommendedMovies()
     }
 
-    private fun getPopularMovies() {
+    private fun getRecommendedMovies() {
         viewModelScope.launch {
-            getMoviesPagerUseCase(pagingDataType = PagingDataType.PopularMovies())
+            val randomMovieId = moviesRepository.getRandomWishListedMovieId()
+            getMoviesPagerUseCase(PagingDataType.RecommendedMovies(randomMovieId))
                 .flow
                 .cachedIn(viewModelScope)
                 .collectLatest { movieList ->
-                    _popularMoviesState.value = movieList.map {
+                    _recommendedMoviesState.value = movieList.map {
                         it.mapToMovieBigCardItem()
                     }
                 }
         }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.alibasoglu.cinemax.domain.repository
 
 import androidx.paging.Pager
+import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.utils.Resource
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
 
-    fun getMoviesPager(searchQuery: String? = null): Pager<Int, Movie>
+    fun getMoviesPager(pagingDataType: PagingDataType<Any>): Pager<Int, Movie>
 
     suspend fun getSetConfigurationData()
 

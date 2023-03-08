@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.home.ui
+package com.alibasoglu.cinemax.search.ui
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
-import com.alibasoglu.cinemax.databinding.FragmentPopularMoviesBinding
+import com.alibasoglu.cinemax.databinding.FragmentRecommendedMoviesBinding
 import com.alibasoglu.cinemax.ui.MovieBigCardItemAdapter
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
@@ -15,19 +15,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class PopularMoviesFragment : BaseFragment(R.layout.fragment_popular_movies) {
+class RecommendedMoviesFragment : BaseFragment(R.layout.fragment_recommended_movies) {
 
     private val toolbarConfiguration = ToolbarConfiguration(
         startIconResId = R.drawable.ic_arrow_back,
         startIconClick = ::navBack,
-        titleResId = R.string.most_popular_movie
+        titleResId = R.string.recommended
     )
 
     override val fragmentConfiguration = FragmentConfiguration(toolbarConfiguration)
 
-    private val binding by viewBinding(FragmentPopularMoviesBinding::bind)
+    private val binding by viewBinding(FragmentRecommendedMoviesBinding::bind)
 
-    private val viewModel by viewModels<PopularMoviesViewModel>()
+    private val viewModel by viewModels<RecommendedMoviesViewModel>()
 
     private val bigCardAdapterListener = MovieBigCardItemAdapter.MoviesBigCardAdapterListener {
         navToMovieDetailFragment(it.id)
@@ -38,7 +38,7 @@ class PopularMoviesFragment : BaseFragment(R.layout.fragment_popular_movies) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        initObserver()
+        initObservers()
     }
 
     private fun initUI() {
@@ -46,15 +46,16 @@ class PopularMoviesFragment : BaseFragment(R.layout.fragment_popular_movies) {
         binding.moviesRecyclerView.adapter = bigCardItemAdapter
     }
 
-    private fun navToMovieDetailFragment(movieId: Int) {
-        nav(PopularMoviesFragmentDirections.actionPopularMoviesFragmentToMovieDetailFragment(movieId))
-    }
-
-    private fun initObserver() {
+    private fun initObservers() {
         viewLifecycleOwner.observe {
-            viewModel.popularMoviesState.collectLatest {
+            viewModel.recommendedMoviesState.collectLatest {
                 bigCardItemAdapter.submitData(it)
             }
         }
+
+    }
+
+    private fun navToMovieDetailFragment(movieId: Int) {
+        nav(RecommendedMoviesFragmentDirections.actionRecommendedMoviesFragmentToMovieDetailFragment(movieId))
     }
 }

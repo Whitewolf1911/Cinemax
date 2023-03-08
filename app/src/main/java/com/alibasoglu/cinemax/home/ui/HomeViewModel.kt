@@ -6,6 +6,7 @@ import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.mapToCarouselMovieItem
 import com.alibasoglu.cinemax.domain.model.mapToMovieBasicCardItem
 import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
@@ -14,11 +15,11 @@ import com.alibasoglu.cinemax.home.usecase.GetCarouselMoviesUseCase
 import com.alibasoglu.cinemax.ui.model.MovieBasicCardItem
 import com.alibasoglu.cinemax.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -41,7 +42,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies(genreFilter: String? = null) {
         viewModelScope.launch {
-            getMoviesPagerUseCase(searchQuery = null)
+            getMoviesPagerUseCase(pagingDataType = PagingDataType.PopularMovies())
                 .flow
                 .cachedIn(viewModelScope)
                 .collectLatest { movieList ->

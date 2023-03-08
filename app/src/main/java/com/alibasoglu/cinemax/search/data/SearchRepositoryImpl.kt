@@ -6,10 +6,10 @@ import com.alibasoglu.cinemax.search.data.model.mapToPersonItem
 import com.alibasoglu.cinemax.search.domain.SearchRepository
 import com.alibasoglu.cinemax.search.ui.model.PersonItem
 import com.alibasoglu.cinemax.utils.Resource
-import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchRepositoryImpl(
     private val searchApi: SearchApi
@@ -41,7 +41,7 @@ class SearchRepositoryImpl(
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
-                searchApi.getRecommendedMovies(movieId).body()
+                searchApi.getRecommendedMovies(movieId = movieId, page = 1).body()
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null

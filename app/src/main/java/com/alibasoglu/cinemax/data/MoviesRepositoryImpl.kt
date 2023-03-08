@@ -9,6 +9,7 @@ import com.alibasoglu.cinemax.data.local.model.mapToMovieDetail
 import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource
+import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
@@ -16,10 +17,10 @@ import com.alibasoglu.cinemax.moviedetail.domain.model.mapToMovieEntity
 import com.alibasoglu.cinemax.search.data.SearchApi
 import com.alibasoglu.cinemax.setConfigDataFromResponse
 import com.alibasoglu.cinemax.utils.Resource
-import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import java.io.IOException
 
 class MoviesRepositoryImpl(
     private val moviesApi: MoviesApi,
@@ -29,13 +30,13 @@ class MoviesRepositoryImpl(
 
     private val movieDao = movieDatabase.dao
 
-    override fun getMoviesPager(searchQuery: String?): Pager<Int, Movie> = Pager(
+    override fun getMoviesPager(pagingDataType: PagingDataType<Any>): Pager<Int, Movie> = Pager(
         config = PagingConfig(
             pageSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
             initialLoadSize = MoviesPagingSource.MOVIES_PAGE_SIZE,
             enablePlaceholders = false
         ),
-        pagingSourceFactory = { MoviesPagingSource(moviesApi = moviesApi, searchApi, searchQuery = searchQuery) }
+        pagingSourceFactory = { MoviesPagingSource(moviesApi = moviesApi, searchApi, pagingDataType = pagingDataType) }
     )
 
     override suspend fun getSetConfigurationData() {

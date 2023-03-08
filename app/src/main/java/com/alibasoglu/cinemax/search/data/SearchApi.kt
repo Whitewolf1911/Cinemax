@@ -24,7 +24,7 @@ interface SearchApi {
 
     @GET("movie/{movie_id}/recommendations")
     suspend fun getRecommendedMovies(
-        @Path("movie_id") movieId: Int
+        @Path("movie_id") movieId: Int, @Query("page") page: Int
     ): Response<RecommendedMoviesResponse>
 
     @GET("movie/now_playing")
