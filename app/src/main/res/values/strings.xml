@@ -15,7 +15,7 @@
     <string name="full_name">Full Name</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
-    <string name="agree_to_terms">I agree to the Terms and Services\nand Privacy Policy</string>
+    <string name="agree_to_terms">I agree to the <font color='#12CDD9'>Terms and Services</font> \nand <font color='#12CDD9'>Privacy Policy</font></string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="hello_with_comma">Hello, %1$s</string>
     <string name="lets_stream_favorite">Let\'s stream your favorite movie</string>
@@ -84,5 +84,6 @@
     <string name="top_rated">Top Rated</string>
     <string name="suggested_languages">Suggested Languages</string>
     <string name="logged_out">Logged out</string>
+    <string name="account_created">Account created</string>
 
 </resources>

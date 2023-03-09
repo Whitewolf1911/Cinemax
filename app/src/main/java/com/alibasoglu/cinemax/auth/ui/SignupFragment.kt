@@ -45,13 +45,16 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
                     termsAccepted = termsPrivacyCheckBox.isChecked
                 )
             }
+            termsPrivacyTextView.setOnClickListener {
+                navToPrivacyPolicyFragment()
+            }
         }
     }
 
     private fun createNewUser(email: String, password: String, termsAccepted: Boolean) {
         if (email.isNotBlank() && password.isNotBlank() && termsAccepted) {
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
-                Toast.makeText(requireContext(), "Account created", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.account_created), Toast.LENGTH_SHORT).show()
                 setStartDestinationToHome()
                 navToHomeFragment()
             }.addOnFailureListener { exception ->
@@ -62,6 +65,10 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
     private fun navToHomeFragment() {
         nav(SignupFragmentDirections.actionSignupFragmentToHomeFragment())
+    }
+
+    private fun navToPrivacyPolicyFragment() {
+        nav(SignupFragmentDirections.actionSignupFragmentToPrivacyPolicyFragment())
     }
 
 }
