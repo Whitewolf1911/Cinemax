@@ -17,7 +17,7 @@
     <string name="email_address">E-posta Adresi</string>
     <string name="password">Şifre</string>
     <string name="agree_to_terms"><font color='#12CDD9'>Şartlar ve Hizmetler</font> ile<font color='#12CDD9'> Gizlilik Politikasını</font> kabul ediyorum</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="forgot_password">Şifremi unuttum</string>
     <string name="hello_with_comma">Merhaba, %1$s</string>
     <string name="lets_stream_favorite">En sevdiğiniz filmi yayınlayalım</string>
     <string name="search_a_title">Film ara..</string>
