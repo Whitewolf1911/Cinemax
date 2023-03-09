@@ -82,5 +82,7 @@
     <string name="login_success">Giriş Başarılı</string>
     <string name="facebook_login_failed">Facebook Girişi Başarısız</string>
     <string name="on_date">%1$s</string>
+    <string name="hi_comma">Merhaba,</string>
+    <string name="welcome_back">Tekrar hoşgeldiniz!  \\nLütfen bilgilerinizi giriniz.</string>
 
 </resources>
