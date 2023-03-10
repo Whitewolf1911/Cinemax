@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.search.data
 
+import com.alibasoglu.cinemax.search.data.model.MultiSearchResponse
 import com.alibasoglu.cinemax.search.data.model.NowPlayingMoviesResponse
 import com.alibasoglu.cinemax.search.data.model.PersonSearchResult
 import com.alibasoglu.cinemax.search.data.model.RecommendedMoviesResponse
@@ -16,6 +17,7 @@ interface SearchApi {
         @Query("query") searchQuery: String
     ): Response<PersonSearchResult>
 
+    //TODO Remove unused endpoint
     @GET("search/movie")
     suspend fun searchMovie(
         @Query("query") searchQuery: String,
@@ -35,4 +37,10 @@ interface SearchApi {
         @Query("language") language: String
     ): Response<NowPlayingMoviesResponse>
 
+    @GET("search/multi")
+    suspend fun searchMulti(
+        @Query("query") searchQuery: String,
+        @Query("page") page: Int,
+        @Query("language") language: String
+    ): Response<MultiSearchResponse>
 }

@@ -7,6 +7,7 @@ import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.search.data.SearchApi
+import com.alibasoglu.cinemax.search.data.model.mapToMovie
 import com.alibasoglu.cinemax.utils.ENGLISH
 import retrofit2.HttpException
 import java.io.IOException
@@ -18,7 +19,6 @@ class MoviesPagingSource(
     private val sharedPreferences: SharedPreferences
 ) : PagingSource<Int, Movie>() {
 
-    private val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
 
     override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -29,20 +29,24 @@ class MoviesPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         val page = params.key ?: FIRST_PAGE_INDEX
         return try {
             val moviesApiResponse: List<Movie>? =
                 when (pagingDataType) {
                     is PagingDataType.SearchMovies -> {
-                        searchApi.searchMovie(
+                        searchApi.searchMulti(
                             searchQuery = pagingDataType.parameter as String,
                             page = page,
                             language = currentLanguage
                         )
-                            .body()?.results?.map {
+                            .body()?.results?.filter {
+                                it.media_type == TYPE_TV || it.media_type == TYPE_MOVIE
+                            }?.map {
                                 it.mapToMovie()
                             }
                     }
+
                     is PagingDataType.PopularMovies -> {
                         moviesApi.getPopularMovies(page = page, language = currentLanguage).body()?.results?.map {
                             it.mapToMovie()
@@ -85,6 +89,8 @@ class MoviesPagingSource(
     companion object {
         const val MOVIES_PAGE_SIZE = 10
         private const val FIRST_PAGE_INDEX = 1
+        const val TYPE_TV = "tv"
+        const val TYPE_MOVIE = "movie"
     }
 }
 

@@ -16,6 +16,7 @@ data class Movie(
     val title: String,
     val video: Boolean,
     val vote_average: Double,
+    val mediaType: String? = null
 )
 
 fun Movie.mapToMovieBasicCardItem(): MovieBasicCardItem {
@@ -44,6 +45,7 @@ fun Movie.mapToMovieBigCardItem(): MovieBigCardItem {
         poster_path = poster_path,
         release_date = release_date,
         title = title,
-        vote_average = vote_average
+        vote_average = vote_average,
+        mediaType = mediaType
     )
 }
