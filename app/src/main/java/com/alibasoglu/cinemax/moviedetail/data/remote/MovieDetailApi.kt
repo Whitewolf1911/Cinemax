@@ -3,6 +3,8 @@ package com.alibasoglu.cinemax.moviedetail.data.remote
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieCreditsResponse
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieDetailsResponse
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieTrailersResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.TvShowCreditsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.TvShowDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,4 +28,16 @@ interface MovieDetailApi {
     suspend fun getMovieTrailers(
         @Path("movie_id") movieId: Int
     ): Response<MovieTrailersResponse>
+
+    @GET("tv/{show_id}")
+    suspend fun getShowDetail(
+        @Path("show_id") showId: Int,
+        @Query("language") language: String
+    ): Response<TvShowDetailResponse>
+
+    @GET("tv/{show_id}/credits")
+    suspend fun getTvShowCredits(
+        @Path("show_id") showId: Int,
+        @Query("language") language: String
+    ): Response<TvShowCreditsResponse>
 }

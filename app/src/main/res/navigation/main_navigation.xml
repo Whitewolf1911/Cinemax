@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_searchResultFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -172,4 +175,12 @@
         android:name="com.alibasoglu.cinemax.profile.ui.LanguageFragment"
         android:label="LanguageFragment"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/tvShowDetailFragment"
+        android:name="com.alibasoglu.cinemax.moviedetail.ui.TvShowDetailFragment"
+        android:label="TvShowDetailFragment" >
+        <argument
+            android:name="showId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

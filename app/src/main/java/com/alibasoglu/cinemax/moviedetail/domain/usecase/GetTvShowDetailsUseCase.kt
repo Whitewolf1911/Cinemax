@@ -2,8 +2,8 @@ package com.alibasoglu.cinemax.moviedetail.domain.usecase
 
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 
-class GetMovieDetailsUseCase(
+class GetTvShowDetailsUseCase(
     private val movieDetailRepository: MovieDetailRepository
 ) {
-    suspend operator fun invoke(movieId: Int) = movieDetailRepository.getMovieDetails(movieId)
+    suspend operator fun invoke(showId: Int) = movieDetailRepository.getTvShowDetails(showId = showId)
 }

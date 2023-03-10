@@ -127,7 +127,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
             viewModel.movieOfTheDayState.collectLatest { movieItem ->
                 val typeText = when (movieItem.mediaType) {
                     MoviesPagingSource.TYPE_TV -> getString(R.string.tv)
-                    MoviesPagingSource.TYPE_MOVIE ->getString(R.string.movie)
+                    MoviesPagingSource.TYPE_MOVIE -> getString(R.string.movie)
                     else -> getString(R.string.movie)
                 }
                 val imageUrl =

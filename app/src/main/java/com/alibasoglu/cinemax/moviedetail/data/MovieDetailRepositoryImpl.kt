@@ -5,10 +5,12 @@ import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToCastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToMovieDetail
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToTrailer
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToTvShowDetail
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.CastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.Trailer
+import com.alibasoglu.cinemax.moviedetail.domain.model.TvShowDetail
 import com.alibasoglu.cinemax.utils.ENGLISH
 import com.alibasoglu.cinemax.utils.Resource
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +23,7 @@ class MovieDetailRepositoryImpl(
 ) : MovieDetailRepository {
 
     override suspend fun getMovieDetails(movieId: Int): Flow<Resource<MovieDetail>> {
-       val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
         return flow {
             emit(Resource.Loading(isLoading = true))
             val response = try {
@@ -85,6 +87,56 @@ class MovieDetailRepositoryImpl(
             response?.results?.let { movieTrailersResults ->
                 val movieTrailers = movieTrailersResults.map { it.mapToTrailer() }
                 emit(Resource.Success(data = movieTrailers))
+                emit(Resource.Loading(isLoading = false))
+            }
+        }
+    }
+
+    override suspend fun getTvShowDetails(showId: Int): Flow<Resource<TvShowDetail>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
+        return flow {
+            emit(Resource.Loading(isLoading = true))
+            val response = try {
+                movieDetailApi.getShowDetail(showId = showId, language = currentLanguage).body()
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            }
+            response?.let { tvShowDetailResponse ->
+                val tvShowDetail = tvShowDetailResponse.mapToTvShowDetail()
+                emit(Resource.Success(data = tvShowDetail))
+                emit(Resource.Loading(isLoading = false))
+            }
+        }
+    }
+
+    override suspend fun getTvShowCastCrew(showId: Int): Flow<Resource<List<CastCrewPerson>>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
+        return flow {
+            emit(Resource.Loading(isLoading = true))
+            val response = try {
+                movieDetailApi.getTvShowCredits(showId = showId, language = currentLanguage).body()
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            }
+            response?.let { creditsResponse ->
+                val castCrewList: MutableList<CastCrewPerson> = mutableListOf()
+                val castList = creditsResponse.cast.map {
+                    it.mapToCastCrewPerson()
+                }
+                val crewList = creditsResponse.crew.map {
+                    it.mapToCastCrewPerson()
+                }
+                castCrewList.addAll(castList)
+                castCrewList.addAll(crewList)
+                emit(Resource.Success(data = castCrewList))
                 emit(Resource.Loading(isLoading = false))
             }
         }

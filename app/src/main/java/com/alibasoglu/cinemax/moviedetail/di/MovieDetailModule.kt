@@ -7,6 +7,8 @@ import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieTrailerUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetTvShowCastCrewListUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetTvShowDetailsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,4 +53,14 @@ object MovieDetailModule {
     @Singleton
     fun provideGetMovieTrailerUseCase(movieDetailsRepository: MovieDetailRepository) =
         GetMovieTrailerUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetTvShowDetailsUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetTvShowDetailsUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetTvShowCastCrewListUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetTvShowCastCrewListUseCase(movieDetailsRepository)
 }

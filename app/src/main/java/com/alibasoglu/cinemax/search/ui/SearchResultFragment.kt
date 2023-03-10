@@ -36,6 +36,9 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
         if (movieBigCardItem.mediaType!="tv"){
             nav(SearchResultFragmentDirections.actionSearchResultFragmentToMovieDetailFragment(movieBigCardItem.id))
         }
+        else{
+            nav(SearchResultFragmentDirections.actionSearchResultFragmentToTvShowDetailFragment(movieBigCardItem.id))
+        }
     }
 
     private val movieBigCardItemAdapter = MovieBigCardItemAdapter(movieBigCardAdapterListener)
