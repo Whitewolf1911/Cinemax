@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.moviedetail.data.remote.model
+package com.alibasoglu.cinemax.moviedetail.data.remote.model.tv
 
 data class TvShowCreditsResponse(
     val cast: List<CastTv>,

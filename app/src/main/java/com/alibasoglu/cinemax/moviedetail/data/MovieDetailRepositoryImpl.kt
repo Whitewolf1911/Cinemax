@@ -2,10 +2,11 @@ package com.alibasoglu.cinemax.moviedetail.data
 
 import android.content.SharedPreferences
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToCastCrewPerson
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToMovieDetail
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToTrailer
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.mapToTvShowDetail
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.mapToCastCrewPerson
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.mapToMovieDetail
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.mapToTrailer
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.mapToCastCrewPerson
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.mapToTvShowDetail
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.CastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail

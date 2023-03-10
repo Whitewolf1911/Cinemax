@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.moviedetail.data.remote.model
+package com.alibasoglu.cinemax.moviedetail.data.remote.model.tv
 
 import com.alibasoglu.cinemax.moviedetail.domain.model.CastCrewPerson
 

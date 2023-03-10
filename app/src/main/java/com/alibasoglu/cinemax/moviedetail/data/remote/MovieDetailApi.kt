@@ -1,10 +1,10 @@
 package com.alibasoglu.cinemax.moviedetail.data.remote
 
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieCreditsResponse
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieDetailsResponse
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieTrailersResponse
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.TvShowCreditsResponse
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.TvShowDetailResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.MovieCreditsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.MovieDetailsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.MovieTrailersResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.TvShowCreditsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.TvShowDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
