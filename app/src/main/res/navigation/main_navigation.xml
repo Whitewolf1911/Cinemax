@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.alibasoglu.cinemax.moviedetail.ui.MovieDetailFragment"
+        android:name="com.alibasoglu.cinemax.moviedetail.ui.movie.MovieDetailFragment"
         android:label="MovieDetailFragment"
         tools:layout="@layout/fragment_movie_detail">
         <argument
@@ -177,7 +177,7 @@
         tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/tvShowDetailFragment"
-        android:name="com.alibasoglu.cinemax.moviedetail.ui.TvShowDetailFragment"
+        android:name="com.alibasoglu.cinemax.moviedetail.ui.tvshow.TvShowDetailFragment"
         android:label="TvShowDetailFragment" >
         <argument
             android:name="showId"

@@ -244,6 +244,30 @@
             app:layout_constraintTop_toBottomOf="@id/castCrewText"
             tools:listitem="@layout/item_cast_crew" />
 
+        <TextView
+            android:id="@+id/episodeTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/episode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castCrewRecyclerView" />
+
+        <TextView
+            android:id="@+id/seasonsButton"
+            style="@style/text_h5"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_16dp"
+            android:drawablePadding="@dimen/_4dp"
+            android:gravity="center"
+            app:drawableEndCompat="@drawable/ic_arrow_season"
+            app:layout_constraintStart_toStartOf="@+id/episodeTextView"
+            app:layout_constraintTop_toBottomOf="@id/episodeTextView"
+            tools:text="Season 1" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

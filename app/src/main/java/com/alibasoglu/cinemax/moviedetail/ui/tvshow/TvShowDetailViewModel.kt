@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.moviedetail.ui
+package com.alibasoglu.cinemax.moviedetail.ui.tvshow
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope

@@ -15,3 +15,11 @@ data class LanguageListItem(
 ) : SelectionListItem() {
     override fun getVisibleName(context: Context): String = languageName
 }
+
+data class SeasonListItem(
+    val seasonId: Int,
+    val seasonTitle: String,
+    override var isSelected: Boolean
+) : SelectionListItem() {
+    override fun getVisibleName(context: Context) = seasonTitle
+}

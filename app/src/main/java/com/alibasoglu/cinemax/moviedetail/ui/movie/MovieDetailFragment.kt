@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.moviedetail.ui
+package com.alibasoglu.cinemax.moviedetail.ui.movie
 
 import android.os.Bundle
 import android.view.View
@@ -9,10 +9,12 @@ import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
-import com.alibasoglu.cinemax.databinding.FragmentTvShowDetailBinding
-import com.alibasoglu.cinemax.moviedetail.domain.model.TvShowDetail
+import com.alibasoglu.cinemax.databinding.FragmentMovieDetailBinding
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.ui.CastCrewAdapter
 import com.alibasoglu.cinemax.utils.ShareDialog
 import com.alibasoglu.cinemax.utils.lifecycle.observe
+import com.alibasoglu.cinemax.utils.showTextToast
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -20,23 +22,23 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
+class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
+
     private val toolbarConfiguration = ToolbarConfiguration(
         startIconResId = R.drawable.ic_arrow_back,
         startIconClick = ::navBack,
         endIconResId = R.drawable.ic_wishlist,
-        endIconClick = ::addShowToWishList
+        endIconClick = ::addMovieToWishlist
     )
     override val fragmentConfiguration = FragmentConfiguration()
 
-    private val binding by viewBinding(FragmentTvShowDetailBinding::bind)
+    private val binding by viewBinding(FragmentMovieDetailBinding::bind)
 
-    private val viewModel by viewModels<TvShowDetailViewModel>()
+    private val viewModel by viewModels<MovieDetailViewModel>()
 
     private val castCrewAdapter = CastCrewAdapter()
 
     private var shareDialog: ShareDialog? = null
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,8 +47,7 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getTvShowDetails()
-        viewModel.getShowCastCrew()
+        viewModel.getMovieDetails()
     }
 
     override fun onPause() {
@@ -68,21 +69,21 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
         binding.customToolbar.configure(toolbarConfiguration)
         hideBottomNavbar()
         viewLifecycleOwner.observe {
-            viewModel.showDetailState.collectLatest { showDetailState ->
-                showDetailState.tvShowDetail?.let { tvShowDetail ->
+            viewModel.movieDetailsState.collectLatest { movieDetailState ->
+                movieDetailState.movieDetail?.let { movieDetail ->
                     with(binding) {
-                        customToolbar.setTitle(tvShowDetail.name)
+                        customToolbar.setTitle(movieDetail.title)
                         shareButton.setOnClickListener {
                             showShareDialog()
                         }
                         playButton.setOnClickListener {
-                            navToShowTrailerFragment(tvShowDetail = tvShowDetail)
+                            navToMovieTrailerFragment(movieDetail = movieDetail)
                         }
 
                         castCrewRecyclerView.adapter = castCrewAdapter
 
                         val posterUrl =
-                            ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(3) + tvShowDetail.poster_path
+                            ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(3) + movieDetail.poster_path
                         Glide.with(requireContext())
                             .load(posterUrl)
                             .transition(DrawableTransitionOptions.withCrossFade())
@@ -90,14 +91,14 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
                                 into(backgroundImageView)
                                 into(posterImageView)
                             }
-                        yearTextView.text = tvShowDetail.first_air_date
-                        ratingTextView.text = tvShowDetail.vote_average.toString()
-                        genreTextView.text = tvShowDetail.genres
-                        runtimeTextView.text = getString(R.string.minutes, tvShowDetail.episode_run_time.toString())
-                        storyLineTextView.text = tvShowDetail.overview
+                        yearTextView.text = movieDetail.release_date
+                        ratingTextView.text = movieDetail.vote_average.toString()
+                        genreTextView.text = movieDetail.genre
+                        runtimeTextView.text = getString(R.string.minutes, movieDetail.runtime.toString())
+                        storyLineTextView.text = movieDetail.overview
                     }
                 }
-                if (showDetailState.isLoading) {
+                if (movieDetailState.isLoading) {
                     showProgressDialog()
                 } else {
                     hideProgressDialog()
@@ -111,16 +112,18 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
         }
     }
 
-    private fun addShowToWishList() {
-        //TODO add to wishlist
+    private fun addMovieToWishlist() {
+        viewModel.insertMovieToDatabase()
+        context?.showTextToast("Movie added to wishlist!")
     }
 
     private fun showShareDialog() {
-        shareDialog = ShareDialog(requireActivity())
+        shareDialog = activity?.let { ShareDialog(it) }
         shareDialog?.startDialog()
     }
 
-    private fun navToShowTrailerFragment(tvShowDetail: TvShowDetail) {
-        //TODO nav to trailer
+    private fun navToMovieTrailerFragment(movieDetail: MovieDetail) {
+        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieDetail))
     }
+
 }

@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.moviedetail.ui
+package com.alibasoglu.cinemax.moviedetail.ui.movie
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -13,11 +13,11 @@ import com.alibasoglu.cinemax.moviedetail.ui.model.MovieDetailState
 import com.alibasoglu.cinemax.utils.Resource
 import com.alibasoglu.cinemax.utils.getOrThrow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
