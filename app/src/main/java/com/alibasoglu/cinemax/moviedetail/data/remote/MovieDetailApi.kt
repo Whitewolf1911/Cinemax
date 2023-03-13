@@ -1,8 +1,11 @@
 package com.alibasoglu.cinemax.moviedetail.data.remote
 
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieCreditsResponse
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieDetailsResponse
-import com.alibasoglu.cinemax.moviedetail.data.remote.model.MovieTrailersResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.MovieCreditsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.MovieDetailsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.MovieTrailersResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.SeasonResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.TvShowCreditsResponse
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.TvShowDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -25,5 +28,29 @@ interface MovieDetailApi {
     @GET("movie/{movie_id}/videos")
     suspend fun getMovieTrailers(
         @Path("movie_id") movieId: Int
+    ): Response<MovieTrailersResponse>
+
+    @GET("tv/{show_id}")
+    suspend fun getShowDetail(
+        @Path("show_id") showId: Int,
+        @Query("language") language: String
+    ): Response<TvShowDetailResponse>
+
+    @GET("tv/{show_id}/credits")
+    suspend fun getTvShowCredits(
+        @Path("show_id") showId: Int,
+        @Query("language") language: String
+    ): Response<TvShowCreditsResponse>
+
+    @GET("tv/{show_id}/season/{season_number}")
+    suspend fun getSeasonDetails(
+        @Path("show_id") showId: Int,
+        @Path("season_number") seasonNumber: Int,
+        @Query("language") language: String
+    ): Response<SeasonResponse>
+
+    @GET("tv/{show_id}/videos")
+    suspend fun getTvShowTrailer(
+        @Path("show_id") showId: Int
     ): Response<MovieTrailersResponse>
 }

@@ -9,6 +9,7 @@ data class MovieBigCardItem(
     val release_date: String,
     val title: String,
     val vote_average: Double,
+    val mediaType: String?
 ) : RecyclerListItem {
     override fun areItemsTheSame(other: RecyclerListItem): Boolean {
         return other is MovieBigCardItem && other.id == id

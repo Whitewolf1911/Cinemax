@@ -11,6 +11,7 @@ import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
+import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource
 import com.alibasoglu.cinemax.databinding.FragmentSearchBinding
 import com.alibasoglu.cinemax.home.ui.HomeFragment
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
@@ -124,6 +125,11 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
         }
         viewLifecycleOwner.observe {
             viewModel.movieOfTheDayState.collectLatest { movieItem ->
+                val typeText = when (movieItem.mediaType) {
+                    MoviesPagingSource.TYPE_TV -> getString(R.string.tv)
+                    MoviesPagingSource.TYPE_MOVIE -> getString(R.string.movie)
+                    else -> getString(R.string.movie)
+                }
                 val imageUrl =
                     ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(1) + movieItem.poster_path
                 binding.todayMovieItem.apply {
@@ -131,6 +137,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     nameTextView.text = movieItem.title
                     yearTextView.text = movieItem.release_date
                     ratingTextView.text = movieItem.vote_average.toString()
+                    mediaTypeTextView.text = typeText
                     Glide
                         .with(requireContext())
                         .load(imageUrl)

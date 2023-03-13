@@ -90,15 +90,15 @@
         app:layout_constraintTop_toTopOf="@id/genreTextView" />
 
     <TextView
-        android:id="@+id/movieText"
+        android:id="@+id/mediaTypeTextView"
         style="@style/text_h6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8dp"
         android:layout_marginTop="@dimen/_12dp"
-        android:text="@string/movie"
         app:layout_constraintStart_toEndOf="@id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/yearTextView"
+        tools:text="Movie" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="@dimen/_56dp"

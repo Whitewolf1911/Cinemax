@@ -1,4 +1,4 @@
-package com.alibasoglu.cinemax.moviedetail.ui
+package com.alibasoglu.cinemax.moviedetail.ui.movie
 
 import android.os.Bundle
 import android.view.View
@@ -11,6 +11,7 @@ import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentMovieDetailBinding
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.ui.CastCrewAdapter
 import com.alibasoglu.cinemax.utils.ShareDialog
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.showTextToast
@@ -122,7 +123,12 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     }
 
     private fun navToMovieTrailerFragment(movieDetail: MovieDetail) {
-        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieDetail))
+        nav(
+            MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(
+                movieDetail = movieDetail,
+                isMovie = true
+            )
+        )
     }
 
 }

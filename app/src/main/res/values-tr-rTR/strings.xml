@@ -78,6 +78,9 @@
     <string name="suggested_languages">Tavsiye Edilen Diller</string>
     <string name="logged_out">Çıkış Yapıldı</string>
     <string name="account_created">Hesap oluşturuldu</string>
+    <string name="tv">Dizi</string>
+    <string name="episode">Bölümler</string>
+    <string name="season">Sezon %1$d</string>
 
     <string name="login_success">Giriş Başarılı</string>
     <string name="facebook_login_failed">Facebook Girişi Başarısız</string>

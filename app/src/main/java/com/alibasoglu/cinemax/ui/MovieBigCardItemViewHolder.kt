@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.R
+import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource.Companion.TYPE_MOVIE
+import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource.Companion.TYPE_TV
 import com.alibasoglu.cinemax.databinding.ItemMovieBigCardBinding
 import com.alibasoglu.cinemax.ui.model.MovieBigCardItem
 import com.bumptech.glide.Glide
@@ -19,9 +21,17 @@ class MovieBigCardItemViewHolder(
             with(movieBigCardItem) {
                 val posterUrl = ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(1) + poster_path
 
+                val typeText = when (mediaType) {
+                    TYPE_TV -> root.context.getString(R.string.tv)
+                    TYPE_MOVIE -> root.context.getString(R.string.movie)
+                    else -> root.context.getString(R.string.movie)
+                }
+
+
                 nameTextView.text = title
                 genreTextView.text = genre
                 ratingTextView.text = vote_average.toString()
+                mediaTypeTextView.text = typeText
                 yearTextView.text = release_date
                 Glide.with(binding.root.context)
                     .load(posterUrl)

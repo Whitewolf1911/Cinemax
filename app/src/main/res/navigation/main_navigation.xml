@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.alibasoglu.cinemax.moviedetail.ui.MovieDetailFragment"
+        android:name="com.alibasoglu.cinemax.moviedetail.ui.movie.MovieDetailFragment"
         android:label="MovieDetailFragment"
         tools:layout="@layout/fragment_movie_detail">
         <argument
@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_searchResultFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -112,6 +115,9 @@
         <argument
             android:name="movieDetail"
             app:argType="com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail" />
+        <argument
+            android:name="isMovie"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -172,4 +178,15 @@
         android:name="com.alibasoglu.cinemax.profile.ui.LanguageFragment"
         android:label="LanguageFragment"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/tvShowDetailFragment"
+        android:name="com.alibasoglu.cinemax.moviedetail.ui.tvshow.TvShowDetailFragment"
+        android:label="TvShowDetailFragment" >
+        <argument
+            android:name="showId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_tvShowDetailFragment_to_movieTrailerFragment"
+            app:destination="@id/movieTrailerFragment" />
+    </fragment>
 </navigation>

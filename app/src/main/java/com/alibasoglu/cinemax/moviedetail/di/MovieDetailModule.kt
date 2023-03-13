@@ -4,9 +4,13 @@ import android.content.SharedPreferences
 import com.alibasoglu.cinemax.moviedetail.data.MovieDetailRepositoryImpl
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetEpisodesUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieTrailerUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetShowTrailerUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetTvShowCastCrewListUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetTvShowDetailsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,4 +55,24 @@ object MovieDetailModule {
     @Singleton
     fun provideGetMovieTrailerUseCase(movieDetailsRepository: MovieDetailRepository) =
         GetMovieTrailerUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetTvShowDetailsUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetTvShowDetailsUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetTvShowCastCrewListUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetTvShowCastCrewListUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetEpisodesUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetEpisodesUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetShowTrailerUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetShowTrailerUseCase(movieDetailsRepository)
 }

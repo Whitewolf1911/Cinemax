@@ -34,7 +34,8 @@ class SearchFragmentViewModel @Inject constructor(
             poster_path = "",
             release_date = "",
             title = "",
-            vote_average = 0.0
+            vote_average = 0.0,
+            mediaType = ""
         )
     )
     val movieOfTheDayState: StateFlow<MovieBigCardItem>

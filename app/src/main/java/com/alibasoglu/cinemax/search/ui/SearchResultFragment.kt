@@ -33,7 +33,12 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
     private var searchJob: Job? = null
 
     private val movieBigCardAdapterListener = MovieBigCardItemAdapter.MoviesBigCardAdapterListener { movieBigCardItem ->
-        nav(SearchResultFragmentDirections.actionSearchResultFragmentToMovieDetailFragment(movieBigCardItem.id))
+        if (movieBigCardItem.mediaType!="tv"){
+            nav(SearchResultFragmentDirections.actionSearchResultFragmentToMovieDetailFragment(movieBigCardItem.id))
+        }
+        else{
+            nav(SearchResultFragmentDirections.actionSearchResultFragmentToTvShowDetailFragment(movieBigCardItem.id))
+        }
     }
 
     private val movieBigCardItemAdapter = MovieBigCardItemAdapter(movieBigCardAdapterListener)
@@ -105,10 +110,10 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
                     }
                 }
             }
-            viewLifecycleOwner.observe {
-                viewModel.moviesSearchState.collectLatest {
-                    movieBigCardItemAdapter.submitData(it)
-                }
+        }
+        viewLifecycleOwner.observe {
+            viewModel.moviesSearchState.collectLatest {
+                movieBigCardItemAdapter.submitData(it)
             }
         }
     }

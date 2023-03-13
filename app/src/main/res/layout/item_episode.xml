@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_212dp"
+    android:layout_marginVertical="@dimen/_8dp"
+    android:backgroundTint="@color/primary_soft"
+    app:cardCornerRadius="@dimen/_16dp"
+    app:strokeColor="@color/primary_soft">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/episodeImageView"
+            android:layout_width="@dimen/_120dp"
+            android:layout_height="@dimen/_84dp"
+            android:layout_marginStart="@dimen/_12dp"
+            android:layout_marginTop="@dimen/_12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageView_8dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/downloadButton"
+            style="@style/CinemaxRoundIconButtonStyle"
+            android:layout_width="@dimen/_48dp"
+            android:layout_height="@dimen/_48dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:layout_marginEnd="@dimen/_12dp"
+            android:backgroundTint="@color/primary_dark"
+            app:icon="@drawable/ic_download_24"
+            app:iconTint="@color/secondary_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/premiumCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:backgroundTint="@color/secondary_orange"
+            app:layout_constraintStart_toEndOf="@+id/episodeImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/secondary_orange">
+
+            <TextView
+                style="@style/text_h7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_8dp"
+                android:paddingVertical="@dimen/_4dp"
+                android:text="@string/premium"
+                tools:layout_editor_absoluteX="129dp"
+                tools:layout_editor_absoluteY="7dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/runtimeTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4dp"
+            android:textColor="@color/text_grey"
+            app:layout_constraintStart_toStartOf="@id/premiumCard"
+            app:layout_constraintTop_toBottomOf="@id/premiumCard"
+            tools:text="1h30m" />
+
+        <TextView
+            android:id="@+id/episodeTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4dp"
+            android:ellipsize="end"
+            android:maxWidth="@dimen/_120dp"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="@id/runtimeTextView"
+            app:layout_constraintTop_toBottomOf="@id/runtimeTextView"
+            tools:text="Episode 1" />
+
+        <TextView
+            android:id="@+id/overviewTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12dp"
+            android:ellipsize="end"
+            android:maxWidth="@dimen/_300dp"
+            android:maxLines="4"
+            android:textColor="@color/text_white_grey"
+            app:layout_constraintStart_toStartOf="@id/episodeImageView"
+            app:layout_constraintTop_toBottomOf="@id/episodeImageView"
+            tools:text="Hello mate how you doing todays episode of breaking fcknbabadHello mate how you doing todays episode of breaking fcknbabadHello mate how you doing todays episode of " />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.alibasoglu.cinemax.customviews.CustomToolbar
+            android:id="@+id/customToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:alpha="0.1"
+            android:foreground="@drawable/bg_movie_poster_gradient"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/posterImageView"
+            android:layout_width="@dimen/_204dp"
+            android:layout_height="@dimen/_288dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customToolbar"
+            app:shapeAppearanceOverlay="@style/roundedImageView_16dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/yearTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24dp"
+            android:drawablePadding="@dimen/_6dp"
+            android:maxLength="4"
+            android:textColor="@color/text_grey"
+            app:drawableStartCompat="@drawable/ic_calendar"
+            app:layout_constraintEnd_toStartOf="@+id/divider1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/backgroundImageView"
+            app:layout_constraintTop_toBottomOf="@+id/posterImageView"
+            tools:text="2022" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="@dimen/_1dp"
+            android:layout_height="@dimen/_16dp"
+            android:layout_marginHorizontal="@dimen/_12dp"
+            android:background="@color/text_grey"
+            app:layout_constraintEnd_toStartOf="@+id/runtimeTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/yearTextView"
+            app:layout_constraintTop_toTopOf="@id/yearTextView" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="@dimen/_1dp"
+            android:layout_height="@dimen/_16dp"
+            android:layout_marginHorizontal="@dimen/_12dp"
+            android:background="@color/text_grey"
+            app:layout_constraintEnd_toStartOf="@+id/genreTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/runtimeTextView"
+            app:layout_constraintTop_toTopOf="@id/yearTextView" />
+
+        <TextView
+            android:id="@+id/runtimeTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_6dp"
+            android:textColor="@color/text_grey"
+            app:drawableStartCompat="@drawable/ic_clock"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/divider1"
+            app:layout_constraintTop_toTopOf="@id/yearTextView"
+            tools:text="132 Minutes" />
+
+        <TextView
+            android:id="@+id/genreTextView"
+            style="@style/text_h6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_6dp"
+            android:textColor="@color/text_grey"
+            app:drawableStartCompat="@drawable/ic_genre"
+            app:layout_constraintEnd_toStartOf="@+id/backgroundImageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toTopOf="@id/yearTextView"
+            tools:text="Action" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="@dimen/_56dp"
+            android:layout_height="@dimen/_24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="vertical"
+            app:cardBackgroundColor="@color/primary_soft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/runtimeTextView"
+            app:strokeColor="@color/primary_soft">
+
+            <TextView
+                android:id="@+id/ratingTextView"
+                style="@style/text_h6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_8dp"
+                android:drawablePadding="@dimen/_4dp"
+                android:maxLength="3"
+                android:textColor="@color/secondary_orange"
+                app:drawableStartCompat="@drawable/ic_star"
+                tools:text="4.5" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/playButton"
+            style="@style/cinemax_button_extra_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_28dp"
+            android:backgroundTint="@color/primary_blue_accent"
+            android:maxLines="1"
+            android:text="@string/trailer"
+            app:icon="@drawable/ic_play"
+            app:iconSize="@dimen/_16dp"
+            app:layout_constraintEnd_toStartOf="@+id/downloadButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/backgroundImageView"
+            app:layout_constraintTop_toBottomOf="@id/materialCardView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/downloadButton"
+            style="@style/CinemaxRoundIconButtonStyle"
+            android:layout_width="@dimen/_48dp"
+            android:layout_height="@dimen/_48dp"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:backgroundTint="@color/primary_soft"
+            app:icon="@drawable/ic_download_24"
+            app:iconTint="@color/primary_blue_accent"
+            app:layout_constraintEnd_toStartOf="@+id/shareButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/playButton"
+            app:layout_constraintTop_toTopOf="@id/playButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shareButton"
+            style="@style/CinemaxRoundIconButtonStyle"
+            android:layout_width="@dimen/_48dp"
+            android:layout_height="@dimen/_48dp"
+            android:backgroundTint="@color/primary_soft"
+            app:icon="@drawable/ic_share"
+            app:iconTint="@color/primary_blue_accent"
+            app:layout_constraintEnd_toStartOf="@+id/backgroundImageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/downloadButton"
+            app:layout_constraintTop_toTopOf="@id/playButton" />
+
+        <TextView
+            android:id="@+id/storyLineText"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/story_line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playButton" />
+
+        <TextView
+            android:id="@+id/storyLineTextView"
+            style="@style/text_h5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_8dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:textColor="@color/text_white_grey"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/storyLineText"
+            app:layout_constraintTop_toBottomOf="@id/storyLineText"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/showMoreButton"
+            style="@style/text_h5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:text="@string/more"
+            android:textColor="@color/primary_blue_accent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storyLineTextView" />
+
+        <TextView
+            android:id="@+id/castCrewText"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_28dp"
+            android:text="@string/cast_and_crew"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storyLineTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/castCrewRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16dp"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castCrewText"
+            tools:listitem="@layout/item_cast_crew" />
+
+        <TextView
+            android:id="@+id/episodeTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/episode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castCrewRecyclerView" />
+
+        <TextView
+            android:id="@+id/seasonsButton"
+            style="@style/text_h5"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_16dp"
+            android:drawablePadding="@dimen/_4dp"
+            android:gravity="center"
+            app:drawableEndCompat="@drawable/ic_arrow_season"
+            app:layout_constraintStart_toStartOf="@+id/episodeTextView"
+            app:layout_constraintTop_toBottomOf="@id/episodeTextView"
+            tools:text="Season 1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/episodesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seasonsButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
