@@ -8,12 +8,11 @@ data class Episode(
     val id: Int,
     val name: String,
     val overview: String,
-    val runtime: Int,
+    val runtime: Int?,
     val season_number: Int,
     val show_id: Int,
-    val still_path: String,
+    val still_path: String?,
 )
-
 
 fun Episode.mapToEpisodeItem(): EpisodeItem {
     return EpisodeItem(
@@ -21,9 +20,9 @@ fun Episode.mapToEpisodeItem(): EpisodeItem {
         id = id,
         name = name,
         overview = overview,
-        runtime = runtime,
+        runtime = runtime?:0,
         seasonNumber = season_number,
         showId = show_id,
-        stillPath = still_path
+        stillPath = still_path ?: ""
     )
 }
