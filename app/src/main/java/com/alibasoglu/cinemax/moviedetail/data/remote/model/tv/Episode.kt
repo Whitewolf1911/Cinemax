@@ -20,7 +20,7 @@ fun Episode.mapToEpisodeItem(): EpisodeItem {
         id = id,
         name = name,
         overview = overview,
-        runtime = runtime?:0,
+        runtime = runtime ?: 0,
         seasonNumber = season_number,
         showId = show_id,
         stillPath = still_path ?: ""
