@@ -1,5 +1,6 @@
 package com.alibasoglu.cinemax.moviedetail.domain
 
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.Episode
 import com.alibasoglu.cinemax.moviedetail.domain.model.CastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.Trailer
@@ -18,4 +19,6 @@ interface MovieDetailRepository {
     suspend fun getTvShowDetails(showId: Int): Flow<Resource<TvShowDetail>>
 
     suspend fun getTvShowCastCrew(showId: Int): Flow<Resource<List<CastCrewPerson>>>
+
+    suspend fun getTvShowSeasonEpisodes(showId: Int, seasonNumber: Int): Flow<Resource<List<Episode>>>
 }

@@ -37,35 +37,25 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
 
     private val castCrewAdapter = CastCrewAdapter()
 
+    private val episodesAdapter = EpisodesAdapter()
+
     private var shareDialog: ShareDialog? = null
 
     private var seasonsDialog: SeasonDialog? = null
 
-    var list = mutableListOf(
-        SeasonListItem(seasonId = 1, seasonTitle = "Season 1", isSelected = true),
-        SeasonListItem(seasonId = 2, seasonTitle = "Season 2", isSelected = false),
-        SeasonListItem(seasonId = 3, seasonTitle = "Season 3", isSelected = false),
-        SeasonListItem(seasonId = 4, seasonTitle = "Season 4", isSelected = false),
-        SeasonListItem(seasonId = 5, seasonTitle = "Season 5", isSelected = false),
-        SeasonListItem(seasonId = 6, seasonTitle = "Season 6", isSelected = false),
-        SeasonListItem(seasonId = 7, seasonTitle = "Season 7", isSelected = false),
-        SeasonListItem(seasonId = 8, seasonTitle = "Season 8", isSelected = false),
-        SeasonListItem(seasonId = 9, seasonTitle = "Season 9", isSelected = false),
-        SeasonListItem(seasonId = 10, seasonTitle = "Season 10", isSelected = false),
-        SeasonListItem(seasonId = 11, seasonTitle = "Season 11", isSelected = false),
-        SeasonListItem(seasonId = 12, seasonTitle = "Season 12", isSelected = false),
-    )
+    private var seasonsList: MutableList<SeasonListItem> = mutableListOf()
 
     private val seasonDialogListener = SeasonDialog.OnDifferentSeasonSelect {
-        list.forEach { item ->
+        seasonsList.forEach { item ->
             item.isSelected = false
         }
-        list.find { s ->
+        seasonsList.find { s ->
             s.seasonId == it.seasonId
         }.also { selectedItem ->
             selectedItem?.isSelected = true
         }
         binding.seasonsButton.text = it.seasonTitle
+        viewModel.getSeasonEpisodes(it.seasonId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +67,7 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
         super.onResume()
         viewModel.getTvShowDetails()
         viewModel.getShowCastCrew()
+        viewModel.getSeasonEpisodes(1)
     }
 
     override fun onPause() {
@@ -87,7 +78,6 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
     }
 
     private fun initUIWithObservers() {
-        binding.seasonsButton.text = list.firstOrNull()?.seasonTitle
         activity?.window?.apply {
             addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
@@ -102,16 +92,26 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
             shareButton.setOnClickListener {
                 showShareDialog()
             }
-            seasonsButton.setOnClickListener {
-                initSeasonsDialog()
-            }
             castCrewRecyclerView.adapter = castCrewAdapter
+            episodesRecyclerView.adapter = episodesAdapter
         }
 
         viewLifecycleOwner.observe {
             viewModel.showDetailState.collectLatest { showDetailState ->
                 showDetailState.tvShowDetail?.let { tvShowDetail ->
+                    for (i in 1..tvShowDetail.number_of_seasons) {
+                        val isSelected = i == 1
+                        val seasonListItem =
+                            SeasonListItem(
+                                seasonId = i,
+                                seasonTitle = getString(R.string.season, i),
+                                isSelected = isSelected
+                            )
+                        seasonsList.add(seasonListItem)
+                    }
+                    initSeasonsDialog()
                     with(binding) {
+                        seasonsButton.text = seasonsList.firstOrNull()?.seasonTitle
                         customToolbar.setTitle(tvShowDetail.name)
                         val posterUrl =
                             ImagesConfigData.secure_base_url + ImagesConfigData.poster_sizes?.get(3) + tvShowDetail.poster_path
@@ -130,6 +130,10 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
                         genreTextView.text = tvShowDetail.genres
                         runtimeTextView.text = getString(R.string.minutes, tvShowDetail.episode_run_time.toString())
                         storyLineTextView.text = tvShowDetail.overview
+
+                        seasonsButton.setOnClickListener {
+                            seasonsDialog?.startDialog()
+                        }
                     }
                 }
                 if (showDetailState.isLoading) {
@@ -144,6 +148,11 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
                 castCrewAdapter.submitList(it)
             }
         }
+        viewLifecycleOwner.observe {
+            viewModel.episodesState.collectLatest {
+                episodesAdapter.submitList(it)
+            }
+        }
     }
 
     private fun addShowToWishList() {
@@ -156,8 +165,12 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
     }
 
     private fun initSeasonsDialog() {
-        seasonsDialog = SeasonDialog(activity = requireActivity(), listener = seasonDialogListener, seasonList = list)
-        seasonsDialog?.startDialog()
+        seasonsDialog =
+            SeasonDialog(
+                activity = requireActivity(),
+                listener = seasonDialogListener,
+                seasonList = seasonsList.toList()
+            )
     }
 
     private fun navToShowTrailerFragment(tvShowDetail: TvShowDetail) {

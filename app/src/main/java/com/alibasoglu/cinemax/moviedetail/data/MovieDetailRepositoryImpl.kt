@@ -5,6 +5,7 @@ import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.mapToCastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.mapToMovieDetail
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.movie.mapToTrailer
+import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.Episode
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.mapToCastCrewPerson
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.mapToTvShowDetail
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
@@ -16,6 +17,7 @@ import com.alibasoglu.cinemax.utils.ENGLISH
 import com.alibasoglu.cinemax.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import java.io.IOException
 
 class MovieDetailRepositoryImpl(
@@ -32,7 +34,7 @@ class MovieDetailRepositoryImpl(
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
-            } catch (e: IOException) {
+            } catch (e: HttpException) {
                 emit(Resource.Error(message = e.toString()))
                 null
             }
@@ -53,7 +55,7 @@ class MovieDetailRepositoryImpl(
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
-            } catch (e: IOException) {
+            } catch (e: HttpException) {
                 emit(Resource.Error(message = e.toString()))
                 null
             }
@@ -81,7 +83,7 @@ class MovieDetailRepositoryImpl(
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
-            } catch (e: IOException) {
+            } catch (e: HttpException) {
                 emit(Resource.Error(message = e.toString()))
                 null
             }
@@ -102,7 +104,7 @@ class MovieDetailRepositoryImpl(
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
-            } catch (e: IOException) {
+            } catch (e: HttpException) {
                 emit(Resource.Error(message = e.toString()))
                 null
             }
@@ -123,7 +125,7 @@ class MovieDetailRepositoryImpl(
             } catch (e: IOException) {
                 emit(Resource.Error(message = e.toString()))
                 null
-            } catch (e: IOException) {
+            } catch (e: HttpException) {
                 emit(Resource.Error(message = e.toString()))
                 null
             }
@@ -138,6 +140,30 @@ class MovieDetailRepositoryImpl(
                 castCrewList.addAll(castList)
                 castCrewList.addAll(crewList)
                 emit(Resource.Success(data = castCrewList))
+                emit(Resource.Loading(isLoading = false))
+            }
+        }
+    }
+
+    override suspend fun getTvShowSeasonEpisodes(showId: Int, seasonNumber: Int): Flow<Resource<List<Episode>>> {
+        val currentLanguage = sharedPreferences.getString("locale", ENGLISH) ?: ENGLISH
+        return flow {
+            emit(Resource.Loading(isLoading = true))
+            val response = try {
+                movieDetailApi.getSeasonDetails(
+                    showId = showId,
+                    seasonNumber = seasonNumber,
+                    language = currentLanguage
+                ).body()?.episodes
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            } catch (e: HttpException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            }
+            response?.let { episodes ->
+                emit(Resource.Success(data = episodes))
                 emit(Resource.Loading(isLoading = false))
             }
         }

@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.alibasoglu.cinemax.moviedetail.data.MovieDetailRepositoryImpl
 import com.alibasoglu.cinemax.moviedetail.data.remote.MovieDetailApi
 import com.alibasoglu.cinemax.moviedetail.domain.MovieDetailRepository
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetEpisodesUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieTrailerUseCase
@@ -63,4 +64,9 @@ object MovieDetailModule {
     @Singleton
     fun provideGetTvShowCastCrewListUseCase(movieDetailsRepository: MovieDetailRepository) =
         GetTvShowCastCrewListUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetEpisodesUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetEpisodesUseCase(movieDetailsRepository)
 }
