@@ -8,6 +8,7 @@ import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetEpisodesUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieDetailsUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieTrailerUseCase
+import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetShowTrailerUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetTvShowCastCrewListUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetTvShowDetailsUseCase
 import dagger.Module
@@ -69,4 +70,9 @@ object MovieDetailModule {
     @Singleton
     fun provideGetEpisodesUseCase(movieDetailsRepository: MovieDetailRepository) =
         GetEpisodesUseCase(movieDetailsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetShowTrailerUseCase(movieDetailsRepository: MovieDetailRepository) =
+        GetShowTrailerUseCase(movieDetailsRepository)
 }

@@ -48,4 +48,9 @@ interface MovieDetailApi {
         @Path("season_number") seasonNumber: Int,
         @Query("language") language: String
     ): Response<SeasonResponse>
+
+    @GET("tv/{show_id}/videos")
+    suspend fun getTvShowTrailer(
+        @Path("show_id") showId: Int
+    ): Response<MovieTrailersResponse>
 }

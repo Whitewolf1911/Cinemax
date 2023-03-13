@@ -123,7 +123,12 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     }
 
     private fun navToMovieTrailerFragment(movieDetail: MovieDetail) {
-        nav(MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(movieDetail))
+        nav(
+            MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieTrailerFragment(
+                movieDetail = movieDetail,
+                isMovie = true
+            )
+        )
     }
 
 }

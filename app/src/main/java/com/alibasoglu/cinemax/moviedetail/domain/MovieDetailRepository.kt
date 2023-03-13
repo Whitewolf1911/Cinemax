@@ -21,4 +21,7 @@ interface MovieDetailRepository {
     suspend fun getTvShowCastCrew(showId: Int): Flow<Resource<List<CastCrewPerson>>>
 
     suspend fun getTvShowSeasonEpisodes(showId: Int, seasonNumber: Int): Flow<Resource<List<Episode>>>
+
+    suspend fun getShowTrailers(showId: Int): Flow<Resource<List<Trailer>>>
+
 }

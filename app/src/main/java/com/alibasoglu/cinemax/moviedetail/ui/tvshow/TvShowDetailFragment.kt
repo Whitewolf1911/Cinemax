@@ -10,6 +10,7 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentTvShowDetailBinding
+import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.TvShowDetail
 import com.alibasoglu.cinemax.moviedetail.ui.CastCrewAdapter
 import com.alibasoglu.cinemax.profile.settings.SeasonListItem
@@ -174,6 +175,24 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
     }
 
     private fun navToShowTrailerFragment(tvShowDetail: TvShowDetail) {
-        //TODO nav to trailer
+        val movieDetail = MovieDetail(
+            backdrop_path = tvShowDetail.backdrop_path,
+            genre = tvShowDetail.genres,
+            id = tvShowDetail.id,
+            original_title = "",
+            overview = tvShowDetail.overview,
+            poster_path = null,
+            release_date = tvShowDetail.first_air_date,
+            runtime = 0,
+            title = tvShowDetail.name,
+            video = false,
+            vote_average = 0.0
+        )
+        nav(
+            TvShowDetailFragmentDirections.actionTvShowDetailFragmentToMovieTrailerFragment(
+                movieDetail = movieDetail,
+                isMovie = false
+            )
+        )
     }
 }

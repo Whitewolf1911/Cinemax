@@ -168,4 +168,24 @@ class MovieDetailRepositoryImpl(
             }
         }
     }
+
+    override suspend fun getShowTrailers(showId: Int): Flow<Resource<List<Trailer>>> {
+        return flow {
+            emit(Resource.Loading(isLoading = true))
+            val response = try {
+                movieDetailApi.getTvShowTrailer(showId).body()
+            } catch (e: IOException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            } catch (e: HttpException) {
+                emit(Resource.Error(message = e.toString()))
+                null
+            }
+            response?.results?.let { movieTrailersResults ->
+                val movieTrailers = movieTrailersResults.map { it.mapToTrailer() }
+                emit(Resource.Success(data = movieTrailers))
+                emit(Resource.Loading(isLoading = false))
+            }
+        }
+    }
 }
