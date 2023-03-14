@@ -3,11 +3,13 @@ package com.alibasoglu.cinemax.customviews
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.CustomToolbarBinding
+import com.alibasoglu.cinemax.utils.setImageDrawableWithAnimation
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 
 class CustomToolbar @JvmOverloads constructor(
@@ -66,6 +68,13 @@ class CustomToolbar @JvmOverloads constructor(
             setImageResource(resId)
             setOnClickListener { clickAction?.invoke() }
             isVisible = true
+        }
+    }
+
+    fun changeEndButtonDrawable(resId: Int) {
+        binding.endImageButton.apply {
+            val drawable = AppCompatResources.getDrawable(context, resId)
+            setImageDrawableWithAnimation(drawable)
         }
     }
 

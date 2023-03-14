@@ -160,6 +160,11 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
         viewLifecycleOwner.observe {
             viewModel.wishListedState.collectLatest {
                 isWishListed = it
+                if (isWishListed) {
+                    binding.customToolbar.changeEndButtonDrawable(R.drawable.ic_wishlist)
+                } else {
+                    binding.customToolbar.changeEndButtonDrawable(R.drawable.ic_wishlist_empty)
+                }
             }
         }
     }
