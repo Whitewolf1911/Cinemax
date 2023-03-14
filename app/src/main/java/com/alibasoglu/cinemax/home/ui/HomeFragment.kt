@@ -50,6 +50,25 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private var searchJob: Job? = null
 
+    //This variable is used for saving state of selected tab and restore it in onResume()
+    private var selectedTabPosition = 0
+
+    private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+            val allGenres = GenresData.genres.find {
+                it.id == 0
+            }?.name.orEmpty()
+            val selectedTabGenreName = GenresData.genres.find {
+                it.name == tab?.text
+            }?.name
+            viewModel.filterPopularMovies(selectedTabGenreName ?: allGenres)
+            viewModel.filterTopRatedMovies(selectedTabGenreName ?: allGenres)
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab?) {}
+        override fun onTabReselected(tab: TabLayout.Tab?) {}
+    }
+
     private lateinit var auth: FirebaseAuth
 
     private var currentUser: FirebaseUser? = null
@@ -69,6 +88,15 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         binding.searchEditText.text?.clear()
+        //To not lose the state of fragment we need to select tab first, then set the listener.
+        binding.categoriesTabLayout.selectTab(binding.categoriesTabLayout.getTabAt(selectedTabPosition))
+        binding.categoriesTabLayout.addOnTabSelectedListener(onTabSelectedListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        selectedTabPosition = binding.categoriesTabLayout.selectedTabPosition
+        binding.categoriesTabLayout.removeOnTabSelectedListener(onTabSelectedListener)
     }
 
     private fun initUI() {
@@ -81,23 +109,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             }
             popularMoviesRecyclerView.adapter = popularMoviesAdapter
             topRatedMoviesRecyclerView.adapter = topRatedMoviesAdapter
-
-            val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val allGenres = GenresData.genres.find {
-                        it.id == 0
-                    }?.name.orEmpty()
-                    val selectedTabGenreName = GenresData.genres.find {
-                        it.name == tab?.text
-                    }?.name
-                    viewModel.filterPopularMovies(selectedTabGenreName ?: allGenres)
-                    viewModel.filterTopRatedMovies(selectedTabGenreName ?: allGenres)
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-            categoriesTabLayout.addOnTabSelectedListener(onTabSelectedListener)
 
             seeAllTextView.setOnClickListener {
                 navToPopularMoviesFragment()

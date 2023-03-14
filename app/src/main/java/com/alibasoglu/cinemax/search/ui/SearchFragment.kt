@@ -19,7 +19,6 @@ import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -60,7 +59,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                 categoriesTabLayout.addTab(categoriesTabLayout.newTab().setText(genre.name))
             }
 
-            val onTabSelectedListener = object : OnTabSelectedListener {
+            val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     val allGenres = GenresData.genres.find {
                         it.id == 0
@@ -97,7 +96,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     return@setOnEditorActionListener true
                 }
             }
-
             seeAllTextView.setOnClickListener {
                 navToRecommendedMoviesFragment()
             }
