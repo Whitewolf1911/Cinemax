@@ -3,7 +3,9 @@ package com.alibasoglu.cinemax.moviedetail.ui.movie
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.domain.usecase.CheckMovieWishListedUseCase
 import com.alibasoglu.cinemax.domain.usecase.InsertMovieToDatabaseUseCase
+import com.alibasoglu.cinemax.domain.usecase.RemoveMovieFromDatabaseUseCase
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToCastCrewItem
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetMovieCastCrewListUseCase
@@ -24,15 +26,19 @@ class MovieDetailViewModel @Inject constructor(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     private val getMovieCastCrewListUseCase: GetMovieCastCrewListUseCase,
     private val insertMovieToDatabaseUseCase: InsertMovieToDatabaseUseCase,
+    private val removeMovieFromDatabaseUseCase: RemoveMovieFromDatabaseUseCase,
+    private val checkMovieWishListedUseCase: CheckMovieWishListedUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val movieId = savedStateHandle.getOrThrow<Int>("movieId")
 
     private var _movieDetailsState =
-        MutableStateFlow<MovieDetailState>(MovieDetailState(isLoading = true, movieDetail = null))
+        MutableStateFlow(MovieDetailState(isLoading = true, movieDetail = null))
     val movieDetailsState: StateFlow<MovieDetailState>
         get() = _movieDetailsState
+
+    var wishListedState = MutableStateFlow(false)
 
     private var movieData: MovieDetail? = null
 
@@ -43,6 +49,7 @@ class MovieDetailViewModel @Inject constructor(
     init {
         getMovieDetails()
         getMovieCastCrewList()
+        checkMovieWishListed()
     }
 
 
@@ -91,7 +98,23 @@ class MovieDetailViewModel @Inject constructor(
 
     fun insertMovieToDatabase() {
         viewModelScope.launch {
-            movieData?.let { insertMovieToDatabaseUseCase(it) }
+            movieData?.let {
+                insertMovieToDatabaseUseCase(it)
+                wishListedState.value = true
+            }
+        }
+    }
+
+    fun removeMovieFromDatabase() {
+        viewModelScope.launch {
+            removeMovieFromDatabaseUseCase(movieId)
+            wishListedState.value = false
+        }
+    }
+
+    private fun checkMovieWishListed() {
+        viewModelScope.launch {
+            wishListedState.value = checkMovieWishListedUseCase(movieId)
         }
     }
 

@@ -27,4 +27,12 @@ interface MoviesRepository {
     suspend fun getWishListedShows(): Flow<List<TvShowDetail>>
 
     suspend fun insertShowToDatabase(showDetail: TvShowDetail)
+
+    suspend fun checkIsMovieWishListed(movieId: Int): Boolean
+
+    suspend fun checkIsShowWishListed(showId: Int): Boolean
+
+    suspend fun removeShowFromDatabase(showId: Int)
+
+    suspend fun removeMovieFromDatabase(movieId: Int)
 }

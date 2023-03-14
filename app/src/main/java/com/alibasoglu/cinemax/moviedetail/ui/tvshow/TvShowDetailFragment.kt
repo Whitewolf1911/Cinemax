@@ -29,13 +29,15 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
         startIconResId = R.drawable.ic_arrow_back,
         startIconClick = ::navBack,
         endIconResId = R.drawable.ic_wishlist,
-        endIconClick = ::addShowToWishList
+        endIconClick = ::addOrRemoveToWishList
     )
     override val fragmentConfiguration = FragmentConfiguration()
 
     private val binding by viewBinding(FragmentTvShowDetailBinding::bind)
 
     private val viewModel by viewModels<TvShowDetailViewModel>()
+
+    private var isWishListed = false
 
     private val castCrewAdapter = CastCrewAdapter()
 
@@ -155,11 +157,21 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
                 episodesAdapter.submitList(it)
             }
         }
+        viewLifecycleOwner.observe {
+            viewModel.wishListedState.collectLatest {
+                isWishListed = it
+            }
+        }
     }
 
-    private fun addShowToWishList() {
-        viewModel.insertShowToDatabase()
-        context?.showTextToast(getString(R.string.added_to_wishlist))
+    private fun addOrRemoveToWishList() {
+        if (isWishListed.not()) {
+            viewModel.insertShowToDatabase()
+            context?.showTextToast(getString(R.string.added_to_wishlist))
+        } else {
+            viewModel.removeShowFromDatabase()
+            context?.showTextToast(getString(R.string.removed_from_wishlist))
+        }
     }
 
     private fun showShareDialog() {

@@ -1,11 +1,15 @@
 package com.alibasoglu.cinemax.domain.di
 
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
+import com.alibasoglu.cinemax.domain.usecase.CheckMovieWishListedUseCase
+import com.alibasoglu.cinemax.domain.usecase.CheckShowWishListedUseCase
 import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
 import com.alibasoglu.cinemax.domain.usecase.GetWishListedMediaUseCase
 import com.alibasoglu.cinemax.domain.usecase.GetWishListedMoviesUseCase
 import com.alibasoglu.cinemax.domain.usecase.InsertMovieToDatabaseUseCase
 import com.alibasoglu.cinemax.domain.usecase.InsertShowToDatabaseUseCase
+import com.alibasoglu.cinemax.domain.usecase.RemoveMovieFromDatabaseUseCase
+import com.alibasoglu.cinemax.domain.usecase.RemoveShowFromDatabaseUseCase
 import com.alibasoglu.cinemax.domain.usecase.SetImagesConfigDataUseCase
 import com.alibasoglu.cinemax.home.usecase.GetCarouselMoviesUseCase
 import dagger.Module
@@ -52,4 +56,24 @@ object UseCaseModule {
     @Singleton
     fun provideInsertShowToDatabaseUseCase(moviesRepository: MoviesRepository) =
         InsertShowToDatabaseUseCase(moviesRepository)
+
+    @Provides
+    @Singleton
+    fun provideCheckMovieWishListedUseCase(moviesRepository: MoviesRepository) =
+        CheckMovieWishListedUseCase(moviesRepository)
+
+    @Provides
+    @Singleton
+    fun provideCheckShowWishListedUseCase(moviesRepository: MoviesRepository) =
+        CheckShowWishListedUseCase(moviesRepository)
+
+    @Provides
+    @Singleton
+    fun provideRemoveShowFromDatabaseUseCase(moviesRepository: MoviesRepository) =
+        RemoveMovieFromDatabaseUseCase(moviesRepository)
+
+    @Provides
+    @Singleton
+    fun provideRemoveMovieFromDatabaseUseCase(moviesRepository: MoviesRepository) =
+        RemoveShowFromDatabaseUseCase(moviesRepository)
 }

@@ -114,6 +114,22 @@ class MoviesRepositoryImpl(
         movieDao.insertShow(showDetail.mapToShowEntity())
     }
 
+    override suspend fun checkIsMovieWishListed(movieId: Int): Boolean {
+        return movieDao.checkMovieExists(movieId)
+    }
+
+    override suspend fun checkIsShowWishListed(showId: Int): Boolean {
+        return movieDao.checkShowExists(showId)
+    }
+
+    override suspend fun removeShowFromDatabase(showId: Int) {
+        movieDao.deleteShowEntity(showId)
+    }
+
+    override suspend fun removeMovieFromDatabase(movieId: Int) {
+        movieDao.deleteMovieEntity(movieId)
+    }
+
     override suspend fun getRandomWishListedMovieId(): Int {
         return try {
             val wishList = movieDao.getWishListedMovies()

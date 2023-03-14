@@ -3,7 +3,9 @@ package com.alibasoglu.cinemax.moviedetail.ui.tvshow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.domain.usecase.CheckShowWishListedUseCase
 import com.alibasoglu.cinemax.domain.usecase.InsertShowToDatabaseUseCase
+import com.alibasoglu.cinemax.domain.usecase.RemoveShowFromDatabaseUseCase
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.mapToEpisodeItem
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToCastCrewItem
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetEpisodesUseCase
@@ -27,6 +29,8 @@ class TvShowDetailViewModel @Inject constructor(
     private val getTvShowCastCrewListUseCase: GetTvShowCastCrewListUseCase,
     private val getEpisodesUseCase: GetEpisodesUseCase,
     private val insertShowToDatabaseUseCase: InsertShowToDatabaseUseCase,
+    private val checkShowWishListedUseCase: CheckShowWishListedUseCase,
+    private val removeShowFromDatabaseUseCase: RemoveShowFromDatabaseUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -44,6 +48,12 @@ class TvShowDetailViewModel @Inject constructor(
     private var _episodesState = MutableStateFlow<List<EpisodeItem>>(listOf())
     val episodesState: StateFlow<List<EpisodeItem>>
         get() = _episodesState
+
+    var wishListedState = MutableStateFlow(false)
+
+    init {
+        checkShowWishListed()
+    }
 
     fun getTvShowDetails() {
         viewModelScope.launch {
@@ -111,7 +121,21 @@ class TvShowDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _showDetailState.value.tvShowDetail?.let { detail ->
                 insertShowToDatabaseUseCase(detail)
+                wishListedState.value = true
             }
+        }
+    }
+
+    private fun checkShowWishListed() {
+        viewModelScope.launch {
+            wishListedState.value = checkShowWishListedUseCase(showId)
+        }
+    }
+
+    fun removeShowFromDatabase() {
+        viewModelScope.launch {
+            removeShowFromDatabaseUseCase(showId)
+            wishListedState.value = false
         }
     }
 }

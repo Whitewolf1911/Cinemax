@@ -28,7 +28,7 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
         startIconResId = R.drawable.ic_arrow_back,
         startIconClick = ::navBack,
         endIconResId = R.drawable.ic_wishlist,
-        endIconClick = ::addMovieToWishlist
+        endIconClick = ::addOrRemoveMovieToWishlist
     )
     override val fragmentConfiguration = FragmentConfiguration()
 
@@ -37,6 +37,8 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     private val viewModel by viewModels<MovieDetailViewModel>()
 
     private val castCrewAdapter = CastCrewAdapter()
+
+    private var isWishListed = false
 
     private var shareDialog: ShareDialog? = null
 
@@ -110,11 +112,22 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
                 castCrewAdapter.submitList(it)
             }
         }
+
+        viewLifecycleOwner.observe {
+            viewModel.wishListedState.collectLatest {
+                isWishListed = it
+            }
+        }
     }
 
-    private fun addMovieToWishlist() {
-        viewModel.insertMovieToDatabase()
-        context?.showTextToast(getString(R.string.added_to_wishlist))
+    private fun addOrRemoveMovieToWishlist() {
+        if (isWishListed.not()) {
+            viewModel.insertMovieToDatabase()
+            context?.showTextToast(getString(R.string.added_to_wishlist))
+        } else {
+            viewModel.removeMovieFromDatabase()
+            context?.showTextToast(getString(R.string.removed_from_wishlist))
+        }
     }
 
     private fun showShareDialog() {
