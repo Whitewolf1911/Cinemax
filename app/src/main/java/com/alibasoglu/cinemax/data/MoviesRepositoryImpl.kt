@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import com.alibasoglu.cinemax.ImagesConfigData
 import com.alibasoglu.cinemax.data.local.MovieDatabase
 import com.alibasoglu.cinemax.data.local.model.mapToMovieDetail
+import com.alibasoglu.cinemax.data.local.model.mapToTvShowDetail
 import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.data.remote.model.mapToMovie
 import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource
@@ -14,7 +15,9 @@ import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.domain.model.TvShowDetail
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToMovieEntity
+import com.alibasoglu.cinemax.moviedetail.domain.model.mapToShowEntity
 import com.alibasoglu.cinemax.search.data.SearchApi
 import com.alibasoglu.cinemax.setConfigDataFromResponse
 import com.alibasoglu.cinemax.utils.ENGLISH
@@ -97,6 +100,18 @@ class MoviesRepositoryImpl(
                 it.mapToMovieDetail()
             })
         }
+    }
+
+    override suspend fun getWishListedShows(): Flow<List<TvShowDetail>> {
+        return flow {
+            emit(movieDao.getWishListedShows().map {
+                it.mapToTvShowDetail()
+            })
+        }
+    }
+
+    override suspend fun insertShowToDatabase(showDetail: TvShowDetail) {
+        movieDao.insertShow(showDetail.mapToShowEntity())
     }
 
     override suspend fun getRandomWishListedMovieId(): Int {

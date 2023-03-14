@@ -114,7 +114,7 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
 
     private fun addMovieToWishlist() {
         viewModel.insertMovieToDatabase()
-        context?.showTextToast("Movie added to wishlist!")
+        context?.showTextToast(getString(R.string.added_to_wishlist))
     }
 
     private fun showShareDialog() {

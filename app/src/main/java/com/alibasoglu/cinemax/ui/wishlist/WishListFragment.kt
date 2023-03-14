@@ -25,7 +25,11 @@ class WishListFragment : BaseFragment(R.layout.fragment_wishlist) {
     private val viewModel by viewModels<WishListViewModel>()
 
     private val wishListCardAdapterListener = WishListCardAdapter.WishListCardAdapterListener { wishListCardItem ->
-        nav(WishListFragmentDirections.actionWishListFragmentToMovieDetailFragment(wishListCardItem.id))
+        if (wishListCardItem.isMovie) {
+            nav(WishListFragmentDirections.actionWishListFragmentToMovieDetailFragment(wishListCardItem.id))
+        } else {
+            nav(WishListFragmentDirections.actionWishListFragmentToTvShowDetailFragment(wishListCardItem.id))
+        }
     }
 
     private val wishListAdapter = WishListCardAdapter(wishListCardAdapterListener)

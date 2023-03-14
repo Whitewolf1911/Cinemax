@@ -86,7 +86,8 @@
             app:iconGravity="textEnd"
             app:iconSize="@dimen/_32dp"
             app:iconTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintTop_toTopOf="@id/typeTextView"
+            app:layout_constraintBottom_toBottomOf="@id/typeTextView"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

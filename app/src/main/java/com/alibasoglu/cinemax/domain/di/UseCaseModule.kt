@@ -2,8 +2,10 @@ package com.alibasoglu.cinemax.domain.di
 
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.domain.usecase.GetMoviesPagerUseCase
+import com.alibasoglu.cinemax.domain.usecase.GetWishListedMediaUseCase
 import com.alibasoglu.cinemax.domain.usecase.GetWishListedMoviesUseCase
 import com.alibasoglu.cinemax.domain.usecase.InsertMovieToDatabaseUseCase
+import com.alibasoglu.cinemax.domain.usecase.InsertShowToDatabaseUseCase
 import com.alibasoglu.cinemax.domain.usecase.SetImagesConfigDataUseCase
 import com.alibasoglu.cinemax.home.usecase.GetCarouselMoviesUseCase
 import dagger.Module
@@ -41,4 +43,13 @@ object UseCaseModule {
     fun provideGetWishListedMoviesUseCase(moviesRepository: MoviesRepository) =
         GetWishListedMoviesUseCase(moviesRepository)
 
+    @Provides
+    @Singleton
+    fun provideGetWishListedMediaUseCase(moviesRepository: MoviesRepository) =
+        GetWishListedMediaUseCase(moviesRepository)
+
+    @Provides
+    @Singleton
+    fun provideInsertShowToDatabaseUseCase(moviesRepository: MoviesRepository) =
+        InsertShowToDatabaseUseCase(moviesRepository)
 }

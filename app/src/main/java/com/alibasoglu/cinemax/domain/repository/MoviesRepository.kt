@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import com.alibasoglu.cinemax.data.remote.pagingsource.PagingDataType
 import com.alibasoglu.cinemax.domain.model.Movie
 import com.alibasoglu.cinemax.moviedetail.domain.model.MovieDetail
+import com.alibasoglu.cinemax.moviedetail.domain.model.TvShowDetail
 import com.alibasoglu.cinemax.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
@@ -22,4 +23,8 @@ interface MoviesRepository {
     suspend fun getWishListedMovies(): Flow<List<MovieDetail>>
 
     suspend fun getRandomWishListedMovieId(): Int
+
+    suspend fun getWishListedShows(): Flow<List<TvShowDetail>>
+
+    suspend fun insertShowToDatabase(showDetail: TvShowDetail)
 }

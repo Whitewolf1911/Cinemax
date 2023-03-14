@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_wishListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_wishListFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"

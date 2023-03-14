@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibasoglu.cinemax.ImagesConfigData
+import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.databinding.ItemWishlistBinding
 import com.alibasoglu.cinemax.ui.model.WishListCardItem
 import com.bumptech.glide.Glide
@@ -17,6 +18,8 @@ class WishListItemViewHolder(
         with(wishListCardItem) {
             val imageUrl = ImagesConfigData.secure_base_url + ImagesConfigData.backdrop_sizes?.get(1) + backdrop_path
 
+            val typeText =
+                if (isMovie) binding.root.context.getString(R.string.movie) else binding.root.context.getString(R.string.tv)
             with(binding) {
                 root.setOnClickListener {
                     listener.onClick(wishListCardItem)
@@ -24,7 +27,7 @@ class WishListItemViewHolder(
                 genreTextView.text = genre
                 movieNameTextView.text = title
                 ratingTextView.text = vote_average.toString().substring(0, 3)
-                typeTextView.text = "Movie"
+                typeTextView.text = typeText
                 Glide.with(root.context).load(imageUrl).centerCrop().into(posterImageView)
             }
         }

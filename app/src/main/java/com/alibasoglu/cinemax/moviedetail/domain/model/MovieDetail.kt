@@ -42,6 +42,7 @@ fun MovieDetail.mapToWishListCardItem(): WishListCardItem {
         genre = genre,
         id = id,
         title = title,
-        vote_average = vote_average
+        vote_average = vote_average,
+        isMovie = true
     )
 }

@@ -16,6 +16,7 @@ import com.alibasoglu.cinemax.moviedetail.ui.CastCrewAdapter
 import com.alibasoglu.cinemax.profile.settings.SeasonListItem
 import com.alibasoglu.cinemax.utils.ShareDialog
 import com.alibasoglu.cinemax.utils.lifecycle.observe
+import com.alibasoglu.cinemax.utils.showTextToast
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -157,7 +158,8 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
     }
 
     private fun addShowToWishList() {
-        //TODO add to wishlist
+        viewModel.insertShowToDatabase()
+        context?.showTextToast(getString(R.string.added_to_wishlist))
     }
 
     private fun showShareDialog() {

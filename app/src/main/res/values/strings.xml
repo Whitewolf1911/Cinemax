@@ -90,5 +90,6 @@
     <string name="tv">Tv</string>
     <string name="episode">Episodes</string>
     <string name="season">Season %1$d</string>
+    <string name="added_to_wishlist">Added to wishlist !</string>
 
 </resources>

@@ -1,14 +1,16 @@
-package com.alibasoglu.cinemax.moviedetail.domain.model
+package com.alibasoglu.cinemax.data.local.model
 
-import com.alibasoglu.cinemax.data.local.model.ShowEntity
-import com.alibasoglu.cinemax.ui.model.WishListCardItem
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.alibasoglu.cinemax.moviedetail.domain.model.TvShowDetail
 
-data class TvShowDetail(
+@Entity(tableName = "show_entities")
+data class ShowEntity(
+    @PrimaryKey val id: Int,
     val backdrop_path: String?,
     val episode_run_time: Int,
     val first_air_date: String,
     val genres: String,
-    val id: Int,
     val name: String,
     val number_of_episodes: Int,
     val number_of_seasons: Int,
@@ -18,8 +20,8 @@ data class TvShowDetail(
     val vote_average: Double,
 )
 
-fun TvShowDetail.mapToShowEntity(): ShowEntity {
-    return ShowEntity(
+fun ShowEntity.mapToTvShowDetail(): TvShowDetail {
+    return TvShowDetail(
         id = id,
         backdrop_path = backdrop_path,
         episode_run_time = episode_run_time,
@@ -32,16 +34,5 @@ fun TvShowDetail.mapToShowEntity(): ShowEntity {
         overview = overview,
         poster_path = poster_path,
         vote_average = vote_average
-    )
-}
-
-fun TvShowDetail.mapToWishListCardItem(): WishListCardItem {
-    return WishListCardItem(
-        backdrop_path = backdrop_path ?: "",
-        genre = genres,
-        id = id,
-        title = name,
-        vote_average = vote_average,
-        isMovie = false
     )
 }

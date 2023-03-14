@@ -3,6 +3,7 @@ package com.alibasoglu.cinemax.moviedetail.ui.tvshow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.alibasoglu.cinemax.core.BaseViewModel
+import com.alibasoglu.cinemax.domain.usecase.InsertShowToDatabaseUseCase
 import com.alibasoglu.cinemax.moviedetail.data.remote.model.tv.mapToEpisodeItem
 import com.alibasoglu.cinemax.moviedetail.domain.model.mapToCastCrewItem
 import com.alibasoglu.cinemax.moviedetail.domain.usecase.GetEpisodesUseCase
@@ -25,6 +26,7 @@ class TvShowDetailViewModel @Inject constructor(
     private val getTvShowDetailsUseCase: GetTvShowDetailsUseCase,
     private val getTvShowCastCrewListUseCase: GetTvShowCastCrewListUseCase,
     private val getEpisodesUseCase: GetEpisodesUseCase,
+    private val insertShowToDatabaseUseCase: InsertShowToDatabaseUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -101,6 +103,14 @@ class TvShowDetailViewModel @Inject constructor(
                     is Resource.Error -> {}
                     is Resource.Loading -> {}
                 }
+            }
+        }
+    }
+
+    fun insertShowToDatabase() {
+        viewModelScope.launch {
+            _showDetailState.value.tvShowDetail?.let { detail ->
+                insertShowToDatabaseUseCase(detail)
             }
         }
     }
