@@ -1,5 +1,7 @@
 package com.alibasoglu.cinemax
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.customviews.CustomToolbar
 import com.alibasoglu.cinemax.databinding.ActivityMainBinding
+import com.alibasoglu.cinemax.utils.ENGLISH
 import com.alibasoglu.cinemax.utils.ProgressDialog
 import com.alibasoglu.cinemax.utils.navigateSafe
 import com.alibasoglu.cinemax.utils.setAppLocale
@@ -33,6 +36,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var myIntent: Intent
 
+    private var currentLanguage = ENGLISH
+
     private var progressDialog = ProgressDialog(this)
 
     private lateinit var auth: FirebaseAuth
@@ -42,9 +47,9 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         installSplashScreen()
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ContextCompat.getColor(this,R.color.primary_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.primary_dark)
         myIntent = intent
-        val currentLanguage = viewModel.getCurrentLocale()
+        currentLanguage = viewModel.getCurrentLocale()
         setAppLocale(currentLanguage)
         setContentView(binding.root)
         viewModel.getSetImagesConfigData()
@@ -55,6 +60,10 @@ class MainActivity : AppCompatActivity() {
         }
         setupNavigation()
         handleOnBoarding()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(ContextWrapper(newBase?.setAppLocale(currentLanguage)))
     }
 
     private fun handleOnBoarding() {
