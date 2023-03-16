@@ -5,11 +5,14 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.alibasoglu.cinemax.BuildConfig
+import com.alibasoglu.cinemax.auth.data.AuthRepositoryImpl
+import com.alibasoglu.cinemax.auth.domain.AuthRepository
 import com.alibasoglu.cinemax.data.MoviesRepositoryImpl
 import com.alibasoglu.cinemax.data.local.MovieDatabase
 import com.alibasoglu.cinemax.data.remote.MoviesApi
 import com.alibasoglu.cinemax.domain.repository.MoviesRepository
 import com.alibasoglu.cinemax.search.data.SearchApi
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -94,6 +97,18 @@ object AppModule {
     @Singleton
     fun provideSharedPref(app: Application): SharedPreferences {
         return app.getSharedPreferences("prefs", MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFireBaseAuthInstance(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository {
+        return AuthRepositoryImpl(firebaseAuth)
     }
 
 }

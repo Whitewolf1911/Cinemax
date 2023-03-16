@@ -120,7 +120,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 .placeholder(R.drawable.ic_person_24)
                 .into(personImageView)
 
-            helloTextView.text = getString(R.string.hello_with_comma, currentUser?.displayName)
+            helloTextView.text = getString(R.string.hello_with_comma, currentUser?.displayName ?: "")
 
             searchEditText.apply {
                 doAfterTextChanged { searchQuery ->

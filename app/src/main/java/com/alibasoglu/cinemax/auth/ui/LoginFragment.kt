@@ -3,22 +3,20 @@ package com.alibasoglu.cinemax.auth.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentLoginBinding
+import com.alibasoglu.cinemax.utils.Resource
+import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
-
-    lateinit var firebaseAuth: FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        firebaseAuth = FirebaseAuth.getInstance()
-    }
 
     private val toolbarConfiguration = ToolbarConfiguration(
         titleResId = R.string.login,
@@ -30,9 +28,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private val binding by viewBinding(FragmentLoginBinding::bind)
 
+    private val viewModel by viewModels<LoginViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        initObservers()
     }
 
     private fun initUI() {
@@ -47,13 +48,29 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun loginUser(email: String, password: String) {
-        if (email.isNotBlank() && password.isNotBlank()) {
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-                Toast.makeText(requireContext(), "Login success", Toast.LENGTH_SHORT).show()
-                setStartDestinationToHome()
-                navToHomeFragment()
-            }.addOnFailureListener { exception ->
-                Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_SHORT).show()
+        viewModel.loginWithEmailPassword(email, password)
+    }
+
+    private fun initObservers() {
+        viewLifecycleOwner.observe {
+            viewModel.loginState.collectLatest { state ->
+                when (state) {
+                    is Resource.Success -> {
+                        hideProgressDialog()
+                        Toast.makeText(requireContext(), "Login success", Toast.LENGTH_SHORT).show()
+                        setStartDestinationToHome()
+                        navToHomeFragment()
+                    }
+                    is Resource.Error -> {
+                        hideProgressDialog()
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    }
+                    is Resource.Loading -> {
+                        if (state.isLoading)
+                            showProgressDialog()
+                    }
+                }
+
             }
         }
     }
