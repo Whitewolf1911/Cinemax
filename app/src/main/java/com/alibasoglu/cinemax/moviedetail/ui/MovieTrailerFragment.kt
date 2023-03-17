@@ -45,6 +45,8 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
 
     private var isFullscreen = false
 
+    private var isInitialized = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
@@ -162,7 +164,10 @@ class MovieTrailerFragment : BaseFragment(R.layout.fragment_movie_trailer) {
         viewLifecycleOwner.observe {
             viewModel.trailerId.collectLatest {
                 it?.let {
-                    setupPlayer(it)
+                    if (isInitialized.not()) {
+                        setupPlayer(it)
+                        isInitialized = true
+                    }
                 }
             }
         }
