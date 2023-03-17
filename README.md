@@ -15,6 +15,7 @@ Supports English and Turkish languages.
 - Room Database 
 - Glide
 - ViewPager 2
+- Shared Preferences
 - Carousel RecyclerView -> sparrow007:carouselrecyclerview
 - Lottie Animations
 - Library For Playing Trailers -> com.pierfrancescosoffritti.androidyoutubeplayer
