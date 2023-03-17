@@ -11,6 +11,7 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentHomeBinding
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
+import com.alibasoglu.cinemax.utils.QUERY_SEARCH_DELAY
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
@@ -176,9 +177,4 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private fun navToPopularMoviesFragment() {
         nav(HomeFragmentDirections.actionHomeFragmentToPopularMoviesFragment())
     }
-
-    companion object {
-        const val QUERY_SEARCH_DELAY = 1000L
-    }
-
 }
