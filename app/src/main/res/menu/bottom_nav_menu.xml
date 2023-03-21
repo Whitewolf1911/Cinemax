@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home_24"
-        android:title="@string/home" />
+        android:title="@string/home"
+        app:ebnb_selectedIconColor="@color/primary_blue_accent"
+        app:ebnb_selectedTextColor="@color/primary_blue_accent"
+        app:ebnb_unSelectedIconColor="@color/text_grey"
+        app:ebnb_unSelectedTextColor="@color/text_grey" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search_24"
-        android:title="@string/search" />
+        android:title="@string/search"
+        app:ebnb_selectedIconColor="@color/primary_blue_accent"
+        app:ebnb_selectedTextColor="@color/primary_blue_accent"
+        app:ebnb_unSelectedIconColor="@color/text_grey"
+        app:ebnb_unSelectedTextColor="@color/text_grey" />
     <item
         android:id="@+id/wishListFragment"
         android:icon="@drawable/ic_download_24"
-        android:title="@string/wishlist" />
+        android:title="@string/wishlist"
+        app:ebnb_selectedIconColor="@color/primary_blue_accent"
+        app:ebnb_selectedTextColor="@color/primary_blue_accent"
+        app:ebnb_unSelectedIconColor="@color/text_grey"
+        app:ebnb_unSelectedTextColor="@color/text_grey" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_24"
-        android:title="@string/profile" />
+        android:title="@string/profile"
+        app:ebnb_selectedIconColor="@color/primary_blue_accent"
+        app:ebnb_selectedTextColor="@color/primary_blue_accent"
+        app:ebnb_unSelectedIconColor="@color/text_grey"
+        app:ebnb_unSelectedTextColor="@color/text_grey" />
 </menu>

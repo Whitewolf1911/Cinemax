@@ -19,9 +19,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navigationHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:background="@color/primary_dark"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/primary_dark"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,16 +31,17 @@
         app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/main_navigation" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.example.expandable_bottom_navigation_bar.ExpandableBottomNavigationBar
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height"
         android:background="@color/primary_dark"
+        app:ebnb_itemBackgroundShape="@drawable/bg_enb_bottom_nav"
+        app:ebnb_menuResource="@menu/bottom_nav_menu"
         app:itemIconTint="@color/bnv_tab_item"
         app:itemTextColor="@color/bnv_tab_item"
         app:layout_constraintBottom_toBottomOf="@+id/navigationHostFragment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

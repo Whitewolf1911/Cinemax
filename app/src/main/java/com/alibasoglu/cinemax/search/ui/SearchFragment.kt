@@ -13,8 +13,8 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.data.remote.pagingsource.MoviesPagingSource
 import com.alibasoglu.cinemax.databinding.FragmentSearchBinding
-import com.alibasoglu.cinemax.home.ui.HomeFragment
 import com.alibasoglu.cinemax.ui.MoviesBasicCardAdapter
+import com.alibasoglu.cinemax.utils.QUERY_SEARCH_DELAY
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import com.bumptech.glide.Glide
@@ -82,7 +82,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
                     searchQuery?.let {
                         searchJob?.cancel()
                         searchJob = lifecycleScope.launch {
-                            delay(HomeFragment.QUERY_SEARCH_DELAY)
+                            delay(QUERY_SEARCH_DELAY)
                             if (searchQuery.trim().length > 1)
                                 navToSearchResultFragment(searchQuery.toString())
                         }

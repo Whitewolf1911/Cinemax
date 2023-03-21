@@ -13,7 +13,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.customviews.CustomToolbar
 import com.alibasoglu.cinemax.databinding.ActivityMainBinding
@@ -79,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             (supportFragmentManager.findFragmentById(binding.navigationHostFragment.id) as NavHostFragment).navController
         binding.bottomNavigationView.apply {
             setupWithNavController(navController)
-            setOnItemReselectedListener {} // To prevent reselect item and resetting selected fragment
         }
     }
 
@@ -93,10 +91,6 @@ class MainActivity : AppCompatActivity() {
         val graph = navController.navInflater.inflate(R.navigation.main_navigation)
         graph.setStartDestination(R.id.homeFragment)
         navController.setGraph(graph, intent.extras)
-        binding.bottomNavigationView.apply {
-            setupWithNavController(navController)
-            setOnItemReselectedListener {} // To prevent reselect item and resetting selected fragment
-        }
     }
 
     fun navBack() {

@@ -10,8 +10,8 @@ import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentSearchResultBinding
-import com.alibasoglu.cinemax.home.ui.HomeFragment
 import com.alibasoglu.cinemax.ui.MovieBigCardItemAdapter
+import com.alibasoglu.cinemax.utils.QUERY_SEARCH_DELAY
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,7 +66,7 @@ class SearchResultFragment : BaseFragment(R.layout.fragment_search_result) {
                     searchQuery?.let {
                         searchJob?.cancel()
                         searchJob = lifecycleScope.launch {
-                            delay(HomeFragment.QUERY_SEARCH_DELAY)
+                            delay(QUERY_SEARCH_DELAY)
                             if (searchQuery.trim().length > 1) {
                                 viewModel.searchPerson(searchQuery.toString())
                                 viewModel.searchMovie(searchQuery.toString())
