@@ -1,7 +1,7 @@
 package com.alibasoglu.cinemax.auth.ui
 
 import androidx.lifecycle.viewModelScope
-import com.alibasoglu.cinemax.auth.domain.AuthRepository
+import com.alibasoglu.cinemax.auth.domain.usecase.LoginWithEmailUseCase
 import com.alibasoglu.cinemax.core.BaseViewModel
 import com.alibasoglu.cinemax.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val loginWithEmailUseCase: LoginWithEmailUseCase
 ) : BaseViewModel() {
 
     private var _loginState = MutableStateFlow<Resource<Unit>>(Resource.Loading(isLoading = false))
@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor(
 
     fun loginWithEmailPassword(email: String, password: String) {
         viewModelScope.launch {
-            authRepository.loginWithEmailPassword(email, password).collectLatest { result ->
+            loginWithEmailUseCase(email, password).collectLatest { result ->
                 when (result) {
                     is Resource.Success -> {
                         _loginState.value = Resource.Success(null)

@@ -92,5 +92,6 @@
     <string name="season">Season %1$d</string>
     <string name="added_to_wishlist">Added to wishlist !</string>
     <string name="removed_from_wishlist">Removed from wishlist !</string>
+    <string name="invalid_email_format">Invalid Email Format</string>
 
 </resources>

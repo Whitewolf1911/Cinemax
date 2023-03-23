@@ -2,7 +2,6 @@ package com.alibasoglu.cinemax.auth.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.alibasoglu.cinemax.R
 import com.alibasoglu.cinemax.core.fragment.BaseFragment
@@ -11,6 +10,7 @@ import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentLoginBinding
 import com.alibasoglu.cinemax.utils.Resource
 import com.alibasoglu.cinemax.utils.lifecycle.observe
+import com.alibasoglu.cinemax.utils.showTextToast
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -57,13 +57,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 when (state) {
                     is Resource.Success -> {
                         hideProgressDialog()
-                        Toast.makeText(requireContext(), "Login success", Toast.LENGTH_SHORT).show()
+                        requireContext().showTextToast(getString(R.string.login_success))
                         setStartDestinationToHome()
                         navToHomeFragment()
                     }
                     is Resource.Error -> {
                         hideProgressDialog()
-                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        state.message?.let {
+                            requireContext().showTextToast(it)
+                        }
                     }
                     is Resource.Loading -> {
                         if (state.isLoading)

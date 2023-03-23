@@ -89,5 +89,6 @@
     <string name="welcome_back">Tekrar hoşgeldiniz! \nLütfen bilgilerinizi giriniz.</string>
     <string name="added_to_wishlist">İstek listesine eklendi !</string>
     <string name="removed_from_wishlist">İstek listesinden kaldırıldı !</string>
+    <string name="invalid_email_format">Geçersiz email adresi</string>
 
 </resources>
