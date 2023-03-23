@@ -181,7 +181,7 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
 
     private fun showShareDialog() {
         shareDialog = ShareDialog(requireActivity())
-        shareDialog?.startDialog()
+        shareDialog?.showDialog()
     }
 
     private fun initSeasonsDialog() {

@@ -136,8 +136,8 @@ class MovieDetailFragment : BaseFragment(R.layout.fragment_movie_detail) {
     }
 
     private fun showShareDialog() {
-        shareDialog = activity?.let { ShareDialog(it) }
-        shareDialog?.startDialog()
+        shareDialog = ShareDialog(requireActivity())
+        shareDialog?.showDialog()
     }
 
     private fun navToMovieTrailerFragment(movieDetail: MovieDetail) {
