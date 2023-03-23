@@ -8,6 +8,7 @@ import com.alibasoglu.cinemax.core.fragment.BaseFragment
 import com.alibasoglu.cinemax.core.fragment.FragmentConfiguration
 import com.alibasoglu.cinemax.core.fragment.ToolbarConfiguration
 import com.alibasoglu.cinemax.databinding.FragmentWishlistBinding
+import com.alibasoglu.cinemax.ui.model.WishListCardItem
 import com.alibasoglu.cinemax.utils.lifecycle.observe
 import com.alibasoglu.cinemax.utils.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,13 +25,20 @@ class WishListFragment : BaseFragment(R.layout.fragment_wishlist) {
 
     private val viewModel by viewModels<WishListViewModel>()
 
-    private val wishListCardAdapterListener = WishListCardAdapter.WishListCardAdapterListener { wishListCardItem ->
-        if (wishListCardItem.isMovie) {
-            nav(WishListFragmentDirections.actionWishListFragmentToMovieDetailFragment(wishListCardItem.id))
-        } else {
-            nav(WishListFragmentDirections.actionWishListFragmentToTvShowDetailFragment(wishListCardItem.id))
+    private val wishListCardAdapterListener =
+        object : WishListCardAdapter.WishListCardAdapterListener {
+            override fun onClick(wishListCardItem: WishListCardItem) {
+                if (wishListCardItem.isMovie) {
+                    nav(WishListFragmentDirections.actionWishListFragmentToMovieDetailFragment(wishListCardItem.id))
+                } else {
+                    nav(WishListFragmentDirections.actionWishListFragmentToTvShowDetailFragment(wishListCardItem.id))
+                }
+            }
+
+            override fun onLongClick(wishListCardItem: WishListCardItem) {
+                //TODO handle long click
+            }
         }
-    }
 
     private val wishListAdapter = WishListCardAdapter(wishListCardAdapterListener)
 

@@ -24,6 +24,10 @@ class WishListItemViewHolder(
                 root.setOnClickListener {
                     listener.onClick(wishListCardItem)
                 }
+                root.setOnLongClickListener {
+                    listener.onLongClick(wishListCardItem)
+                    true
+                }
                 genreTextView.text = genre
                 movieNameTextView.text = title
                 ratingTextView.text = vote_average.toString().substring(0, 3)
@@ -33,8 +37,9 @@ class WishListItemViewHolder(
         }
     }
 
-    fun interface WishListItemClickListener {
+    interface WishListItemClickListener {
         fun onClick(wishListCardItem: WishListCardItem)
+        fun onLongClick(wishListCardItem: WishListCardItem)
     }
 
     companion object {

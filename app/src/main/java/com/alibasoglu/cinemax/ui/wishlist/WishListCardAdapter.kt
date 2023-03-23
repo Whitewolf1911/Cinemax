@@ -16,11 +16,17 @@ class WishListCardAdapter(
         holder.bind(getItem(position))
     }
 
-    private val wishListClickItem = WishListItemViewHolder.WishListItemClickListener {
-        listener.onClick(it)
+    private val wishListClickItem = object : WishListItemViewHolder.WishListItemClickListener {
+        override fun onClick(wishListCardItem: WishListCardItem) {
+            listener.onClick(wishListCardItem)
+        }
+        override fun onLongClick(wishListCardItem: WishListCardItem) {
+            listener.onLongClick(wishListCardItem)
+        }
     }
 
-    fun interface WishListCardAdapterListener {
+    interface WishListCardAdapterListener {
         fun onClick(wishListCardItem: WishListCardItem)
+        fun onLongClick(wishListCardItem: WishListCardItem)
     }
 }
