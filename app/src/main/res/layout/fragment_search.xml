@@ -1,108 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchFragmentLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/bottom_bar_height">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/searchLayout"
-        style="@style/CinemaxTextInputLayoutStyle"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_24dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_search_24">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchEditText"
-            style="@style/CinemaxTextInputEditTextStyle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLayout"
+            style="@style/CinemaxTextInputLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/search_a_title"
-            android:imeOptions="actionSearch"
-            android:inputType="text" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_search_24">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchEditText"
+                style="@style/CinemaxTextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search_a_title"
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/categoriesTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40dp"
-        android:layout_marginHorizontal="@dimen/_24dp"
-        android:layout_marginTop="@dimen/_16dp"
-        android:backgroundTint="@color/primary_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
-        app:tabBackground="@drawable/tab_layout_selector"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/primary_blue_accent"
-        app:tabTextAppearance="@style/text_h6"
-        app:tabTextColor="@color/text_white_grey" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/todayTextView"
-        style="@style/text_h4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_24dp"
-        android:layout_marginTop="@dimen/_24dp"
-        android:text="@string/today"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/categoriesTabLayout" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/categoriesTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40dp"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_16dp"
+            android:backgroundTint="@color/primary_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchLayout"
+            app:tabBackground="@drawable/tab_layout_selector"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/primary_blue_accent"
+            app:tabTextAppearance="@style/text_h6"
+            app:tabTextColor="@color/text_white_grey" />
 
-    <include
-        android:id="@+id/todayMovieItem"
-        layout="@layout/item_movie_big_card"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_148dp"
-        android:layout_marginHorizontal="@dimen/_24dp"
-        android:layout_marginTop="@dimen/_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todayTextView" />
+        <TextView
+            android:id="@+id/todayTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_24dp"
+            android:text="@string/today"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categoriesTabLayout" />
 
-    <TextView
-        android:id="@+id/recommendedTextView"
-        style="@style/text_h4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_24dp"
-        android:layout_marginTop="@dimen/_68dp"
-        android:text="@string/recommended_for_you"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todayMovieItem" />
+        <include
+            android:id="@+id/todayMovieItem"
+            layout="@layout/item_movie_big_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_148dp"
+            android:layout_marginHorizontal="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayTextView" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recommendedMoviesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recommendedTextView"
-        tools:listitem="@layout/item_movie_basic_card" />
+        <TextView
+            android:id="@+id/recommendedTextView"
+            style="@style/text_h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24dp"
+            android:layout_marginTop="@dimen/_68dp"
+            android:text="@string/recommended_for_you"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayMovieItem" />
 
-    <TextView
-        android:id="@+id/seeAllTextView"
-        style="@style/text_h5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_24dp"
-        android:text="@string/see_all"
-        android:textColor="@color/primary_blue_accent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recommendedTextView" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommendedMoviesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommendedTextView"
+            tools:listitem="@layout/item_movie_basic_card" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/seeAllTextView"
+            style="@style/text_h5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_24dp"
+            android:text="@string/see_all"
+            android:textColor="@color/primary_blue_accent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recommendedTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
