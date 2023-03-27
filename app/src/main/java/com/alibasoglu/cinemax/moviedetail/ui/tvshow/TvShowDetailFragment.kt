@@ -103,17 +103,19 @@ class TvShowDetailFragment : BaseFragment(R.layout.fragment_tv_show_detail) {
         viewLifecycleOwner.observe {
             viewModel.showDetailState.collectLatest { showDetailState ->
                 showDetailState.tvShowDetail?.let { tvShowDetail ->
-                    for (i in 1..tvShowDetail.number_of_seasons) {
-                        val isSelected = i == 1
-                        val seasonListItem =
-                            SeasonListItem(
-                                seasonId = i,
-                                seasonTitle = getString(R.string.season, i),
-                                isSelected = isSelected
-                            )
-                        seasonsList.add(seasonListItem)
+                    if (seasonsList.isEmpty()) {
+                        for (i in 1..tvShowDetail.number_of_seasons) {
+                            val isSelected = i == 1
+                            val seasonListItem =
+                                SeasonListItem(
+                                    seasonId = i,
+                                    seasonTitle = getString(R.string.season, i),
+                                    isSelected = isSelected
+                                )
+                            seasonsList.add(seasonListItem)
+                        }
+                        initSeasonsDialog()
                     }
-                    initSeasonsDialog()
                     with(binding) {
                         seasonsButton.text = seasonsList.firstOrNull()?.seasonTitle
                         customToolbar.setTitle(tvShowDetail.name)
