@@ -12,7 +12,7 @@ data class MovieResult(
     val overview: String,
     val popularity: Double,
     val poster_path: String?,
-    val release_date: String,
+    val release_date: String?,
     val title: String,
     val video: Boolean,
     val vote_average: Double,
@@ -27,7 +27,7 @@ fun MovieResult.mapToMovie(): Movie {
         original_title = original_title,
         overview = overview,
         poster_path = poster_path ?: "",
-        release_date = release_date,
+        release_date = release_date ?: "",
         title = title,
         video = video,
         vote_average = vote_average
