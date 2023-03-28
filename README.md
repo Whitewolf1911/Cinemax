@@ -3,6 +3,8 @@ App for browsing movies, tv shows, watching trailers.
 
 Supports English and Turkish languages.
 
+You can download Cinemax in Google Play Store ! https://play.google.com/store/apps/details?id=com.alibasoglu.cinemax
+
 ## Used Technologies, Patterns, Libraries
 - Clean Architecture -->  Data -> Domain -> UI and MVVM / Single Activity, Fragment Based Structure
 - Dependency Injection -> (Hilt) 
