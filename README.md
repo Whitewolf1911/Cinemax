@@ -16,7 +16,7 @@ You can download Cinemax in Google Play Store ! https://play.google.com/store/ap
 - Paging 3 Libray For Pagination
 - Room Database 
 - Glide
-- ViewPager 2
+- ViewPager
 - Shared Preferences
 - Carousel RecyclerView -> sparrow007:carouselrecyclerview
 - Lottie Animations
