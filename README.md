@@ -13,7 +13,7 @@ You can download Cinemax in Google Play Store ! https://play.google.com/store/ap
 - Kotlin Coroutines / Flows / StateFlows
 - ViewBinding
 - Retrofit For API Calls (Moshi Converter)
-- Paging 3 Libray For Pagination
+- Paging 3 Library For Pagination
 - Room Database 
 - Glide
 - ViewPager
