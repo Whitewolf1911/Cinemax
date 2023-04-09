@@ -90,5 +90,9 @@
     <string name="added_to_wishlist">İstek listesine eklendi !</string>
     <string name="removed_from_wishlist">İstek listesinden kaldırıldı !</string>
     <string name="invalid_email_format">Geçersiz email adresi</string>
+    <string name="delete_my_account">Hesabımı Sil</string>
+    <string name="your_data_deleted">"Hesabınız ve bütün bilgileriniz silinecek. Emin misiniz? "</string>
+    <string name="account_deleted">Hesabınız silindi.</string>
+    <string name="please_relogin">Lütfen tekrar giriş yaptıktan sonra deneyiniz.</string>
 
 </resources>

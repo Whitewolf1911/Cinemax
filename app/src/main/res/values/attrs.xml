@@ -3,6 +3,7 @@
     <declare-styleable name="CustomProfileButton">
         <attr name="startIconDrawable" format="reference" />
         <attr name="text" format="string"/>
+        <attr name="textColor" format="color"/>
     </declare-styleable>
 
 </resources>

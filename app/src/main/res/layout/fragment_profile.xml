@@ -289,14 +289,15 @@
                     app:layout_constraintTop_toBottomOf="@id/countryButton" />
 
                 <com.alibasoglu.cinemax.customviews.CustomProfileButton
-                    android:id="@+id/clearCacheButton"
+                    android:id="@+id/deleteMyAccountButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_72dp"
+                    app:textColor="@color/secondary_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/divider3"
                     app:startIconDrawable="@drawable/ic_trashbin"
-                    app:text="@string/clear_cache" />
+                    app:text="@string/delete_my_account" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private var logoutDialog: LogoutDialog? = null
 
+    private var deleteAccountDialog: DeleteAccountDialog? = null
+
     private var currentUser: FirebaseUser? = null
 
     private val logOutRequestListener = LogoutDialog.LogOutRequestListener {
@@ -32,6 +34,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         context?.showTextToast(getString(R.string.logged_out))
         setStartDestinationToIntro()
         nav(ProfileFragmentDirections.actionProfileFragmentToIntroFragment())
+    }
+
+    private val deleteAccountListener = DeleteAccountDialog.DeleteAccountListener {
+        showProgressDialog()
+        auth.currentUser?.delete()?.addOnSuccessListener {
+            hideProgressDialog()
+            context?.showTextToast(getString(R.string.account_deleted))
+            setStartDestinationToIntro()
+            nav(ProfileFragmentDirections.actionProfileFragmentToIntroFragment())
+        }?.addOnFailureListener {
+            hideProgressDialog()
+            context?.showTextToast(getString(R.string.please_relogin))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +76,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             logoutButton.setOnClickListener {
                 showLogoutDialog()
             }
+            deleteMyAccountButton.setOnClickListener {
+                deleteAccountDialog()
+            }
             if (!currentUser?.email.isNullOrEmpty()) {
                 emailTextView.text = currentUser?.email
             } else {
@@ -78,5 +96,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         logoutDialog = LogoutDialog(requireActivity(), logOutRequestListener)
 
         logoutDialog?.startDialog()
+    }
+
+    private fun deleteAccountDialog() {
+        deleteAccountDialog = DeleteAccountDialog(requireActivity(), deleteAccountListener)
+        deleteAccountDialog?.showDialog()
     }
 }
