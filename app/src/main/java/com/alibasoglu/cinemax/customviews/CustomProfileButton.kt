@@ -23,6 +23,11 @@ class CustomProfileButton @JvmOverloads constructor(
 
             try {
                 binding.textView.text = getString(R.styleable.CustomProfileButton_text)
+                if (this.hasValue(R.styleable.CustomProfileButton_textColor)) {
+                    binding.textView.setTextColor(
+                        getColor(R.styleable.CustomProfileButton_textColor, 0)
+                    )
+                }
                 binding.startIconImageView.setImageDrawable(getDrawable(R.styleable.CustomProfileButton_startIconDrawable))
             } finally {
                 recycle()
